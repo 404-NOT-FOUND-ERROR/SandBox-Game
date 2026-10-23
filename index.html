@@ -34,15 +34,26 @@
   #atlas{padding:0;border:3px solid var(--ink);box-shadow:9px 9px 0 rgba(20,32,38,.5);color:var(--ink);background:#fff9e9;width:min(1040px,calc(100vw - 40px));max-height:calc(100dvh - 40px)}#atlas::backdrop{background:rgba(21,40,49,.45);backdrop-filter:blur(5px)}.atlas-header{position:sticky;top:0;z-index:1;background:#fff9e9;padding:22px 26px 0;border-bottom:2px solid var(--ink)}.atlas-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.atlas-top h2{margin:4px 0 10px;font-size:29px;letter-spacing:.06em}.atlas-top .eyebrow{margin:0}#atlasClose{font-size:20px;background:none;box-shadow:none;padding:6px 10px}.atlas-tabs{display:flex;gap:24px;margin-top:8px}.atlas-tabs button{background:none;border:0;border-bottom:4px solid transparent;box-shadow:none;padding:12px 0;font-size:13px;transform:none}.atlas-tabs button[aria-selected=true]{border-bottom-color:var(--teal)}.atlas-body{padding:22px 26px 26px}.atlas-intro{font-size:14px;line-height:1.8;margin:0 0 22px;max-width:710px}.atlas-intro strong{font-size:18px}.atlas-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.region-card,.cast-card{border:2px solid var(--ink);background:#fffdf6;display:flex;flex-direction:column;box-shadow:3px 3px 0 #d5d4bc}.region-art{height:108px;overflow:hidden;background:var(--region-bg);position:relative}.region-art svg{width:100%;height:100%}.card-copy{padding:13px;flex:1;display:flex;flex-direction:column;align-items:start}.card-copy small{font-size:9px;letter-spacing:.1em;font-weight:850;opacity:.7}.card-copy h3{font-size:19px;margin:5px 0 7px}.card-copy p{font-size:11px;line-height:1.7;margin:0 0 11px}.card-copy .card-rule{font-weight:850}.card-copy button{margin-top:auto;width:100%;background:var(--region-bg);padding:8px;font-size:11px}.stamp{font-size:10px;font-weight:900;margin-bottom:10px;color:#497665}.cast-portrait{height:145px;background:var(--region-bg);display:flex;align-items:center;justify-content:center}.cast-portrait img{width:145px;height:145px;object-fit:contain;image-rendering:auto}.cast-card .card-copy h3{font-size:18px}.cast-card button:disabled{opacity:.65;cursor:default}.journal-sheet{border:2px solid var(--ink);background:#fffdf6;padding:24px}.journal-sheet h3{margin:0 0 10px;font-size:23px}.stamp-list{list-style:none;padding:0;margin:20px 0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stamp-list li{text-align:center;border:2px dashed #b7bbaa;padding:14px 4px;font-size:11px;font-weight:850;line-height:1.8}.stamp-list li.earned{border-style:solid;background:#d9ebe0}.stamp-list b{font-size:26px;display:block}.journal-sheet p{font-size:13px;line-height:1.9}.atlas-footnote{font-size:11px;color:#63756d;margin:20px 0 0}
   @media(max-width:1000px){#hint{display:none}.atlas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#wonderDock{left:auto;right:20px;transform:none;width:290px}}
   @media(max-width:680px){#panel{width:230px;padding:12px;max-height:45dvh}#panel h1{font-size:23px}#panel .eyebrow{font-size:7px}#panel .small{font-size:10px}.book-button{margin:10px 0;padding:9px;font-size:12px}.book-button span{font-size:9px}.avatar-row{gap:5px}.avatar-row label{font-size:10px}#regionBanner{top:12px;right:10px;max-width:140px}#regionBanner small{font-size:7px;letter-spacing:.06em}#regionName{font-size:18px}#regionRule{font-size:9px;line-height:1.6;margin-left:6px}#atlas{width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.atlas-header{padding:16px 14px 0}.atlas-top h2{font-size:24px}.atlas-body{padding:16px 14px}.atlas-intro{font-size:12px}.atlas-intro strong{font-size:15px}.atlas-grid{gap:10px}.region-art{height:82px}.card-copy{padding:10px}.card-copy h3{font-size:16px}.card-copy p{font-size:10px}.cast-portrait{height:115px}.cast-portrait img{height:115px;width:115px}.stamp-list{grid-template-columns:repeat(3,1fr)}.journal-sheet{padding:15px}#wonderDock{width:calc(100vw - 24px);left:12px;right:12px;bottom:15px;padding:8px 10px}#wonderButton{padding:8px;margin-top:5px}#wonderDock small{font-size:9px}#touchControls{bottom:126px}#speech{bottom:330px;padding:13px}#toast{top:auto;bottom:110px;width:max-content;max-width:calc(100vw - 24px);font-size:11px;text-align:center}#hint{display:none}}
+  .atlas-tabs{gap:20px;overflow-x:auto}.atlas-tabs button{flex-shrink:0}.map-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr);gap:20px}.world-map{position:relative;aspect-ratio:1.15;background:#b6d9d9;border:2px solid var(--ink);overflow:hidden}.world-map svg{width:100%;height:100%;display:block}.map-node{position:absolute;transform:translate(-50%,-50%);padding:5px 7px;font-size:10px;background:var(--region-bg);box-shadow:2px 2px 0 var(--ink)}.map-node:hover{transform:translate(-50%,-50%) scale(1.05)}.map-node[aria-pressed=true]{outline:3px solid #ff715d;outline-offset:3px}.map-player,.map-objective{position:absolute;transform:translate(-50%,-50%);pointer-events:none;font-size:19px;text-shadow:0 1px 3px white;z-index:2}.map-player{color:#202820}.map-objective{color:#e46e4b}.map-key{position:absolute;bottom:9px;left:12px;font-size:10px;font-weight:850;background:#fff9e9db;padding:5px 7px}.map-sheet{border:2px solid var(--ink);background:#fffdf6;padding:17px;display:flex;flex-direction:column;gap:10px}.map-sheet h3{font-size:25px;margin:2px 0}.map-sheet p{font-size:12px;line-height:1.8;margin:0}.map-sheet small{font-size:10px;letter-spacing:.08em}.map-sheet .region-art{height:85px;border:1px solid var(--ink);background:var(--region-bg)}.map-sheet button{white-space:normal}.map-tasks{display:grid;gap:9px;border-top:2px solid #ccd3be;padding-top:12px;margin-top:4px}.map-tasks button{text-align:left;background:#e1ece0;line-height:1.5}.activity-card .card-copy{gap:6px}.activity-card button{white-space:normal}.activity-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:10px;font-weight:850}.activity-meta span{padding:3px 5px;background:#e8ecdb}.activity-card progress{width:100%;accent-color:var(--teal);height:10px}.activity-card.active{outline:3px solid var(--teal);outline-offset:2px}.activity-filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}.activity-filters button{background:#fffdf6}.activity-filters [aria-pressed=true]{background:var(--teal)}#routeStatus{font-size:11px;line-height:1.7;border-left:3px solid var(--teal);padding-left:8px;margin:12px 0 0}#routeStatus:empty{display:none}.dock-actions{display:flex;gap:8px}.dock-actions button{flex:1;white-space:normal;font-size:11px}#activityButton{margin-top:7px;background:var(--lemon);padding:10px}#activityHint{font-size:10px;line-height:1.5;margin-top:7px;font-weight:750}#fishingMeter{width:100%;height:10px;margin-top:7px;border:1px solid var(--ink);background:linear-gradient(90deg,#eadbc4 0 32%,#79c59f 32% 78%,#eadbc4 78%);position:relative}#fishingNeedle{height:14px;width:3px;position:absolute;top:-3px;background:var(--ink)}#wonderDock{width:min(430px,calc(100vw - 28px))}#speech{bottom:195px}.journal-summary{display:flex;gap:12px;flex-wrap:wrap;font-weight:850}.journal-summary span{border:2px solid var(--ink);padding:7px 11px;background:#edf0de}
+  @media(max-width:1000px){#wonderDock{width:360px}.map-layout{grid-template-columns:1fr}.map-sheet .region-art{display:none}.map-sheet{gap:8px}.map-tasks{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){.atlas-tabs{gap:15px}.atlas-tabs button{font-size:12px;padding:12px 0 9px}.map-layout{gap:12px}.map-node{font-size:8px;padding:4px 3px;box-shadow:1px 1px 0 var(--ink)}.map-key{font-size:8px;left:5px;bottom:5px;padding:3px}.map-sheet{padding:12px}.map-sheet h3{font-size:21px}.map-tasks{grid-template-columns:1fr}.activity-filters button{font-size:10px}.journal-summary{gap:6px}.journal-summary span{font-size:11px;padding:5px}#wonderDock{width:calc(100vw - 24px)}#wonderButton,#activityButton{padding:8px;margin-top:5px}#touchControls{bottom:177px}#speech{bottom:385px}#toast{bottom:166px}#panel{max-height:min(39dvh,330px)}#routeStatus{font-size:9px;margin-top:8px}#activityHint{font-size:9px}.book-button{margin:9px 0}#regionBanner{max-width:125px}}
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  .wardrobe-link{width:100%;display:flex;justify-content:space-between;align-items:center;margin-top:8px;background:#e6ead8;padding:8px 10px;font-size:11px}.wardrobe-link span{font-size:9px;font-weight:700}
+  .cast-grid{align-items:stretch}.cast-card{overflow:hidden}.cast-card .card-copy>p{min-height:46px}.cast-portrait{position:relative}.portrait-number{position:absolute;top:9px;left:10px;z-index:1;background:#fff9e9dc;border:1px solid var(--ink);padding:3px 5px;font-size:8px;font-weight:900}.look-switch{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;width:100%;margin:-2px 0 8px}.look-switch button{margin:0!important;padding:6px 2px!important;font-size:9px!important;background:#eef0df!important;border:1px solid #718078!important;box-shadow:none!important;white-space:nowrap}.look-switch button[aria-pressed=true]{background:#a6d7c7!important;border-color:#263b49!important;box-shadow:inset 0 -2px 0 #263b49!important}.look-caption{display:grid;gap:3px;min-height:55px;width:100%;margin:0 0 8px;padding:7px 8px;background:#fff8e5;border-left:3px solid #79afa0}.look-caption b{font-size:10px}.look-caption span{font-size:9px;line-height:1.5;color:#53655e}.cast-portrait img{transition:opacity .12s ease}.cast-card .resident-label{min-height:0!important;margin:0 0 7px!important;font-size:9px;color:#53655e}.life-note{width:100%;margin-top:8px;border-top:1px solid #c6d0bf}.life-note summary{font-size:9px;padding:8px 0 4px}.life-note p{padding:5px 0;color:#53655e}.life-note button{margin:5px 0 0!important;padding:6px;font-size:9px!important;background:#e7eee0!important}.region-life{width:100%;margin:0 0 9px;padding:8px;background:#f4f2df;border-left:3px solid #8db8a5}.region-life b{font-size:11px}.region-life p{margin:4px 0 7px!important;font-size:9px!important}.region-life button{margin:0!important;padding:5px;font-size:9px!important;background:#e2efdc!important}
+  .wardrobe-intro{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;margin:0 0 14px;background:#e5eee2;border:2px solid var(--ink)}.wardrobe-intro .eyebrow{font-size:8px;font-weight:900;color:#50786e}.wardrobe-intro h3{margin:5px 0;font-size:22px}.wardrobe-intro p{margin:0;font-size:11px;line-height:1.7}.wardrobe-seal{flex:0 0 88px;text-align:center;font-size:9px;line-height:1.65;border:1px solid #6c877d;padding:6px;background:#fff8e6}.wardrobe-seal b{font-size:23px}.series-shelf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 9px}.series-shelf button{display:grid;gap:5px;min-height:76px;text-align:left;padding:9px;background:var(--series-bg);border:1px solid var(--ink);box-shadow:none}.series-shelf button[aria-pressed=true]{outline:3px solid #477c70;outline-offset:1px}.series-shelf small{font-size:7px;font-weight:900}.series-shelf b{font-size:12px}.series-shelf span{font-size:8px;line-height:1.35}.wardrobe-help{font-size:9px;color:#53655e;line-height:1.6;margin:0 0 12px}
+  .cast-card .card-copy>.card-rule{min-height:0}
+  @media(max-width:680px){.wardrobe-link{padding:7px}.wardrobe-link span{font-size:8px}.wardrobe-intro{padding:10px 12px;gap:8px}.wardrobe-intro h3{font-size:17px}.wardrobe-intro p{font-size:9px}.wardrobe-seal{flex-basis:66px;font-size:8px}.wardrobe-seal b{font-size:18px}.series-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.series-shelf button{min-height:64px;padding:7px}.series-shelf b{font-size:11px}.series-shelf span{font-size:8px}.look-switch{gap:3px}.look-switch button{font-size:9px!important;padding:7px 1px!important}.look-caption{min-height:70px;padding:6px}.look-caption b{font-size:10px}.look-caption span{font-size:9px}}
+  @media(max-width:480px){.cast-grid{grid-template-columns:1fr}.cast-card .cast-portrait{height:150px}.cast-card .cast-portrait img{width:150px;height:150px}.cast-card .card-copy{padding:12px}.cast-card .card-copy p{font-size:11px}.look-switch button{min-height:36px}.look-caption{min-height:56px}.life-note summary{font-size:11px;min-height:36px}.life-note button{font-size:10px!important;min-height:36px}.cast-card .card-copy>button{min-height:40px;font-size:11px}.wardrobe-intro br{display:none}}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <section id="panel" aria-label="浮屿工坊控制面板">
-  <div class="eyebrow">THE ATLAS OF LITTLE WONDERS</div><h1>浮屿工坊</h1><div class="small">第一章 · 心愿长成的地方</div>
-  <button id="openAtlas" class="book-button">奇想手册 <span>五种风土 · 六位伙伴 ↗</span></button>
+  <div class="eyebrow">THE ATLAS OF LITTLE WONDERS</div><h1>浮屿工坊</h1><div class="small">第二章 · 去更远的地方</div>
+  <button id="openAtlas" class="book-button">全域地图 · M <span>九片风土 · 十八段冒险 ↗</span></button>
   <div class="avatar-row"><label for="avatar">今日化身</label><select id="avatar" class="field grow" aria-label="选择角色形象"></select></div>
+  <button id="openWardrobe" class="wardrobe-link">造型衣橱 <span>去看看他们的另一种生活 ↗</span></button>
+  <div id="routeStatus" aria-live="polite"></div>
   <details id="tools"><summary>世界、天气与工坊设置</summary>
   <div class="rule"></div>
   <label for="seed">世界种子</label><div class="row"><input id="seed" class="field grow" value="LUMEN-07" maxlength="22" aria-label="世界种子"/><button id="regen" class="coral">重新生成</button></div>
@@ -53,9 +64,9 @@
   <div class="row"><button id="camera" class="secondary grow">视角：跟随</button><button id="autoTime" class="secondary grow">时间：自动</button></div>
   <label for="time">昼夜时间 <span id="timeLabel" class="value">10:30</span></label><input id="time" type="range" min="0" max="24" step="0.05" value="10.5"/>
   <div class="weather-row"><label for="weather">天气</label><select id="weather" class="field" aria-label="选择天气"><option value="clear">晴朗</option><option value="cloudy">多云</option><option value="rain">细雨</option><option value="snow">落雪</option><option value="stardust">星辉</option></select></div>
-  <label for="vehicle" style="margin-top:12px">出行方式</label><div class="row"><select id="vehicle" class="field grow" aria-label="选择载具"><option value="cart">林叶邮车</option><option value="bus">云铃小巴</option><option value="airship">星帆艇</option></select><button id="summon" class="teal">召回</button></div>
-  <div class="row"><button id="ride" class="secondary">步行 · V 附近乘车</button></div><div class="small">WASD / 方向键行走或驾驶 · V 上下车<br>星帆艇：空格上升 · Shift 下降</div>
-  <label for="zoom" style="margin-top:10px">视野 <span class="small">近看 ↔ 远眺</span></label><input id="zoom" type="range" min="28" max="132" step="1" value="86" aria-label="视野缩放"/>
+  <label for="vehicle" style="margin-top:12px">出行方式</label><div class="row"><select id="vehicle" class="field grow" aria-label="选择载具"><option value="cart">林叶邮车</option><option value="bus">云铃小巴</option><option value="airship">星帆艇</option><option value="ferry">贝壳浮舟</option></select><button id="summon" class="teal">召回</button></div>
+  <div class="row"><button id="ride" class="secondary">步行 · V 附近乘车</button></div><div class="small">WASD / 方向键 · Shift 奔跑 · V 上下车<br>星帆艇：空格上升 · Shift 下降</div>
+  <label for="zoom" style="margin-top:10px">视野 <span class="small">近看 ↔ 远眺</span></label><input id="zoom" type="range" min="28" max="280" step="1" value="86" aria-label="视野缩放"/>
   <details id="workshop"><summary>营地工坊 · 塑形与制作</summary>
   <div class="row"><button id="raise" class="secondary grow">抬升地形</button><button id="lower" class="secondary grow">降低地形</button><button id="smooth" class="secondary grow">平滑地形</button></div>
   <div class="rule"></div>
@@ -66,9 +77,9 @@
   </details>
 </section>
 <aside id="regionBanner" aria-label="当前区域"><small id="regionSubtitle">THE WISH ARCHIPELAGO</small><div id="regionName">奇想群岛</div><div id="regionRule">心愿被听见的地方，奇妙就会发生。</div></aside>
-<div id="wonderDock"><small>身边的奇妙 <span id="wonderCount">印记 0 / 5</span></small><button id="wonderButton">寻找区域里的奇遇 · Q</button></div>
+<div id="wonderDock"><small>身边的奇妙 <span id="wonderCount">印记 0 / 9</span></small><div class="dock-actions"><button id="wonderButton">区域奇遇 · Q</button><button id="activityButton">寻找冒险 · T</button></div><div id="activityHint">打开全域地图，接一段属于你的冒险。</div><div id="fishingMeter" aria-label="钓梦鱼：指针进入绿色区域时按 T" hidden><i id="fishingNeedle"></i></div></div>
 <section id="speech" aria-label="伙伴对话" hidden><button id="speechClose" aria-label="关闭对话">×</button><b id="speechName"></b><p id="speechText" aria-live="polite"></p><div class="row"><button id="speechNext" class="secondary">再聊一句</button><button id="speechWonder" class="teal">让奇妙发生</button></div></section>
-<dialog id="atlas" aria-labelledby="atlasTitle"><header class="atlas-header"><div class="atlas-top"><div><div class="eyebrow">FIELD NOTES · VOL. 01</div><h2 id="atlasTitle">奇想群岛手册</h2></div><button id="atlasClose" aria-label="关闭奇想手册">×</button></div><nav class="atlas-tabs" role="tablist" aria-label="手册分类"><button role="tab" id="tab-regions" aria-controls="atlasContent" aria-selected="true" data-tab="regions">五种风土</button><button role="tab" id="tab-cast" aria-controls="atlasContent" aria-selected="false" data-tab="cast" tabindex="-1">奇想居民</button><button role="tab" id="tab-journal" aria-controls="atlasContent" aria-selected="false" data-tab="journal" tabindex="-1">我的旅记</button></nav></header><div id="atlasContent" class="atlas-body" role="tabpanel" aria-labelledby="tab-regions"></div></dialog>
+<dialog id="atlas" aria-labelledby="atlasTitle"><header class="atlas-header"><div class="atlas-top"><div><div class="eyebrow">FIELD NOTES · VOL. 02 / THE OPEN ROADS</div><h2 id="atlasTitle">奇想群岛手册</h2></div><button id="atlasClose" aria-label="关闭奇想手册">×</button></div><nav class="atlas-tabs" role="tablist" aria-label="手册分类"><button role="tab" id="tab-map" aria-controls="atlasContent" aria-selected="true" data-tab="map">全域地图</button><button role="tab" id="tab-regions" aria-controls="atlasContent" aria-selected="false" data-tab="regions" tabindex="-1">九片风土</button><button role="tab" id="tab-activities" aria-controls="atlasContent" aria-selected="false" data-tab="activities" tabindex="-1">冒险清单</button><button role="tab" id="tab-cast" aria-controls="atlasContent" aria-selected="false" data-tab="cast" tabindex="-1">奇想居民</button><button role="tab" id="tab-journal" aria-controls="atlasContent" aria-selected="false" data-tab="journal" tabindex="-1">我的旅记</button></nav></header><div id="atlasContent" class="atlas-body" role="tabpanel" aria-labelledby="tab-map"></div></dialog>
 <div id="hint"><b>岛屿日记</b><span id="progress">找到木材、石头与发光种子，给岛屿添一处温暖的落脚点。</span><span id="locationStatus">云铃镇 · 晴朗 · 10:30</span></div>
 <div id="touchControls" aria-label="触屏控制"><div class="pad"><button data-dir="up" aria-label="向前">↑</button><button data-dir="left" aria-label="向左">←</button><button data-dir="down" aria-label="向后">↓</button><button data-dir="right" aria-label="向右">→</button></div><div class="touch-actions"><button data-action="jump" aria-label="跳跃">跳跃</button><button data-action="collect" aria-label="交谈或采集">交互</button><button data-action="plant" aria-label="种植">种植</button><button data-action="ride" aria-label="乘坐载具">乘车</button></div></div>
 <div id="toast" role="status"></div><div id="reticle"><i class="reticle-line h"></i><i class="reticle-line v"></i></div>
@@ -78,19 +89,19 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
   'use strict';
   const $ = id => document.getElementById(id);
   const app = $('app'), toastEl = $('toast');
-  const TAU = Math.PI * 2;
-  const state = { seed:'LUMEN-07', outline:true, camera:'follow', autoTime:true, time:10.5, weather:'clear', riding:'', avatar:'sprout', stamps:[], met:[], visited:[], wood:0, stone:0, seeds:0, crafted:0, planted:0, terrainEdits:0, jumped:false, terrainOps:[], placed:[], collected:[] };
+  const TAU = Math.PI * 2, MAP_EDGE = 136;
+  const state = { seed:'LUMEN-07', outline:true, camera:'follow', autoTime:true, time:10.5, weather:'clear', riding:'', avatar:'sprout', looks:{}, stamps:[], met:[], visited:[], activityProgress:{}, activityDone:[], activeActivity:'', dreamFish:0, roadDistance:0, wood:0, stone:0, seeds:0, crafted:0, planted:0, terrainEdits:0, jumped:false, terrainOps:[], placed:[], collected:[] };
   const keys = new Set(); let seedHash = 1, rng, world = null, player, playerVelocity = new THREE.Vector3(), onGround = true, elapsed = 0, toastTimer = 0, weatherEffect = null, weatherClock = 0, skyClock = 0, statusClock = 0;
-  const outlines = [], dynamic = [], pickups = [], props = [], plants = [], landmarks = [], roads = [], vehicles = [], lanterns = [], residents = [];
+  const outlines = [], dynamic = [], pickups = [], props = [], plants = [], landmarks = [], roads = [], vehicles = [], lanterns = [], residents = [], activityMarkers = [];
   const clock = new THREE.Clock();
   const scene = new THREE.Scene(); scene.background = new THREE.Color(0xbfeae3); scene.fog = new THREE.Fog(0xbfeae3, 45, 130);
   const renderer = new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,1.65)); renderer.setSize(innerWidth,innerHeight); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFShadowMap; renderer.outputColorSpace=THREE.SRGBColorSpace; app.appendChild(renderer.domElement);
-  let cameraSpan=86;const cameraHeight=cameraSpan/(innerWidth/innerHeight);const camera = new THREE.OrthographicCamera(-cameraSpan/2,cameraSpan/2,cameraHeight/2,-cameraHeight/2,0.1,260); camera.position.set(52,48,52); camera.lookAt(0,0,0);
+  let cameraSpan=86;const cameraHeight=cameraSpan/(innerWidth/innerHeight);const camera = new THREE.OrthographicCamera(-cameraSpan/2,cameraSpan/2,cameraHeight/2,-cameraHeight/2,0.1,720); camera.position.set(52,48,52); camera.lookAt(0,0,0);
   const hemi = new THREE.HemisphereLight(0xfff8d8,0x5d9b8c,1.55); scene.add(hemi); const ambient = new THREE.AmbientLight(0xfff5d2,.32); scene.add(ambient);
-  const sun = new THREE.DirectionalLight(0xfff2c3,2.6); sun.castShadow=true; sun.shadow.mapSize.set(1024,1024); sun.shadow.camera.left=-48;sun.shadow.camera.right=48;sun.shadow.camera.top=48;sun.shadow.camera.bottom=-48;sun.shadow.camera.near=1;sun.shadow.camera.far=150; scene.add(sun); scene.add(sun.target);
+  const sun = new THREE.DirectionalLight(0xfff2c3,2.6); sun.castShadow=true; sun.shadow.mapSize.set(1536,1536); sun.shadow.camera.left=-58;sun.shadow.camera.right=58;sun.shadow.camera.top=58;sun.shadow.camera.bottom=-58;sun.shadow.camera.near=1;sun.shadow.camera.far=500; scene.add(sun); scene.add(sun.target);
   const gradientCanvas=document.createElement('canvas'); gradientCanvas.width=3;gradientCanvas.height=1; const gc=gradientCanvas.getContext('2d'); gc.fillStyle='#4b4b4b';gc.fillRect(0,0,1,1);gc.fillStyle='#9a9a9a';gc.fillRect(1,0,1,1);gc.fillStyle='#f7f7f7';gc.fillRect(2,0,1,1); const gradientMap=new THREE.CanvasTexture(gradientCanvas); gradientMap.minFilter=THREE.NearestFilter;gradientMap.magFilter=THREE.NearestFilter;
   const toon = (color, extra={}) => new THREE.MeshToonMaterial({color,gradientMap,...extra});
-  const outlineMat = new THREE.ShaderMaterial({side:THREE.BackSide,transparent:true,uniforms:{lineColor:{value:new THREE.Color(0x202820)}},vertexShader:'varying float vHeight; void main(){vHeight=position.y; vec3 p=position+normal*0.055; gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}',fragmentShader:'uniform vec3 lineColor; varying float vHeight; void main(){if(vHeight < -2.0) discard; gl_FragColor=vec4(lineColor,1.0);}'});
+  const outlineMat = new THREE.ShaderMaterial({side:THREE.BackSide,transparent:true,fog:true,uniforms:THREE.UniformsUtils.merge([THREE.UniformsLib.fog,{lineColor:{value:new THREE.Color(0x202820)}}]),vertexShader:'varying float vHeight; varying float vFogDepth; void main(){vHeight=position.y; vec3 p=position+normal*0.055; vec4 mv=modelViewMatrix*vec4(p,1.0);vFogDepth=-mv.z;gl_Position=projectionMatrix*mv;}',fragmentShader:'uniform vec3 lineColor;uniform vec3 fogColor;uniform float fogNear;uniform float fogFar;varying float vHeight;varying float vFogDepth;void main(){if(vHeight < -2.0) discard;float fogFactor=smoothstep(fogNear,fogFar,vFogDepth);gl_FragColor=vec4(mix(lineColor,fogColor,fogFactor),1.0);}'});
   const mats={terrain:toon(0xffffff,{vertexColors:true}), water:toon(0x75d7d0,{transparent:true,opacity:.52,side:THREE.DoubleSide}), trunk:toon(0x91552d), leaf:toon(0x4ca85b), pine:toon(0x147b6f), rock:toon(0x858b82), flower:toon(0xffbd3f), cloud:toon(0xfdfdf8,{transparent:true,opacity:.7,depthWrite:false}), clay:toon(0xff8068), fire:toon(0xff6449), wood:toon(0xa86c3c), bench:toon(0xc7864d), seed:toon(0xffd75a), crystal:toon(0x54d8cb,{emissive:0x15594f,emissiveIntensity:.65}), mushroom:toon(0xd778a2), mushroomLight:toon(0xffd986,{emissive:0x795323,emissiveIntensity:.25}), roadEdge:toon(0xd1b982,{side:THREE.DoubleSide}), road:toon(0x8b6c64,{side:THREE.DoubleSide}), wall:toon(0xffe7ba), roof:toon(0x4fa89b), moon:toon(0xf9e5ab), lantern:new THREE.MeshBasicMaterial({color:0xffcb69}), stars:new THREE.PointsMaterial({color:0xfff1bd,size:1.7,transparent:true,opacity:0,depthWrite:false}), rain:new THREE.LineBasicMaterial({color:0x9dd6ec,transparent:true,opacity:.56}), snow:new THREE.PointsMaterial({color:0xf8fbff,size:4,transparent:true,opacity:.9,depthWrite:false}), stardust:new THREE.PointsMaterial({color:0xffe18b,size:3,transparent:true,opacity:.88,depthWrite:false})};
   function hashString(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
   function rand(){seedHash=(seedHash*1664525+1013904223)>>>0;return seedHash/4294967296}
@@ -99,12 +110,12 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
   function gradientDot(ix,iy,x,y){const angle=hash2(ix,iy)*TAU;return Math.cos(angle)*(x-ix)+Math.sin(angle)*(y-iy)}
   function noise(x,y){const xi=Math.floor(x), yi=Math.floor(y), xf=x-xi,yf=y-yi;const u=fade(xf),v=fade(yf);const a=gradientDot(xi,yi,x,y),b=gradientDot(xi+1,yi,x,y),c=gradientDot(xi,yi+1,x,y),d=gradientDot(xi+1,yi+1,x,y);return THREE.MathUtils.lerp(THREE.MathUtils.lerp(a,b,u),THREE.MathUtils.lerp(c,d,u),v)*1.45}
   function fbm(x,y){let value=0,amp=.5,freq=1;for(let i=0;i<5;i++){value+=noise(x*freq,y*freq)*amp;freq*=2.03;amp*=.5}return value}
-  function baseHeight(x,z){const r=Math.hypot(x,z),island=THREE.MathUtils.smoothstep(r,33,43);const base=fbm(x*.045,z*.045)*3.7+fbm(x*.11+14,z*.11-5)*1.3;const ridge=8.4*Math.exp(-((x+18)**2+(z+15)**2)/128);const peak=3.2*Math.exp(-((x+24)**2+(z+20)**2)/26);let height=(base+ridge+peak)*(1-island)-island*4.5;const town=1-THREE.MathUtils.smoothstep(Math.hypot(x-9,z-5),5,12);height=THREE.MathUtils.lerp(height,.9,town*.88);for(const [cx,cz,level,radius] of [[22,-16,1.8,10],[-1,-28,1.1,9]]){const mix=1-THREE.MathUtils.smoothstep(Math.hypot(x-cx,z-cz),radius*.55,radius*1.2);height=THREE.MathUtils.lerp(height,level,mix*.88)}return height}
+  function baseHeight(x,z){const r=Math.hypot(x,z),island=THREE.MathUtils.smoothstep(r,132,149);const base=2.2+fbm(x*.014,z*.014)*4.5+fbm(x*.043+14,z*.043-5)*2.1;const ridge=8.4*Math.exp(-((x+18)**2+(z+15)**2)/128)+3.2*Math.exp(-((x+24)**2+(z+20)**2)/26);const dunes=1.4*Math.sin(x*.16+Math.sin(z*.07)*2.2)*Math.exp(-((x+82)**2+(z-54)**2)/1900);const auroraRidge=10*Math.exp(-((x-93)**2+(z+84)**2)/520);let height=(base+ridge+dunes+auroraRidge)*(1-island)-island*4.5;const town=1-THREE.MathUtils.smoothstep(Math.hypot(x-9,z-5),5,12);height=THREE.MathUtils.lerp(height,.9,town*.88);for(const [cx,cz,level,radius] of [[22,-16,1.8,10],[-1,-28,1.1,9],[80,47,.45,17],[10,100,1.5,18],[-82,54,2.2,17],[93,-84,10,17]]){const mix=1-THREE.MathUtils.smoothstep(Math.hypot(x-cx,z-cz),radius*.58,radius*1.24);height=THREE.MathUtils.lerp(height,level,mix*.92)}return height}
   function terrainHeight(x,z){let h=baseHeight(x,z);for(const op of state.terrainOps){const d=Math.hypot(x-op.x,z-op.z);if(d>=op.radius)continue;const fall=(Math.cos(d/op.radius*Math.PI)*.5+.5);if(op.type==='raise'||op.type==='lower')h+=op.amount*fall;else h+=(op.target-baseHeight(x,z))*op.amount*fall}return h}
-  function zoneColor(h,x=0,z=0){const c=new THREE.Color();if(h<-.6)c.set('#f5d24d');else if(h<3.2)c.set('#74c44f');else if(h<7)c.set('#34b5a4');else c.set('#fff9e9');if(h>-.6)for(const region of REGIONS){const blend=1-THREE.MathUtils.smoothstep(Math.hypot(x-region.x,z-region.z),region.r*.62,region.r*1.22);c.lerp(new THREE.Color(region.ground),blend*.91)}return c;}
+  function zoneColor(h,x=0,z=0){const c=new THREE.Color();if(h<-.6)c.set('#f5d24d');else if(h<3.2)c.set('#74c44f');else if(h<7)c.set('#34b5a4');else c.set('#fff9e9');if(h>-.6)for(const region of REGIONS){const spread=region.r>12?1.85:1;const blend=1-THREE.MathUtils.smoothstep(Math.hypot(x-region.x,z-region.z),region.r*spread*.62,region.r*spread*1.22);c.lerp(new THREE.Color(region.ground),blend*.91)}return c;}
   function meshWithOutline(root, scale=1.035){root.traverse(mesh=>{if(!mesh.isMesh||mesh.userData.outline||mesh.userData.isOutline)return;const hull=new THREE.Mesh(mesh.geometry.clone(),outlineMat);hull.userData.isOutline=true;hull.scale.setScalar(scale);hull.renderOrder=mesh.renderOrder-1;hull.name='inverted-hull';mesh.add(hull);mesh.userData.outline=hull;outlines.push(hull)});return root}
-  function makeTerrain(){const seg=96,size=130;const geo=new THREE.PlaneGeometry(size,size,seg,seg);geo.rotateX(-Math.PI/2);const pos=geo.attributes.position;const colors=[];for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i),h=terrainHeight(x,z);pos.setY(i,h);const c=zoneColor(h,x,z);colors.push(c.r,c.g,c.b)}geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));const flat=geo.toNonIndexed();flat.computeVertexNormals();const m=new THREE.Mesh(flat,mats.terrain);m.receiveShadow=true;m.name='continuous-faceted-terrain';meshWithOutline(m,1.008);scene.add(m);return m}
-  function makeWater(){const water=new THREE.Mesh(new THREE.CircleGeometry(62,96),mats.water);water.rotation.x=-Math.PI/2;water.position.y=-2.1;water.receiveShadow=true;scene.add(water);dynamic.push(water);const rings=[];for(let i=0;i<3;i++){const ring=new THREE.Mesh(new THREE.RingGeometry(32+i*2,32.12+i*2,96),new THREE.MeshBasicMaterial({color:0xffdf69,transparent:true,opacity:.18,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-1.95+i*.02;scene.add(ring);dynamic.push(ring);rings.push(ring)}return {water,rings}}
+  function makeTerrain(){const seg=208,size=310;const geo=new THREE.PlaneGeometry(size,size,seg,seg);geo.rotateX(-Math.PI/2);const pos=geo.attributes.position;const colors=[];for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i),h=terrainHeight(x,z);pos.setY(i,h);const c=zoneColor(h,x,z);colors.push(c.r,c.g,c.b)}geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));const flat=geo.toNonIndexed();geo.dispose();flat.computeVertexNormals();const m=new THREE.Mesh(flat,mats.terrain);m.receiveShadow=true;m.name='continuous-faceted-terrain';meshWithOutline(m,1.008);scene.add(m);return m}
+  function makeWater(){const water=new THREE.Mesh(new THREE.CircleGeometry(205,160),mats.water);water.rotation.x=-Math.PI/2;water.position.y=-2.1;water.receiveShadow=true;scene.add(water);dynamic.push(water);const rings=[];for(let i=0;i<3;i++){const ring=new THREE.Mesh(new THREE.RingGeometry(141+i*4,141.15+i*4,160),new THREE.MeshBasicMaterial({color:0xffdf69,transparent:true,opacity:.18,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-1.95+i*.02;scene.add(ring);dynamic.push(ring);rings.push(ring)}return {water,rings}}
   function makeTree(x,z,pine=false){const g=new THREE.Group();const y=terrainHeight(x,z);g.position.set(x,y,z);const trunk=new THREE.Mesh(new THREE.CylinderGeometry(pine?.22:.28,pine?.34:.42,pine?2.7:2.2,8),mats.trunk);trunk.position.y=1.1;trunk.castShadow=true;g.add(trunk);if(pine){for(let i=0;i<3;i++){const cone=new THREE.Mesh(new THREE.ConeGeometry(1.55-i*.27,2.35-i*.4,8),mats.pine);cone.position.y=2.15+i*.75;cone.castShadow=true;g.add(cone)}}else{const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(1.65,1),mats.leaf);crown.scale.set(1.1,.95,1);crown.position.y=2.55;crown.castShadow=true;g.add(crown);const crown2=new THREE.Mesh(new THREE.IcosahedronGeometry(1.05,1),mats.leaf);crown2.position.set(.65,3.15,.18);crown2.castShadow=true;g.add(crown2)}meshWithOutline(g,1.045);scene.add(g);props.push(g);return g}
   function makeRock(x,z){const g=new THREE.Group();g.position.set(x,terrainHeight(x,z),z);const r=new THREE.Mesh(new THREE.IcosahedronGeometry(.65+rand()*.45,1),mats.rock);r.scale.y=.6;r.rotation.set(rand(),rand(),rand());r.castShadow=true;g.add(r);meshWithOutline(g,1.07);scene.add(g);props.push(g);return g}
   function makeCloud(x,y,z,s){const g=new THREE.Group();g.position.set(x,y,z);for(let i=0;i<4;i++){const p=new THREE.Mesh(new THREE.DodecahedronGeometry(s*(.6+rand()*.35),1),mats.cloud);p.position.set((i-1.5)*s*.7,rand()*s*.3,Math.sin(i)*s*.35);g.add(p)}g.userData.baseX=x;g.userData.speed=.5+rand();scene.add(g);dynamic.push(g);return g}
@@ -447,11 +458,11 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
 
   function makeFantasyVehicle(id, x, z) {
     const group = new THREE.Group(), wheels = [];
-    const isBus = id === 'bus', isAirship = id === 'airship';
-    const record = {id, name: isAirship ? '星帆艇' : isBus ? '云铃小巴' : '林叶邮车',
-      group, wheels, speed: isAirship ? 11 : isBus ? 9 : 12, radius: isBus ? 1 : .72,
-      altitude: isAirship ? 3 : 0, groundOffset: isBus ? .48 : .38,
-      seatHeight: isAirship ? .6 : isBus ? .86 : .57, mounted: false,
+    const isBus = id === 'bus', isAirship = id === 'airship', isBoat = id === 'ferry';
+  const record = {id, name: isAirship ? '星帆艇' : isBus ? '云铃小巴' : isBoat ? '贝壳浮舟' : '林叶邮车',
+      group, wheels, speed: isAirship ? 23 : isBus ? 15 : isBoat ? 13 : 17, radius: isBus ? 1 : .82,
+      altitude: isAirship ? 3 : 0, groundOffset: isBus ? .48 : isBoat ? .68 : .38,
+      seatHeight: isAirship ? .6 : isBus ? .86 : isBoat ? .72 : .57, mounted: false,
       distance: 0, lastTravel: 0};
     group.userData.vehicle = record;
     if (isAirship) {
@@ -474,6 +485,20 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
         fantasyPalette.paleStone, 0, 0, 0);
       blade.rotation.z = Math.PI / 2; group.add(propeller); record.propeller = propeller;
       fantasyGlow(group, new THREE.SphereGeometry(.18, 7, 5), 0xffda8a, 0, .45, 1.76);
+    } else if (isBoat) {
+      const hull = fantasyMesh(group, new THREE.SphereGeometry(1, 10, 7),
+        storyMat(0x69aeb0), 0, .22, 0);
+      hull.scale.set(.86, .37, 1.62);
+      for (const side of [-1, 1]) {
+        const rail = fantasyMesh(group, new THREE.CylinderGeometry(.045, .07, 2.1, 5),
+          fantasyPalette.paleStone, side * .55, .55, -.05);
+        rail.rotation.x = Math.PI / 2;
+      }
+      fantasyMesh(group, new THREE.ConeGeometry(.37, .67, 6), fantasyPalette.gold, 0, .4, 1.58).rotation.x = Math.PI / 2;
+      fantasyMesh(group, new THREE.CylinderGeometry(.045, .055, 1.5, 6), mats.wood, 0, 1.05, -.15);
+      const sail = fantasyMesh(group, new THREE.ConeGeometry(.66, 1.14, 3), storyMat(0xffe4a7), 0, 1.68, -.22);
+      sail.rotation.z = -Math.PI / 2; sail.scale.set(.7, .22, .9);
+      fantasyGlow(group, new THREE.SphereGeometry(.12, 6, 5), 0xffd987, 0, .38, -.7);
     } else {
       const body = fantasyMesh(group, new THREE.SphereGeometry(1, 12, 8),
         isBus ? fantasyPalette.roofs[0] : mats.wood, 0, isBus ? .5 : .25, 0);
@@ -515,10 +540,11 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
   function buildFantasyWorld() {
     fantasyBuildings.length = 0; fantasyFloaters.length = 0;
     const town = makeTown();
-    makeRoads(town); makeScenery(); makeStoryWorld();
+    makeRoads(town); makeScenery(); makeStoryWorld(); makeFrontierRoads(); makeFrontierDistricts(); makeLifeCorners();makeWaystations();makeWideNature();makeActivityWorld();
     makeFantasyVehicle('cart', 2.2, -1.4);
     makeFantasyVehicle('bus', 7.8, -5.1);
     makeFantasyVehicle('airship', 13, -5.2);
+    makeFantasyVehicle('ferry', 77, 47);
   }
 
   function resolveTownCollision(position, previous = position, radius = .5) {
@@ -580,7 +606,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     group.position.x += x / length * vehicle.speed * dt;
     group.position.z += z / length * vehicle.speed * dt;
     const radius = Math.hypot(group.position.x, group.position.z);
-    if (radius > 39) { group.position.x *= 39 / radius; group.position.z *= 39 / radius; }
+    if (radius > MAP_EDGE-1) { group.position.x *= (MAP_EDGE-1) / radius; group.position.z *= (MAP_EDGE-1) / radius; }
     if (vehicle.id === 'airship') {
       if (keys.has('Space')) vehicle.altitude += dt * 4;
       if (keys.has('ShiftLeft') || keys.has('ShiftRight')) vehicle.altitude -= dt * 4;
@@ -592,7 +618,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     group.position.y = terrainHeight(group.position.x, group.position.z) +
       (vehicle.id === 'airship' ? vehicle.altitude : vehicle.groundOffset);
     vehicle.lastTravel = Math.hypot(group.position.x - previous.x, group.position.z - previous.z);
-    vehicle.distance += vehicle.lastTravel;
+    vehicle.distance += vehicle.lastTravel;state.roadDistance+=vehicle.lastTravel;
     if (x || z) group.rotation.y = Math.atan2(x, z);
     syncFantasyRider(vehicle);
     return true;
@@ -617,7 +643,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     for (let i = 0; i < 10; i++) {
       const angle = heading + Math.PI / 2 + i * TAU / 10;
       const candidate = new THREE.Vector3(x + Math.sin(angle) * 2.7, 0, z + Math.cos(angle) * 2.7);
-      if (Math.hypot(candidate.x, candidate.z) > 38) continue;
+      if (Math.hypot(candidate.x, candidate.z) > MAP_EDGE-3) continue;
       candidate.y = terrainHeight(candidate.x, candidate.z);
       const collision = fantasyBuildings.some(building => Math.hypot(candidate.x - building.x, candidate.z - building.z) < building.radius + radius + .25);
       if (!collision) return candidate;
@@ -697,7 +723,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     if (Array.isArray(data)) for (const saved of data) {
       const vehicle = vehicles.find(item => item.id === saved?.id);
       if (!vehicle || !Number.isFinite(saved.x) || !Number.isFinite(saved.z)) continue;
-      const radius = Math.hypot(saved.x, saved.z), scale = radius > 39 ? 39 / radius : 1;
+      const radius = Math.hypot(saved.x, saved.z), scale = radius > MAP_EDGE-1 ? (MAP_EDGE-1) / radius : 1;
       vehicle.group.position.x = saved.x * scale; vehicle.group.position.z = saved.z * scale;
       vehicle.group.rotation.y = Number.isFinite(saved.heading) ? saved.heading : 0;
       vehicle.altitude = vehicle.id === 'airship' && Number.isFinite(saved.altitude)
@@ -716,7 +742,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
   function refreshFantasyGround() {
     for (const prop of props) {
       if (prop.userData.fantasyGround === undefined) continue;
-      if (prop.userData.fantasyRoad || prop.userData.groundDisc) prop.position.set(0, 0, 0);
+      if (prop.userData.fantasyRoad || prop.userData.groundDisc || prop.userData.natureKind) prop.position.set(0, 0, 0);
       else prop.position.y = terrainHeight(prop.position.x, prop.position.z) + prop.userData.fantasyGround;
       if (prop.userData.groundDisc) {
         const positions = prop.geometry.attributes.position;
@@ -732,7 +758,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
         mesh.geometry.dispose(); mesh.geometry = replacements[i]; mesh.position.set(0, 0, 0);
       });
     }
-    updateVehicles(0);
+    refreshWideNature();updateVehicles(0);
   }
 
   function updateFantasyWorld(dt, t = elapsed, nightAmount = 0) {
@@ -753,6 +779,15 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
         item.mesh.rotation.z = t * .28; item.mesh.position.y = 2.1 + Math.sin(t * 1.5) * .13;
       } else if (item.kind === 'bell') {
         item.mesh.rotation.y = t * .45; item.mesh.position.y = 1.42 + Math.sin(t * 1.1) * .14;
+      } else if(item.kind==='frontier-bubble') {
+        item.mesh.position.y=terrainHeight(item.mesh.position.x,item.mesh.position.z)+3.4+Math.sin(t*.8+item.phase)*.35;
+      } else if(item.kind==='bazaar-wheel') {
+        item.mesh.rotation.y=t*.13;
+      } else if(item.kind==='windmill') {
+        item.mesh.rotation.z=t*.82;
+      } else if(item.kind==='aurora-veil') {
+        item.mesh.rotation.y=.2+t*.045+item.phase;
+        item.mesh.scale.setScalar(1+Math.sin(t*.6+item.phase)*.035);
       }
     }
     for (const resident of residents) {
@@ -795,7 +830,38 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     {id:'nocturne',name:'暮光钟城',en:'THE LAST LIGHT DISTRICT',tag:'温柔而勇敢的夜色',x:22,z:-16,r:9,entry:[20,-12],color:'#e7ae64',bg:'#cbd0e2',ground:'#626b9c',symbol:'☾',
       rule:'有人愿意守夜，星星就不会熄灭。',desc:'深靛屋顶、黄铜时钟和悬灯长桥。这里的英雄没有战甲：一小截灯芯，披着比自己还大的斗篷。',wonder:'点亮守夜人星座',event:'长明巡夜',hint:'灯芯沿塔楼升起，把一座守望星座拼回夜空。',resident:'ember',duration:22},
     {id:'whale',name:'鲸眠花海',en:'THE WHALEBLOOM MEADOW',tag:'会呼吸的天空港湾',x:-1,z:-28,r:8,entry:[0,-24],color:'#efaf90',bg:'#f8dfca',ground:'#edc29b',symbol:'❋',
-      rule:'云鲸每呼吸一次，地上就开一圈花。',desc:'杏色草坡与珊瑚花树，停着把远方带回来的云鲸。它总迷路，却从没忘记任何一个朋友。',wonder:'和云鲸打个招呼',event:'云鲸花汐',hint:'阿浮跃入空中，花瓣随着一次深呼吸漫过山坡。',resident:'sprout',duration:24}
+      rule:'云鲸每呼吸一次，地上就开一圈花。',desc:'杏色草坡与珊瑚花树，停着把远方带回来的云鲸。它总迷路，却从没忘记任何一个朋友。',wonder:'和云鲸打个招呼',event:'云鲸花汐',hint:'阿浮跃入空中，花瓣随着一次深呼吸漫过山坡。',resident:'sprout',duration:24},
+    {id:'harbor',name:'泡泡海港',en:'BUBBLELIGHT HARBOR',tag:'潮汐收藏的远方来信',x:80,z:47,r:16,entry:[73,40],color:'#62c7c0',bg:'#cdece4',ground:'#86c5ab',symbol:'◉',
+      rule:'被海浪听见的愿望，会变成一颗不会破的泡泡。',desc:'贝壳码头、漂浮的船屋与气球鱼灯串成海岸集市。潮汐把远方的碎片送来，港务员泡泡仔替它们找到新主人。',wonder:'追随泡泡鲸的潮汐',event:'泡泡鲸归港',hint:'一列彩色泡泡沿海岸升起，拼成归港鲸群的航线。',resident:'bubblefolk',duration:21},
+    {id:'gear',name:'齿轮集市',en:'TICKTOCK BAZAAR',tag:'每一种时间都值得庆祝',x:10,z:100,r:17,entry:[4,92],color:'#db9a5c',bg:'#f0dcc0',ground:'#c6b176',symbol:'⚙',
+      rule:'忘记上发条的东西，会偷偷长出自己的节奏。',desc:'巨型齿轮在市集屋顶缓慢转动，摊贩卖地图、旧钟和“差一点就准时”的闹铃。这里的午后总比别处多出五分钟。',wonder:'替市集找回五分钟',event:'齿轮午后',hint:'散落的发条和钟摆飞上天空，整个市集一起慢下来。',resident:'gearling',duration:22},
+    {id:'dunes',name:'糖沙旷野',en:'SUGARSAND EXPANSE',tag:'把勇气揉进甜甜的风',x:-82,z:54,r:16,entry:[-74,47],color:'#efaa68',bg:'#f5dfad',ground:'#d7a966',symbol:'✦',
+      rule:'走得足够远，沙丘就会替你记住脚印。',desc:'奶油黄沙丘、会结糖晶的仙人掌和一汪薄荷绿绿洲。驼铃兽巴斯把旅行者的脚印收进背囊，等他们下次回来认路。',wonder:'穿过会唱歌的沙丘',event:'糖晶沙暴',hint:'金色沙粒旋成一只甜甜圈风暴，给旷野留下发光足迹。',resident:'sugarbeast',duration:20},
+    {id:'aurora',name:'极光雪境',en:'AURORA SNOWFIELD',tag:'把星光藏在柔软的雪里',x:93,z:-84,r:16,entry:[86,-76],color:'#87badb',bg:'#dcebf0',ground:'#b9d1d0',symbol:'✧',
+      rule:'雪会记得每一束曾经照亮它的光。',desc:'蓝白雪松、镜面冰湖与一座替夜航旅人寄信的星灯邮局。雪地飞蛾极光邮差收集天上的颜色，寄给还没睡着的人。',wonder:'给极光点亮回信',event:'雪境星邮',hint:'星灯邮票排成极光信道，照出地图以外的回信。',resident:'auroraling',duration:23}
+  ];
+  const ACTIVITY_TYPES={delivery:'远方投递',fish:'钓梦鱼',garden:'花圃照料',tune:'回声修补',treasure:'寻宝漫游',race:'道路巡游'};
+  // Ordered, physical stops make every activity part of the walkable world.
+  const stop=(x,z,label)=>({x,z,label});
+  const ACTIVITIES=[
+    {id:'tomorrow-post',region:'town',type:'delivery',name:'没有地址的远方信',desc:'从云铃镇邮筒领信，替啵啵把心意送到林间驿站与海港。',stops:[stop(2,6,'云铃镇领信'),stop(32,25,'林间驿站盖章'),stop(74,46,'海港投递')]},
+    {id:'town-garden',region:'town',type:'garden',name:'街角也要有花开',desc:'照料三座小花圃，让小镇多一点属于你的颜色。',stops:[stop(6,-4,'车站花圃'),stop(18,7,'街角花圃'),stop(2,12,'回家路上的花圃')]},
+    {id:'grove-fish',region:'mushroom',type:'fish',name:'从梦里钓出一片雨',desc:'坐在倒雨池边，等指针进入绿色区再按 T。连续钓起三条梦鱼。',stops:[stop(-19,23,'倒雨池钓点'),stop(-19,23,'倒雨池钓点'),stop(-19,23,'倒雨池钓点')]},
+    {id:'grove-garden',region:'mushroom',type:'garden',name:'把噩梦养成花',desc:'找到三枚沉睡的梦蕾，用一点耐心照亮它们。',stops:[stop(-19,13,'安抚第一枚梦蕾'),stop(-11,24,'唤醒第二枚梦蕾'),stop(-6,18,'照料最后一枚梦蕾')]},
+    {id:'prism-tune',region:'crystal',type:'tune',name:'山谷的三个回声',desc:'依次校准三座晶石，让走失的记忆重新连成线。',stops:[stop(-25,-7,'第一枚晶石'),stop(-20,-17,'第二枚晶石'),stop(-11,-12,'最后一枚晶石')]},
+    {id:'prism-hunt',region:'crystal',type:'treasure',name:'旧航图的碎片',desc:'离开谷底，去西北的旧观星台找回三枚航图。',stops:[stop(-39,-27,'山脊碎片'),stop(-55,-47,'松林碎片'),stop(-72,-62,'观星台碎片')]},
+    {id:'night-lamps',region:'nocturne',type:'tune',name:'替晚归的人留盏灯',desc:'顺着钟城小路，点亮三盏尚未苏醒的夜灯。',stops:[stop(16,-16,'街口夜灯'),stop(25,-24,'钟塔夜灯'),stop(30,-12,'归途夜灯')]},
+    {id:'night-post',region:'nocturne',type:'delivery',name:'寄往极光的晚安',desc:'从钟城拿到星灯，再向北驶往雪线中转站与星灯邮局。',stops:[stop(21,-8,'领取晚安星灯'),stop(54,-48,'雪线中转站'),stop(89,-88,'星灯邮局签收')]},
+    {id:'bloom-garden',region:'whale',type:'garden',name:'阿浮的落脚花园',desc:'为迷路的云鲸照料三座花圃，把它回家的路种出来。',stops:[stop(-6,-24,'第一圈花潮'),stop(3,-30,'第二圈花潮'),stop(-4,-35,'鲸眠花园')]},
+    {id:'bloom-tour',region:'whale',type:'race',name:'追随云鲸的风',desc:'穿过北方花坡与钟城外的五座巡游环。任何出行方式都可以。',limit:75,stops:[stop(0,-21,'花海起点'),stop(10,-23,'北坡风环'),stop(32,-29,'钟城外环'),stop(19,-37,'银草坡环'),stop(0,-34,'花海终点')]},
+    {id:'harbor-fish',region:'harbor',type:'fish',name:'潮汐口袋里的梦',desc:'在泡泡湖边钓三条口袋鱼；先按 T 抛竿，再在绿色区按 T 收竿。',stops:[stop(84,48,'泡泡湖钓点'),stop(84,48,'泡泡湖钓点'),stop(84,48,'泡泡湖钓点')]},
+    {id:'harbor-post',region:'harbor',type:'delivery',name:'一箱会响的贝壳',desc:'把海港的贝壳送过风车坡，交给齿轮集市的修理师。',stops:[stop(73,43,'码头装箱'),stop(49,76,'风车坡歇脚'),stop(12,94,'集市交货')]},
+    {id:'gear-repair',region:'gear',type:'tune',name:'找回多出的五分钟',desc:'依次接通三个发条装置，市集的大轮盘会继续转动。',stops:[stop(2,102,'左侧发条'),stop(11,109,'钟摆齿轮'),stop(19,100,'主轮发条')]},
+    {id:'gear-rally',region:'gear',type:'race',name:'叮当环城拉力',desc:'沿集市外围绕行一圈，穿过五个检查环。召回邮车更轻快。',limit:65,stops:[stop(6,90,'发车环'),stop(23,94,'东侧环'),stop(24,109,'北侧环'),stop(1,115,'西侧环'),stop(-2,95,'抵达环')]},
+    {id:'dune-hunt',region:'dunes',type:'treasure',name:'风藏起来的糖晶',desc:'循着星形标记寻找绿洲、沙丘与古拱门下的三枚糖晶。',stops:[stop(-77,59,'绿洲糖晶'),stop(-94,61,'沙丘糖晶'),stop(-89,43,'拱门糖晶')]},
+    {id:'dune-rally',region:'dunes',type:'race',name:'软糖沙丘大巡游',desc:'顺着金色巡游环穿过五段旷野；步行、邮车或星帆艇均可。',limit:80,stops:[stop(-70,46,'旷野起点'),stop(-72,67,'糖沙南坡'),stop(-94,69,'古沙丘'),stop(-101,46,'沙风拐点'),stop(-82,39,'绿洲终点')]},
+    {id:'aurora-tune',region:'aurora',type:'tune',name:'极光需要一封回信',desc:'为三座星邮灯补回颜色，让雪地里的邮路重新亮起。',stops:[stop(86,-82,'青色星邮灯'),stop(97,-91,'紫色星邮灯'),stop(104,-77,'金色星邮灯')]},
+    {id:'aurora-hunt',region:'aurora',type:'treasure',name:'雪里的星星不会冷',desc:'沿着灯塔、冰湖与松林边缘，寻找三枚掉落的星灯邮票。',stops:[stop(85,-92,'灯塔邮票'),stop(97,-78,'冰湖邮票'),stop(105,-87,'松林邮票')]}
   ];
   const CAST = [
     {id:'sprout',name:'绒角 · 诺诺',role:'收集未完成心愿的旅人',region:'whale',color:0x83c7b2,detail:0xf3d89a,bg:'#d9e9ce',playable:true,trait:'树枝绒角 / 梨形身体 / 月牙挎包',
@@ -809,25 +875,150 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     {id:'ember',name:'灯芯 · 余烁',role:'暮光钟城最小的守夜人',region:'nocturne',color:0x35405f,detail:0xf2b563,bg:'#d2d7e5',playable:true,trait:'烛焰双耳 / 巨大斗篷 / 一颗灯芯心',
       wish:'让夜路上的每个人都能看见下一盏灯。',flaw:'怕黑，所以比任何人都认真地守护夜晚。',lines:['我也会怕黑。所以我把第一盏灯，留给和我一样的人。','英雄不一定要飞得很高。愿意多等一个晚归的人，就已经很好。']},
     {id:'cloudwhale',name:'云鲸 · 阿浮',role:'会把远方带回来的天空旅伴',region:'whale',color:0x98d6d1,detail:0xf5d5a4,bg:'#f5e1d2',playable:false,trait:'云团背鳍 / 花枝触角 / 星斑圆腹',
-      wish:'找到一片可以和朋友一起停下来的云。',flaw:'方向感不太好，但对朋友的记忆特别好。',lines:['呼——下一阵风，会把我们带去哪里呢？','你看，花在替我说“欢迎回来”。']}
+      wish:'找到一片可以和朋友一起停下来的云。',flaw:'方向感不太好，但对朋友的记忆特别好。',lines:['呼——下一阵风，会把我们带去哪里呢？','你看，花在替我说“欢迎回来”。']},
+    {id:'bubblefolk',name:'泡泡仔 · 泡叽',role:'泡泡海港的潮汐收藏员',region:'harbor',color:0x70cfc3,detail:0xffd986,bg:'#d4eee5',playable:false,trait:'透明泡泡头 / 贝壳腮红 / 口袋里的小潮汐',
+      wish:'替每一件漂来的东西找到下一个喜欢它的人。',flaw:'紧张时会变成一串小泡泡，得等同伴帮忙认回来。',lines:['这颗泡泡里装着一条很小的回家路线。你想看看吗？','海浪没说再见，它只是把故事送去别的岸边了。']},
+    {id:'gearling',name:'发条仔 · 咔哒',role:'齿轮集市的慢钟修理师',region:'gear',color:0xd19b62,detail:0x74bfb3,bg:'#f0dfc1',playable:false,trait:'齿轮耳朵 / 三层工具背包 / 总慢半拍的脚步',
+      wish:'修好一只会提醒人休息，而不是催人快跑的钟。',flaw:'自己忘了上发条，却总能准时出现在朋友需要时。',lines:['今天的钟慢了五分钟？太好了，终于能把午饭吃完。','修理之前先听一听，它可能只是想换个节奏。']},
+    {id:'sugarbeast',name:'驼铃兽 · 巴斯',role:'糖沙旷野的脚印向导',region:'dunes',color:0xe8ad76,detail:0xf3dc9d,bg:'#f4e3b8',playable:false,trait:'奶油角 / 背着绿洲小水壶 / 脚步像软糖',
+      wish:'让每个走累的旅人都能找到下一片阴凉。',flaw:'闻到薄荷糖就会走错方向。',lines:['你的脚印没有消失。看，风替你描上了一层糖霜。','先喝一口水吧。远方不急着今天就走完。']},
+    {id:'auroraling',name:'雪灯蛾 · 晚邮',role:'极光雪境的星灯邮差',region:'aurora',color:0x91bdcf,detail:0xd9b7e9,bg:'#e2edf0',playable:false,trait:'星斑绒翼 / 冰晶触角 / 折叠式夜航信箱',
+      wish:'寄出一封能让冬天里的人不再怕黑的回信。',flaw:'翅膀太亮，常把自己的地址也照没了。',lines:['别担心这场夜雪，星星没有忘记路。','有些回信要飞很久，但它正在来的途中。']}
   ];
-  const storyMats = new Map(), regionProps = [], eventObjects = [], portraitURLs = new Map();
-  let activeWonder = null, currentRegion = '', atlasTab = 'regions', speechResident = null, speechLine = 0, whaleActor = null;
-  const storyLights=new Map([[0xffdf93,.95],[0xf3c780,.8],[0xf0c985,.7],[0xffdc87,.8],[0xf2b563,.55],[0xffdc8c,.65],[0xa1e7ed,.4],[0xd7b5ec,.4],[0xcaf3e6,.3],[0xeec5ef,.3],[0xf8a6b6,.3],[0xffe1a4,.3],[0xffe8bb,.35],[0xf3b5a4,.35]]);
+  const LOOK_SERIES = [
+    {id:'core',label:'本真',title:'最初相遇',subtitle:'那些一眼就认得的朋友',color:'#d6e6ca'},
+    {id:'region',label:'风土',title:'风土纪行',subtitle:'把去过的地方穿在身上',color:'#cae7dd'},
+    {id:'hobby',label:'兴趣',title:'小小兴趣社',subtitle:'今天想试试另一种生活',color:'#f2d5c0'},
+    {id:'stardream',label:'星愿',title:'星愿巡游',subtitle:'让没实现的心愿先去远方',color:'#d6d3ea'}
+  ];
+  const CHARACTER_LOOKS = {
+    sprout:{region:{name:'花海采云记',description:'珊瑚花披肩与云朵采集袋，去给阿浮找一处停靠的花坡。',color:0xf0b58d,accent:0xffe58e,motif:'bloom'},hobby:{name:'会走路的花圃师',description:'把花种、浇水壶和一朵不肯摘下来的小花都带在身边。',color:0x79b99d,accent:0xf7d879,motif:'watering'},stardream:{name:'月芽巡星者',description:'月弧头饰连着星星挎包，想替每个朋友在天上找一颗座位。',color:0x778bb8,accent:0xffdf91,motif:'moon'}},
+    post:{region:{name:'钟城夜行邮差',description:'穿过暮光长桥的防风邮披，让每封信都赶在灯熄前到达。',color:0x72799d,accent:0xffcf7b,motif:'paper'},hobby:{name:'浮云面包师',description:'折耳沾着面粉，邮袋里装着刚出炉的云朵小面包。',color:0xe8a16f,accent:0xffe7aa,motif:'pastry'},stardream:{name:'流星信使',description:'一枚小小星帆让没写地址的信也能飞过夜空。',color:0x4f8199,accent:0xf7d77b,motif:'comet'}},
+    mori:{region:{name:'倒雨池青蛙探险',description:'青苔雨帽与池塘靴，专门追踪从地面往天上落的雨滴。',color:0x78b89b,accent:0xf3d879,motif:'frog'},hobby:{name:'梦蕾甜点师',description:'菌帽变成莓果蛋糕，试着把噩梦烤成一口会开花的点心。',color:0xd68fbd,accent:0x8fd8bd,motif:'pastry'},stardream:{name:'月眠观星客',description:'睡帽尖端挂着新月，数到第三颗星时就会打个哈欠。',color:0x7589bd,accent:0xffdfad,motif:'moon'}},
+    ray:{region:{name:'晶谷浮空勘探员',description:'透明晶片记录山谷回声，鳐翼穿过悬浮石环寻找新记忆。',color:0x6eacbf,accent:0xc7a9eb,motif:'crystal'},hobby:{name:'回声玻璃匠',description:'把听见的旋律吹成彩色玻璃珠，晶冠也因此亮了一点。',color:0x7bb4c5,accent:0xe7b5dc,motif:'glass'},stardream:{name:'星环航海家',description:'肩披星图，沿记忆星环航行，去找从未见过的第一段往事。',color:0x596b9d,accent:0xffd987,motif:'comet'}},
+    ember:{region:{name:'松林暖夜巡游',description:'灯笼斗篷加厚了一圈，替晚归旅人把雪线驿路照亮。',color:0x515d83,accent:0xf4bd69,motif:'lantern'},hobby:{name:'夜灯汤点厨师',description:'围上暖橙围裙，熬一小锅能让守夜人安心的星薯汤。',color:0xc8785e,accent:0xffd98b,motif:'soup'},stardream:{name:'晨光微型骑士',description:'披风里收着一小束日出，把第一道光留给怕黑的朋友。',color:0x7c698d,accent:0xffd77f,motif:'comet'}},
+    cloudwhale:{region:{name:'珊瑚云游鲸',description:'花瓣航帆上别着远方车票，呼吸时把花潮带去新山坡。',color:0xefad9b,accent:0xffe5a2,motif:'bloom'},hobby:{name:'云端花艺师',description:'背鳍上开着一座迷你花店，常把花束送给路过的风。',color:0x86c7b9,accent:0xf2c3ca,motif:'bouquet'},stardream:{name:'星河载梦鲸',description:'腹部的星图慢慢旋转，载着朋友去找一片愿意停下来的云。',color:0x7589ae,accent:0xffdc92,motif:'comet'}},
+    bubblefolk:{region:{name:'贝壳潜梦员',description:'珊瑚围巾和贝壳面罩陪它潜入泡泡湖，捞起漂来的小故事。',color:0x5eaaa4,accent:0xf5d38b,motif:'pearl'},hobby:{name:'潮汐拾贝收藏家',description:'口袋分成好多小格，专门收纳形状奇怪却舍不得丢的贝壳。',color:0x7bcac0,accent:0xf2b7ae,motif:'shell'},stardream:{name:'月光泡泡船长',description:'驾驶一颗不会破的泡泡穿过月色，帮迷路的故事寻找新岸边。',color:0x687dab,accent:0xffe6a4,motif:'moon'}},
+    gearling:{region:{name:'集市发条巡修员',description:'工具背包多出一枚慢钟徽章，记得修完东西要先休息。',color:0xb88958,accent:0x8fd2bf,motif:'gear'},hobby:{name:'街角音乐家',description:'把齿轮排成会唱歌的节拍器，演出时间永远多出五分钟。',color:0x64998e,accent:0xf3cd79,motif:'music'},stardream:{name:'银河慢钟守护者',description:'一枚星轮守着自己的节奏，让赶路的星星也能放慢脚步。',color:0x716e9e,accent:0xffdc88,motif:'comet'}},
+    sugarbeast:{region:{name:'薄荷绿洲旅行家',description:'水壶装满凉凉的绿洲水，角上挂着一串记路用的风铃。',color:0xc9a36d,accent:0x83c5a4,motif:'oasis'},hobby:{name:'沙丘香草园丁',description:'在糖沙里种薄荷和香草，路过的旅人都能闻到清凉的风。',color:0x88ae78,accent:0xf1d587,motif:'watering'},stardream:{name:'彗星脚印向导',description:'把银色彗星尘收进蹄印里，替远行者点亮回家的路。',color:0x896e9b,accent:0xffdc8d,motif:'comet'}},
+    auroraling:{region:{name:'极光雪线邮差',description:'换上星灯邮披，把雪地里没说出口的晚安寄到远方。',color:0x83b9c9,accent:0xe6c7f0,motif:'moth'},hobby:{name:'冰湖故事馆员',description:'翅尖夹着一册冻住的故事，等有人来一起翻开最后一页。',color:0x88a7ca,accent:0xffe1ac,motif:'book'},stardream:{name:'星帆夜航员',description:'冰晶触角校准星位，绒翼载着一封很久以前的回信出发。',color:0x6976a9,accent:0xffde93,motif:'comet'}}
+  };
+  const REGION_LIFE = [
+    {region:'town',resident:'post',look:'hobby',name:'云朵面包驿站',kind:'bakery',x:4.8,z:1.6,activity:'tomorrow-post',story:'有些没有地址的信，会闻着刚出炉的面包香找到收信人。',line:'今天不赶邮路，先尝一块云朵面包。心事烤暖了，信才送得更远。'},
+    {region:'mushroom',resident:'mori',look:'region',name:'倒雨观察棚',kind:'rainpond',x:-13.5,z:19,activity:'grove-fish',story:'在这里，雨伞是捞雨的网。青蛙小队记录每滴雨最终去了哪片云。',line:'这顶青蛙雨帽有两只观察眼！今天记录到第七滴倒着下的雨，我还没睡着。'},
+    {region:'crystal',resident:'ray',look:'hobby',name:'回声玻璃工坊',kind:'glass',x:-17.8,z:-6.7,activity:'prism-tune',story:'没有声音的玻璃珠，会在有人说起珍贵往事时慢慢亮起来。',line:'我把第一声笑吹进了这颗玻璃珠。你愿意说一段记得很久的故事吗？'},
+    {region:'nocturne',resident:'ember',look:'hobby',name:'暖夜汤点铺',kind:'soup',x:17.1,z:-10.1,activity:'night-lamps',story:'每位点完夜灯的守夜人，都能在天亮前喝到一碗不会凉的汤。',line:'煮汤时我就没那么怕黑了。先替晚归的人留盏灯，再来喝一碗星薯汤吧。'},
+    {region:'whale',resident:'sprout',look:'hobby',name:'花潮停靠站',kind:'florist',x:3.2,z:-26,activity:'bloom-garden',story:'花束会替云鲸记住方向。诺诺想把这处小站种成所有朋友都能停留的家。',line:'阿浮又带回一阵远方的风。我把它种在这束花里，闻起来像刚认识的新朋友。'},
+    {region:'harbor',resident:'bubblefolk',look:'hobby',name:'潮汐失物小铺',kind:'shells',x:78,z:41.4,activity:'harbor-post',story:'每枚失物都有一个小抽屉。喜欢它的下一位旅人到来时，贝壳就轻轻叮一声。',line:'这枚贝壳长得像一只没睡醒的耳朵。你看，它终于等到愿意听它说话的人了。'},
+    {region:'gear',resident:'gearling',look:'hobby',name:'慢五分钟舞台',kind:'music',x:6.3,z:99,activity:'gear-repair',story:'演出总是慢五分钟开场，留给忙碌的人把午饭吃完。齿轮是它的乐谱。',line:'这把手风琴是用坏闹钟修出来的。慢半拍也能合奏，先听一听自己的节奏。'},
+    {region:'dunes',resident:'sugarbeast',look:'hobby',name:'薄荷旅行花圃',kind:'herbs',x:-78.8,z:51,activity:'dune-hunt',story:'巴斯的香草箱跟着脚印移动，每个走累的旅人都能带走一片清凉的叶子。',line:'我又把路记成了薄荷味。不过你看，这次还带回了三株会为旅人遮阴的香草。'},
+    {region:'aurora',resident:'auroraling',look:'hobby',name:'冰湖故事屋',kind:'library',x:90,z:-83,activity:'aurora-hunt',story:'雪把还没讲完的故事冻在书页里。两个人一起翻开，它们才会暖起来。',line:'这本书还缺最后一页。不是撕掉了，是在等你也写一点自己的旅行。'}
+  ];
+  let castSeries='core';const castPreviews=new Map();
+  const portraitURLs = new Map(); let portraitRenderer = null;
+  const storyMats = new Map(), regionProps = [], eventObjects = [];
+  let activeWonder = null, currentRegion = '', atlasTab = 'map', speechResident = null, speechLine = 0, whaleActor = null, fishingRun = null;
+  let mapSelected='town',activityFilter='all',activityRun=null,activityTarget=null,lastActivityAt=-10,natureBatch=null,trailBeacon=null;
+  const ROAM_ROUTES=[
+    ['coast',[[9,5],[23,9],[39,20],[57,31],[73,41],[80,47]],'star'],
+    ['market',[[80,47],[68,60],[50,75],[31,88],[10,100]],'stone'],
+    ['sugar',[[10,100],[-10,89],[-32,75],[-58,63],[-82,54]],'wood'],
+    ['west',[[-82,54],[-70,32],[-56,15],[-42,1],[-28,-7],[-18,-10]],'star'],
+    ['snow',[[22,-16],[35,-28],[54,-48],[74,-63],[86,-76],[93,-84]],'star'],
+    ['observatory',[[-18,-10],[-39,-27],[-55,-47],[-72,-62]],'stone'],
+    ['north',[[-72,-62],[-40,-68],[-8,-61],[29,-49],[54,-48]],'wood']
+  ];
+  const storyLights=new Map([[0xffdf93,.95],[0xf3c780,.8],[0xf0c985,.7],[0xffdc87,.8],[0xf2b563,.55],[0xffdc8c,.65],[0xa1e7ed,.4],[0xd7b5ec,.4],[0xcaf3e6,.3],[0xeec5ef,.3],[0xf8a6b6,.3],[0xffe1a4,.3],[0xffe8bb,.35],[0xf3b5a4,.35],[0xffe3b1,.7],[0xb3ece8,.55],[0x8ce7ce,.65],[0xa7b9f1,.65]]);
   const storyMat = color => {if(!storyMats.has(color))storyMats.set(color,toon(color,storyLights.has(color)?{emissive:color,emissiveIntensity:storyLights.get(color)*.25}:{}));return storyMats.get(color)};
-  const storyGeo = {ball:new THREE.SphereGeometry(1,12,8),eye:new THREE.SphereGeometry(1,7,5),cone:new THREE.ConeGeometry(1,1,10),pillar:new THREE.CylinderGeometry(1,1,1,8),gem:new THREE.OctahedronGeometry(1),ring:new THREE.TorusGeometry(1,.07,6,28)};
+  const storyGeo = {ball:new THREE.SphereGeometry(1,12,8),eye:new THREE.SphereGeometry(1,7,5),cone:new THREE.ConeGeometry(1,1,10),pillar:new THREE.CylinderGeometry(1,1,1,8),gem:new THREE.OctahedronGeometry(1),ring:new THREE.TorusGeometry(1,.07,6,28),box:new THREE.BoxGeometry(1,1,1),crescent:new THREE.TorusGeometry(1,.17,6,20,Math.PI*1.45)};
   // Shared toon assets stay alive; meshes owned by a removed world or avatar are released.
   function disposeObjects(roots){
     const sharedGeo=new Set(Object.values(storyGeo)),sharedMat=new Set([...Object.values(mats),...Object.values(fantasyPalette).flat(),...storyMats.values(),outlineMat]);
     const geometry=new Set(),materials=new Set(),textures=new Set(),removedOutlines=new Set();
-    for(const root of new Set(roots.filter(Boolean))){root.traverse(m=>{if(m.geometry&&!sharedGeo.has(m.geometry))geometry.add(m.geometry);for(const mat of [m.material].flat().filter(Boolean))if(!sharedMat.has(mat))materials.add(mat);if(m.userData.isOutline)removedOutlines.add(m)});root.removeFromParent()}
+    for(const root of new Set(roots.filter(Boolean))){root.traverse(m=>{if(m.geometry&&!sharedGeo.has(m.geometry))geometry.add(m.geometry);for(const mat of [m.material].flat().filter(Boolean))if(!sharedMat.has(mat))materials.add(mat);if(m.userData.isOutline)removedOutlines.add(m);if(m.isInstancedMesh)m.dispose()});root.removeFromParent()}
     for(let i=outlines.length-1;i>=0;i--)if(removedOutlines.has(outlines[i]))outlines.splice(i,1);
     for(const mat of materials){for(const value of Object.values(mat))if(value?.isTexture&&value!==gradientMap)textures.add(value);mat.dispose()}
     for(const tex of textures)tex.dispose();for(const geo of geometry)geo.dispose();
   }
   function storyPart(group,shape,color,x,y,z,sx,sy=sx,sz=sx){const m=fantasyMesh(group,storyGeo[shape],storyMat(color),x,y,z);m.scale.set(sx,sy,sz);return m}
-  function makeCharacter(id, outlined=true) {
+  function addCharacterLook(v,def,look){
+    const outfit=CHARACTER_LOOKS[def.id]?.[look];if(!outfit)return;
+    const whale=def.id==='cloudwhale',front=whale?1.42:def.id==='ray'?.5:def.id==='bubblefolk'?.61:.49;
+    if(look==='region'){
+      const mantle=storyPart(v,'ball',outfit.color,0,.78,whale?-.86:-.33,whale?1.1:.73,.38,whale?.5:.39);mantle.rotation.z=.04;
+      storyPart(v,'ball',outfit.accent,0,.83,front,.39,.27,.12);
+      storyPart(v,'ring',outfit.accent,.46,.58,front-.02,.22,.22,.045);
+    }else if(look==='hobby'){
+      storyPart(v,'ball',outfit.color,0,.75,front,.48,.37,.12);
+      storyPart(v,'ball',outfit.accent,0,.86,front+.105,.12,.12,.045);
+      storyPart(v,'ring',outfit.accent,0,.47,front+.01,.4,.08,.04);
+    }else{
+      const mantle=storyPart(v,'ball',outfit.color,0,.77,whale?-1.2:-.4,whale?1.18:.82,.42,whale?.38:.42);mantle.rotation.z=-.08;
+      const halo=storyPart(v,'ring',outfit.accent,0,2.23,0,.77,.77,.07);halo.rotation.x=Math.PI/2;
+      for(let i=0;i<3;i++)storyPart(v,'gem',outfit.accent,Math.cos(i*TAU/3)*.69,2.23,Math.sin(i*TAU/3)*.69,.13,.19,.1);
+      storyPart(v,'gem',outfit.accent,0,.91,front+.08,.15,.2,.08);
+    }
+    const x=def.id==='ray'?.95:def.id==='cloudwhale'?1.05:.76, y=look==='stardream'?1.02:.86, z=front+.16, c=outfit.color,a=outfit.accent;
+    switch(outfit.motif){
+      case'bloom':storyPart(v,'pillar',c,x,y+.2,z,.045,.42,.045);storyPart(v,'gem',a,x,y+.48,z,.14,.18,.08);for(const s of [-1,1])storyPart(v,'ball',s<0?c:a,x+s*.14,y+.4,z,.16,.075,.08);break;
+      case'paper':{const wing=storyPart(v,'gem',a,x,y+.18,z,.24,.31,.045);wing.rotation.z=-.35;storyPart(v,'gem',0xf8e9cf,x+.23,y+.17,z-.02,.2,.27,.04);break;}
+      case'frog':storyPart(v,'ball',c,x,y+.38,z,.28,.16,.25);for(const s of [-1,1]){storyPart(v,'ball',c,x+s*.19,y+.52,z,.13,.13,.12);storyPart(v,'eye',0x263b49,x+s*.19,y+.53,z+.1,.035,.05,.025)}break;
+      case'crystal':for(let i=0;i<3;i++)storyPart(v,'gem',i===1?a:c,x+(i-1)*.19,y+.24+(i%2)*.14,z,.1,.29,.09);break;
+      case'lantern':storyPart(v,'pillar',c,x,y+.17,z,.11,.34,.11);storyPart(v,'ball',a,x,y+.4,z,.14,.17,.14);break;
+      case'pastry':storyPart(v,'pillar',a,x,y+.42,z,.22,.17,.22);storyPart(v,'ball',a,x,y+.57,z,.15,.12,.15);storyPart(v,'ball',0xf4d596,x,y+.17,z,.2,.12,.14);break;
+      case'comet':{const tail=storyPart(v,'cone',c,x,y+.18,z,.11,.52,.11);tail.rotation.z=-.35;storyPart(v,'gem',a,x+.17,y+.42,z,.18,.23,.13);break;}
+      case'glass':for(let i=0;i<3;i++)storyPart(v,'gem',i%2?a:c,x+(i-1)*.2,y+.18+(i%2)*.12,z,.12,.24,.1);break;
+      case'soup':storyPart(v,'ball',c,x,y+.17,z,.25,.16,.2);storyPart(v,'ring',a,x,y+.3,z,.22,.19,.04);storyPart(v,'gem',a,x+.05,y+.49,z,.1,.13,.07);break;
+      case'bouquet':storyPart(v,'pillar',c,x,y+.2,z,.045,.42,.045);for(const s of [-1,0,1])storyPart(v,'ball',a,x+s*.16,y+.46+(s===0?.1:0),z,.13,.13,.09);break;
+      case'pearl':storyPart(v,'ring',a,x,y+.24,z,.25,.25,.055);storyPart(v,'ball',0xfff2d3,x,y+.24,z+.05,.11);break;
+      case'shell':{const shell=storyPart(v,'ring',a,x,y+.24,z,.25,.25,.085);shell.rotation.z=.7;storyPart(v,'gem',c,x,y+.24,z+.035,.12,.2,.09);break;}
+      case'gear':{const gear=storyPart(v,'ring',a,x,y+.23,z,.24,.24,.08);gear.rotation.y=Math.PI/2;storyPart(v,'ball',c,x,y+.23,z+.05,.1);break;}
+      case'music':storyPart(v,'gem',a,x,y+.42,z,.12,.23,.1);storyPart(v,'gem',c,x+.2,y+.2,z,.12,.2,.1);storyPart(v,'ring',a,x+.1,y+.1,z,.2,.1,.04);break;
+      case'oasis':storyPart(v,'pillar',c,x,y+.2,z,.17,.32,.16);storyPart(v,'ring',a,x,y+.39,z,.17,.17,.05);storyPart(v,'ball',a,x,y+.03,z,.18,.09,.17);break;
+      case'watering':storyPart(v,'ball',c,x,y+.2,z,.2,.24,.16);storyPart(v,'ring',a,x,y+.2,z-.02,.27,.28,.035);storyPart(v,'pillar',c,x+.22,y+.27,z,.12,.08,.12);break;
+      case'book':storyPart(v,'box',c,x,y+.21,z,.47,.62,.13);storyPart(v,'box',0xfff0d4,x+.015,y+.21,z-.06,.4,.54,.08);storyPart(v,'gem',a,x+.02,y+.23,z+.08,.07,.12,.025);break;
+      case'moth':for(const s of [-1,1]){const wing=storyPart(v,'ball',s<0?c:a,x+s*.2,y+.25,z,.21,.34,.055);wing.rotation.z=s*.35;}storyPart(v,'gem',a,x,y+.5,z,.1,.22,.08);break;
+      case'moon':{const moon=storyPart(v,'crescent',a,x,y+.25,z,.24,.24,.055);moon.rotation.z=.5;storyPart(v,'gem',c,x+.19,y+.44,z,.13,.18,.1);break;}
+    }
+    // The series shares a palette, while each resident keeps a different silhouette and tool.
+    const flower=(x,y,z,color)=>{for(let i=0;i<5;i++){const a=i*TAU/5;storyPart(v,'ball',color,x+Math.cos(a)*.13,y+Math.sin(a)*.13,z,.095,.095,.055)}storyPart(v,'ball',0xffdd7c,x,y,z+.045,.075)};
+    if(def.id==='sprout'){
+      if(look==='region')flower(-.53,2.14,.12,c);
+      if(look==='hobby'){storyPart(v,'box',0xb88d63,0,1,-.49,.76,.45,.35);for(const s of [-1,1]){storyPart(v,'pillar',0x6c9e77,s*.27,1.41,-.55,.035,.5,.035);flower(s*.27,1.67,-.55,a)}}
+      if(look==='stardream'){const moon=storyPart(v,'crescent',a,-.42,2.29,.05,.36,.36,.07);moon.rotation.z=.5;}
+    }
+    if(def.id==='post'){
+      if(look==='hobby'){storyPart(v,'pillar',0xffefdb,0,2.08,.02,.33,.32,.3);for(let i=0;i<3;i++)storyPart(v,'ball',0xffefdb,(i-1)*.22,2.31+(i%2)*.08,.03,.25,.25,.24);storyPart(v,'box',0xf4dfb0,0,.72,.58,.72,.58,.09);storyPart(v,'ball',0xcf9b59,.62,.6,.53,.3,.15,.13);}
+      if(look==='stardream'){const sail=storyPart(v,'gem',c,-.8,1.58,-.24,.46,.8,.06);sail.rotation.z=-.3;storyPart(v,'pillar',a,-.69,1.15,-.21,.025,1.2,.025);}
+    }
+    if(def.id==='mori'){
+      if(look==='region')for(const s of [-1,1]){storyPart(v,'ball',c,s*.5,2.22,.25,.26,.23,.23);storyPart(v,'ball',0xfff1d7,s*.5,2.25,.43,.15,.15,.06);storyPart(v,'eye',0x263b49,s*.5,2.25,.49,.052,.072,.032);storyPart(v,'ball',c,s*.31,.16,.24,.23,.2,.31);}
+      if(look==='hobby'){storyPart(v,'ball',0xffead7,0,2.05,0,.89,.18,.68);for(let i=0;i<3;i++){const a=i*TAU/3;storyPart(v,'ball',0xdd6f8a,Math.cos(a)*.48,2.26,Math.sin(a)*.4,.16,.18,.15);}}
+      if(look==='stardream'){const hat=storyPart(v,'cone',c,.13,2.49,-.06,.46,.8,.38);hat.rotation.z=-.35;storyPart(v,'ball',a,.29,2.89,-.06,.13);}
+    }
+    if(def.id==='ray'){
+      if(look==='region')for(const s of [-1,1])storyPart(v,'ring',a,s*.83,1.19,.14,.3,.14,.06).rotation.y=s*.5;
+      if(look==='hobby'){storyPart(v,'pillar',0x807894,-.73,1.23,.26,.035,.65,.035).rotation.z=-.9;storyPart(v,'ball',a,-.96,1.44,.27,.23,.23,.2);}
+      if(look==='stardream')for(const s of [-1,1]){const fin=storyPart(v,'gem',c,s*.93,1.2,-.24,.44,.4,.35);fin.rotation.z=s*.35;storyPart(v,'gem',a,s*1.13,1.28,.04,.1,.16,.06);}
+    }
+    if(def.id==='ember'){
+      if(look==='region'){storyPart(v,'ball',0xf6d9af,0,1.05,-.02,.7,.13,.58);storyPart(v,'ring',a,-.79,.95,.43,.22,.3,.06);storyPart(v,'ball',a,-.79,.93,.43,.14,.17,.1);}
+      if(look==='hobby'){storyPart(v,'box',c,0,.77,.55,.69,.68,.12);storyPart(v,'pillar',a,-.65,.91,.47,.025,.9,.025).rotation.z=-.3;storyPart(v,'ball',a,-.78,1.34,.47,.12,.15,.04);}
+      if(look==='stardream'){storyPart(v,'ball',c,-.7,.85,.4,.35,.42,.12);storyPart(v,'gem',a,-.7,.85,.54,.23,.3,.05);}
+    }
+    if(whale){
+      if(look==='region'){storyPart(v,'pillar',a,0,2.55,-1.0,.05,1.4,.05);storyPart(v,'gem',c,0,2.65,-1.0,.68,.82,.08);}
+      if(look==='hobby')for(const s of [-1,1]){storyPart(v,'box',c,s*.7,1.83,-.95,.7,.27,.6);for(let i=0;i<2;i++)flower(s*.7,2.15,-.9+i*.36,a);}
+      if(look==='stardream'){const orbit=storyPart(v,'ring',a,0,.88,0,1.8,1.8,1.8);orbit.rotation.set(.5,.3,.4);}
+    }
+    if(def.id==='bubblefolk'&&look==='region'){for(const s of [-1,1])storyPart(v,'ring',a,s*.22,1.54,.76,.26,.22,.09);storyPart(v,'pillar',c,.69,1.63,.22,.075,.88,.075);}
+    if(def.id==='gearling'&&look==='hobby'){storyPart(v,'box',c,0,.85,.62,.85,.55,.28);for(let i=0;i<6;i++)storyPart(v,'box',i%2?a:0xfff0d4,-.32+i*.13,.87,.79,.06,.4,.06);}
+    if(def.id==='sugarbeast'&&look==='hobby'){storyPart(v,'box',0xae825a,-.46,1,-.43,.53,.4,.33);for(const s of [-1,1])storyPart(v,'ball',0x72b89a,-.46+s*.15,1.38,-.43,.12,.28,.065).rotation.z=s*.6;}
+    if(def.id==='auroraling'&&look==='stardream')for(const s of [-1,1]){storyPart(v,'gem',a,s*.91,1.38,.14,.15,.4,.045);storyPart(v,'ball',a,s*1.16,1.1,.1,.08);}
+  }
+  function makeCharacter(id, outlined=true, look='core') {
     const def=CAST.find(c=>c.id===id)||CAST[0], g=new THREE.Group(), v=new THREE.Group();g.add(v);g.userData.visual=v;g.userData.character=def.id;
+    id=def.id;if(!LOOK_SERIES.some(s=>s.id===look))look='core';g.userData.look=look;
     const C=def.color,D=def.detail,cream=0xfff0d4,ink=0x263b49;
     if(id==='cloudwhale'){
       storyPart(v,'ball',C,0,1,0,1.5,.85,2.1);storyPart(v,'ball',cream,0,.75,.55,1.18,.53,1.48);
@@ -849,36 +1040,111 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
         for(const s of [-1,1]){const ear=storyPart(v,'cone',cream,s*.34,2.2,0,.25,1.05,.12);ear.rotation.z=s*-.17;storyPart(v,'gem',D,s*.36,2.2,.14,.1,.28,.035);}
         storyPart(v,'cone',C,0,.92,-.03,.78,.66,.52);const bag=storyPart(v,'ball',D,.51,.47,.3,.34,.25,.12);bag.rotation.z=.15;
       }else if(id==='mori'){
-        storyPart(v,'ball',C,0,1.82,0,1.04,.46,.8);storyPart(v,'ball',D,0,1.62,0,1.03,.13,.8);
+        storyPart(v,'ball',look==='region'?0x78b89b:C,0,1.82,0,1.04,.46,.8);storyPart(v,'ball',D,0,1.62,0,1.03,.13,.8);
         for(let i=0;i<5;i++)storyPart(v,'gem',cream,Math.cos(i*2.4)*.65,2.09,Math.sin(i*2.4)*.47,.12,.075,.12);
         for(const s of [-1,1])storyPart(v,'ball',D,s*.49,.12,-.15,.17,.15,.24);
       }else if(id==='ember'){
         const cape=storyPart(v,'cone',0x626a97,0,.65,-.27,.94,1.6,.46);cape.rotation.x=-.15;
         for(const s of [-1,1]){const ear=storyPart(v,'cone',D,s*.4,1.98,0,.24,.8,.19);ear.rotation.z=s*-.2;storyPart(v,'gem',cream,s*.4,1.94,.13,.08,.32,.06);}
         storyPart(v,'gem',D,0,.66,.47,.18,.28,.08);storyPart(v,'ball',D,0,1.34,.47,.45,.24,.13);
+      }else if(id==='bubblefolk'){
+        storyPart(v,'ball',0xd6fbf2,0,1.72,0,.78,.73,.72);storyPart(v,'ball',0x77d1c8,0,.62,-.04,.62,.64,.5);
+        for(const s of [-1,1]){storyPart(v,'ball',0x9ce8dc,s*.88,.64,0,.39,.17,.37);storyPart(v,'gem',D,s*.24,2.05,.54,.14,.18,.08);}
+        storyPart(v,'ring',D,0,.42,-.53,.37);storyPart(v,'ball',0xf7e4b1,0,.2,.14,.35,.16,.31);
+      }else if(id==='gearling'){
+        storyPart(v,'ball',0xc58d55,0,.7,0,.61,.62,.5);storyPart(v,'pillar',0x789b86,0,1.35,0,.67,.28,.63);
+        for(const s of [-1,1]){const gear=storyPart(v,'ring',D,s*.72,1.5,0,.34,.34,.14);gear.rotation.y=Math.PI/2;storyPart(v,'pillar',0x789b86,s*.31,.17,.04,.11,.19,.11);}
+        storyPart(v,'ring',0xffd986,.4,.64,.45,.25);storyPart(v,'gem',0x75c5b8,0,2.07,-.03,.14,.48,.14);
+      }else if(id==='sugarbeast'){
+        storyPart(v,'ball',0xe9b97f,0,.62,0,.68,.72,.63);storyPart(v,'ball',0xf4e2b6,0,1.37,.12,.6,.47,.56);
+        for(const s of [-1,1]){const horn=storyPart(v,'cone',0xf6da98,s*.4,1.88,-.02,.19,.72,.18);horn.rotation.z=s*-.32;storyPart(v,'ball',0x7fc5a9,s*.35,.13,.17,.19,.15,.22);}
+        storyPart(v,'ball',0x88c6a8,0,1.02,.55,.51,.15,.14);storyPart(v,'ball',0xf2d789,-.52,1.02,-.12,.16,.2,.16);
+      }else if(id==='auroraling'){
+        storyPart(v,'ball',0xc5dce6,0,1.28,0,.5,.68,.42);
+        for(const s of [-1,1]){const wing=storyPart(v,'ball',s<0?0x8ecbda:0xc7a9e5,s*.77,1.2,-.03,.63,.79,.15);wing.rotation.z=s*-.52;storyPart(v,'gem',D,s*.2,2.05,-.02,.13,.46,.13);storyPart(v,'ball',0xffedc0,s*.64,.45,.04,.1,.1,.1);}
+        storyPart(v,'ball',0xf5eccf,0,.55,.45,.22,.27,.13);storyPart(v,'ring',0x9bd9df,0,.17,-.08,.35,.3,.22);
       }
     }
-    if(id!=='cloudwhale')for(const s of [-1,1]){const faceZ=id==='ember'?.64:.5;storyPart(v,'eye',ink,s*.19,1.43,faceZ,.065,.09,.047);storyPart(v,'eye',cream,s*.19-.015,1.46,faceZ+.041,.017);storyPart(v,'ball',0xeaa5a0,s*.34,1.27,.47,.08,.035,.02);}
+    if(id!=='cloudwhale')for(const s of [-1,1]){const faceZ=id==='ember'?.64:id==='bubblefolk'?.72:id==='sugarbeast'?.68:.5;storyPart(v,'eye',ink,s*.19,1.43,faceZ,.065,.09,.047);storyPart(v,'eye',cream,s*.19-.015,1.46,faceZ+.041,.017);storyPart(v,'ball',0xeaa5a0,s*.34,1.27,.47,.08,.035,.02);}
+    addCharacterLook(v,def,look);
     if(outlined)meshWithOutline(g,1.025);return g;
   }
   function attachCrown(){
     if(!player)return;const old=player.getObjectByName('dreamer-crown');if(old)disposeObjects([old]);
     if(state.stamps.length<5)return;const crown=new THREE.Group();crown.name='dreamer-crown';
-    for(let i=0;i<5;i++)storyPart(crown,'gem',0xffdc87,Math.cos(i*TAU/5)*.73,2.65,Math.sin(i*TAU/5)*.73,.1,.19,.1);player.add(crown);
+    const n=state.stamps.length===REGIONS.length?9:5;for(let i=0;i<n;i++)storyPart(crown,'gem',0xffdc87,Math.cos(i*TAU/n)*.73,2.65,Math.sin(i*TAU/n)*.73,.1,.19,.1);player.add(crown);
   }
-  function changeAvatar(id,announce=true){
+  function changeAvatar(id,announce=true,look=null){
     if(!CAST.some(c=>c.id===id&&c.playable))id='sprout';state.avatar=id;$('avatar').value=id;
+    if(LOOK_SERIES.some(item=>item.id===look))state.looks[id]=look;
     const previous=player, position=previous?.position.clone()||new THREE.Vector3(0,terrainHeight(0,0)+.03,0),heading=previous?.rotation.y||0;
     if(previous)disposeObjects([previous]);
-    player=makeCharacter(id);player.position.copy(position);player.rotation.y=heading;player.visible=!state.riding;scene.add(player);attachCrown();toggleOutlines();
+    player=makeCharacter(id,true,state.looks[id]||'core');player.position.copy(position);player.rotation.y=heading;player.visible=!state.riding;scene.add(player);attachCrown();toggleOutlines();
     if(announce)toast('今日化身：'+CAST.find(c=>c.id===id).name);
   }
-  function addStoryResident(id,x,z,scale=1){const group=makeCharacter(id);group.scale.setScalar(scale);group.position.set(x,terrainHeight(x,z),z);addProp(group);residents.push({id,group,x,z,phase:residents.length*1.7,speed:.13});return group;}
-  function regionAt(x,z){return REGIONS.find(r=>Math.hypot(x-r.x,z-r.z)<r.r)||null;}
+  function addStoryResident(id,x,z,scale=1){const life=REGION_LIFE.find(l=>l.resident===id),group=makeCharacter(id,true,life?.look||'core');group.scale.setScalar(scale);group.position.set(x,terrainHeight(x,z),z);addProp(group);residents.push({id,group,x,z,phase:residents.length*1.7,speed:.13});return group;}
+  function regionAt(x,z){return REGIONS.filter(r=>Math.hypot(x-r.x,z-r.z)<r.r).sort((a,b)=>Math.hypot(x-a.x,z-a.z)-Math.hypot(x-b.x,z-b.z))[0]||null;}
   function nearestStoryResident(){if(!player||state.riding)return null;let best=null,distance=3.8;for(const resident of residents){const d=Math.hypot(player.position.x-resident.group.position.x,player.position.z-resident.group.position.z);if(d<distance){best=resident;distance=d}}return best;}
   function talkToResident(resident=nearestStoryResident()){
-    if(!resident){toast('走近伙伴按 E 交谈；也可以打开奇想手册寻找他们');return;}speechResident=resident;const def=CAST.find(c=>c.id===resident.id);if(!state.met.includes(def.id))state.met.push(def.id);
-    $('speechName').textContent=def.name+' · '+def.role;$('speechText').textContent=def.lines[speechLine++%def.lines.length];$('speech').hidden=false;keys.clear();
+    if(!resident){toast('走近伙伴按 E 交谈；也可以打开奇想手册寻找他们');return;}
+    if(speechResident!==resident)speechLine=0;
+    speechResident=resident;const def=CAST.find(c=>c.id===resident.id),life=REGION_LIFE.find(l=>l.resident===def.id);if(!state.met.includes(def.id))state.met.push(def.id);
+    const lines=life?[life.line,...def.lines]:def.lines;
+    $('speechName').textContent=def.name+' · '+(life?.name||def.role);$('speechText').textContent=lines[speechLine++%lines.length];$('speech').hidden=false;keys.clear();
+  }
+  function makeLifeCorners(){
+    for(const life of REGION_LIFE){
+      const character=CAST.find(c=>c.id===life.resident),look=CHARACTER_LOOKS[life.resident][life.look],g=new THREE.Group();
+      const c=look.color,a=look.accent,cream=0xffeed5,wood=0xa17c59;
+      g.name='life-'+life.region;g.userData.life=life.region;g.position.set(life.x,terrainHeight(life.x,life.z),life.z);
+      const p=(shape,color,x,y,z,sx,sy=sx,sz=sx)=>storyPart(g,shape,color,x,y,z,sx,sy,sz);
+      p('pillar',c,0,.12,0,1.75,.24,1.5);p('box',wood,0,.95,0,2.35,.2,1.1);
+      for(const s of [-1,1])p('pillar',wood,s*.87,.55,0,.09,.9,.09);
+      switch(life.kind){
+        case'bakery':
+          p('ball',c,0,1.4,-.35,.87,.6,.48);p('ring',wood,0,1.4,.1,.47,.4,.12);p('ball',0xffcf75,0,1.35,.14,.3,.22,.05);
+          for(let i=0;i<3;i++)p('ball',0xe9b56b,-.7+i*.65,1.16,.38,.25,.14,.19);
+          for(const s of [-1,1]){p('pillar',c,s*1.25,1.55,-.57,.055,2.9,.055);p('ball',cream,s*.35,3,-.57,.55,.25,.34);}
+          p('ball',cream,0,3.16,-.57,.52,.3,.34);break;
+        case'rainpond':
+          p('ball',0x73b9bf,0,1.09,0,.99,.08,.6);p('ball',0x83b788,-.4,1.17,.08,.4,.035,.3);
+          p('pillar',wood,0,1.9,-.4,.055,2,.055);p('ball',c,0,2.75,-.4,1.5,.27,1.18);
+          for(let i=0;i<5;i++)p('gem',0xb2eee3,(i-2)*.42,1.55+i%3*.3,.18,.08,.2,.07);
+          for(const s of [-1,1]){p('ball',c,s*.5,2.94,-.1,.27,.22,.22);p('eye',0x263b49,s*.5,2.96,.09,.055,.08,.03);}break;
+        case'glass':
+          for(let i=0;i<4;i++){p('pillar',i%2?c:a,-.8+i*.55,1.3+(i%2)*.13,0,.17,.47,.17);p('ball',i%2?a:c,-.8+i*.55,1.62+(i%2)*.13,0,.25);}
+          p('pillar',wood,-1.25,1.83,-.25,.06,2.7,.06);const ring=p('ring',a,-1.25,3,-.25,.65);ring.rotation.y=.2;break;
+        case'soup':
+          p('ball',c,0,1.27,0,.67,.32,.5);const rim=p('ring',a,0,1.49,0,.65,.5,.13);rim.rotation.x=Math.PI/2;
+          for(let i=0;i<3;i++)p('ball',cream,(i-1)*.22,1.9+i*.27,0,.1,.19,.1);
+          for(const s of [-1,1]){p('ring',wood,s*.77,1.26,0,.18);p('ball',a,s*.9,1.18,.35,.15,.07,.15);}
+          p('pillar',wood,1.2,1.5,-.1,.04,2.8,.04);p('gem',a,1.2,2.89,-.1,.25,.48,.22);break;
+        case'florist':
+        case'herbs':
+          for(let i=0;i<3;i++){p('box',life.kind==='florist'?c:wood,(i-1)*.72,1.13,0,.57,.3,.62);for(const s of [-1,1]){p('pillar',0x6eab83,(i-1)*.72+s*.11,1.62,0,.025,.7,.025);p('ball',life.kind==='florist'?a:0x85cda7,(i-1)*.72+s*.13,1.95,0,.2,.24,.15);}}
+          if(life.kind==='florist'){p('pillar',wood,-1.25,1.7,-.4,.035,3.2,.035);p('crescent',a,-1.25,3.15,-.4,.55);}
+          else{p('pillar',wood,1.25,1.7,-.4,.035,3.2,.035);p('ball',cream,.4,3,-.4,1.2,.16,.9);}break;
+        case'shells':
+          for(let i=0;i<3;i++){p('box',cream,(i-1)*.72,1.27,0,.62,.42,.6);p('ring',a,(i-1)*.72,1.3,.33,.18);p('ball',0xbde9da,(i-1)*.72,1.6,0,.16);}
+          for(let i=0;i<3;i++)p('ring',i%2?c:a,(i-1)*.72,2.1+i*.35,-.2,.23+i*.06);break;
+        case'music':
+          p('box',c,0,1.3,0,2,.55,.7);for(let i=0;i<8;i++)p('box',i%3?cream:wood,-.85+i*.24,1.62,.1,.17,.08,.5);
+          for(const s of [-1,1]){p('pillar',wood,s*1.23,1.95,-.2,.04,3.6,.04);p('ring',a,s*1.23,3.15,-.2,.46);}
+          p('gem',a,-.15,2.57,-.2,.17,.31,.08);p('gem',a,.32,2.35,-.2,.15,.25,.08);break;
+        case'library':
+          p('box',c,0,1.7,-.3,2.3,1.5,.35);for(let i=0;i<7;i++){const book=p('box',i%2?a:cream,-.85+i*.28,1.62,-.02,.19,.68+(i%3)*.16,.42);book.rotation.z=(i%3-1)*.06;}
+          p('cone',0xc5e2e9,0,2.8,-.3,1.55,.9,.75);p('gem',a,0,3.42,-.3,.2,.4,.15);break;
+      }
+      meshWithOutline(g,1.02);addProp(g);fantasyBuildings.push({group:g,x:life.x,z:life.z,radius:1.25,height:3.6,kind:'life-corner'});
+      const sign=makeFantasySign(life.name,life.x-1.7,life.z-.7,character.bg);sign.scale.setScalar(.7);
+    }
+  }
+  function visitLife(id){
+    const life=REGION_LIFE.find(l=>l.resident===id)||REGION_LIFE.find(l=>l.region===id)||(id==='cloudwhale'?REGION_LIFE.find(l=>l.region==='whale'):null);
+    if(!life)return;visitRegion(life.region);
+    const friend=residents.find(r=>r.id===life.resident),x=(friend?.x??life.x)+.5,z=(friend?.z??life.z)+1.8;
+    player.position.set(x,terrainHeight(x,z)+.03,z);resolveTownCollision(player.position,player.position.clone());playerVelocity.set(0,0,0);setViewSpan(36);updateCamera(1);updateLocationStatus();
+    toast('来到'+life.name+' · 靠近伙伴按 E 聊聊');
   }
   function disposeEncounter(){disposeObjects(eventObjects);eventObjects.length=0;activeWonder=null;}
   function makeStoryWorld(){
@@ -923,6 +1189,211 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     makeFantasySign('鲸眠花海',1,-22,'#ffe2d1');
     addStoryResident('post',5.5,4,1.2);addStoryResident('sprout',1,-25,1.25);addStoryResident('mori',-11,16,1.3);addStoryResident('ray',-15,-9,1.4);addStoryResident('ember',20,-13,1.3);
   }
+  function makeFrontierRoads(){
+    for(const [id,anchors,type] of ROAM_ROUTES)makeRoad('frontier-'+id,anchors,type,2.3);
+    makeRoad('east-link',[[80,47],[87,14],[93,-24],[86,-76]],'star',2.1);
+    makeRoad('harbor-loop',[[73,40],[88,39],[94,47],[87,57],[75,55],[73,40]],'wood',1.35,true);
+    makeRoad('gear-loop',[[3,92],[17,90],[22,101],[18,111],[4,112],[-2,102],[3,92]],'star',1.25,true);
+    makeRoad('dune-loop',[[-74,46],[-89,43],[-97,54],[-89,66],[-73,63],[-74,46]],'wood',1.3,true);
+    makeRoad('aurora-loop',[[85,-76],[97,-72],[104,-82],[99,-96],[87,-95],[85,-76]],'star',1.35,true);
+    for(const [x,z] of [[43,22],[58,32],[67,48],[47,79],[-47,70],[-61,59],[-66,31],[58,59],[83,-18],[94,-51],[71,73]])makeLantern(x,z);
+  }
+  function makeFrontierDistricts(){
+    const harbor=REGIONS.find(r=>r.id==='harbor'),gear=REGIONS.find(r=>r.id==='gear'),dunes=REGIONS.find(r=>r.id==='dunes'),aurora=REGIONS.find(r=>r.id==='aurora');
+    makeGroundDisc(harbor.x,harbor.z,12,storyMat(0x80c6b2));
+    makeGroundDisc(harbor.x+2,harbor.z+1.3,4.2,storyMat(0x69c6c7));
+    for(let i=0;i<4;i++){
+      const group=new THREE.Group(),x=harbor.x-6+i*4,z=harbor.z+4;
+      group.position.set(x,terrainHeight(x,z),z);
+      fantasyMesh(group,new THREE.BoxGeometry(2.2,.22,7.1),storyMat(i%2?0xa97852:0xc09162),0,.28,0);
+      for(const side of [-1,1])for(const dz of [-2.7,2.7])fantasyMesh(group,new THREE.CylinderGeometry(.11,.15,1.25,6),mats.wood,side*.78,-.27,dz);
+      fantasyMesh(group,new THREE.TorusGeometry(.7,.13,6,10),storyMat(i%2?0xffe39a:0xf2a7b5),0,1.05,3.45);
+      meshWithOutline(group,1.015);addProp(group);
+    }
+    for(let i=0;i<5;i++){
+      const phase=i*TAU/5,x=harbor.x+Math.cos(phase)*7.3,z=harbor.z+Math.sin(phase)*6.4;
+      makeHouse(x,z,phase+Math.PI/2,i+1);
+      const bubble=new THREE.Group();bubble.position.set(x,terrainHeight(x,z)+3.4,z);
+      const sphere=fantasyGlow(bubble,new THREE.SphereGeometry(.45+(i%3)*.12,9,7),i%2?0xa8f3e8:0xffdc9a,0,0,0,phase);sphere.scale.y=1.18;
+      fantasyMesh(bubble,new THREE.TorusGeometry(.58,.04,5,16),fantasyPalette.paleStone,0,-.62,0);
+      meshWithOutline(bubble,1.025);addProp(bubble,3.4);fantasyFloaters.push({kind:'frontier-bubble',mesh:bubble,phase});
+    }
+    makeFantasySign('泡泡海港',harbor.x-3,harbor.z-8,'#dffbf1');
+    landmarks.push({id:harbor.id,name:harbor.name,x:harbor.x,z:harbor.z,radius:harbor.r});
+    addStoryResident('bubblefolk',harbor.x+1,harbor.z-4,1.22);
+
+    makeGroundDisc(gear.x,gear.z,13,storyMat(0xcdbd8a));
+    const bazaarWheel=new THREE.Group();bazaarWheel.position.set(gear.x,terrainHeight(gear.x,gear.z)+7.5,gear.z);
+    const bigWheel=fantasyMesh(bazaarWheel,new THREE.TorusGeometry(7,.25,8,36),storyMat(0xffd987),0,0,0);bigWheel.rotation.x=Math.PI/2;
+    for(let i=0;i<12;i++){const a=i*TAU/12;fantasyMesh(bazaarWheel,new THREE.BoxGeometry(.32,1.1,.35),fantasyPalette.timber,Math.cos(a)*7,0,Math.sin(a)*7).rotation.y=-a;}
+    for(let i=0;i<3;i++){const spoke=fantasyMesh(bazaarWheel,new THREE.BoxGeometry(14,.18,.18),fantasyPalette.timber,0,0,0);spoke.rotation.y=i*TAU/3;}
+    meshWithOutline(bazaarWheel,1.015);addProp(bazaarWheel,7.5);fantasyFloaters.push({kind:'bazaar-wheel',mesh:bazaarWheel,phase:0});
+    for(let i=0;i<7;i++){
+      const a=i*TAU/7,x=gear.x+Math.cos(a)*8,z=gear.z+Math.sin(a)*8;
+      makeHouse(x,z,a+Math.PI/2,i);
+      const stall=new THREE.Group();stall.position.set(x*.35+gear.x*.65,terrainHeight(x*.35+gear.x*.65,z*.35+gear.z*.65),z*.35+gear.z*.65);
+      fantasyMesh(stall,new THREE.BoxGeometry(2.5,.85,1.55),fantasyPalette.walls[i%3],0,.7,0);
+      fantasyMesh(stall,new THREE.ConeGeometry(1.8,.72,4),fantasyPalette.roofs[(i+1)%3],0,1.55,0).rotation.y=Math.PI/4;
+      fantasyMesh(stall,new THREE.TorusGeometry(.55,.1,5,12),fantasyPalette.gold,0,.45,.85).rotation.x=Math.PI/2;
+      meshWithOutline(stall,1.025);addProp(stall);
+    }
+    makeFantasySign('齿轮集市',gear.x+2,gear.z-12,'#fff0d1');
+    landmarks.push({id:gear.id,name:gear.name,x:gear.x,z:gear.z,radius:gear.r});
+    addStoryResident('gearling',gear.x-4,gear.z+2,1.18);
+
+    makeGroundDisc(dunes.x,dunes.z,13,storyMat(0xd7aa6b));
+    for(let i=0;i<3;i++){
+      const a=i*TAU/3,x=dunes.x+Math.cos(a)*7,z=dunes.z+Math.sin(a)*6;
+      const oasis=makeGroundDisc(x,z,2.7,storyMat(i===1?0x75c9bc:0xa2d9cb));
+      const ring=fantasyMesh(new THREE.Group(),new THREE.TorusGeometry(2.45,.16,6,20),storyMat(0xf6dda1),0,.14,0);ring.rotation.x=Math.PI/2;const oasisFrame=new THREE.Group();oasisFrame.position.set(x,terrainHeight(x,z)+.1,z);ring.parent.remove(ring);oasisFrame.add(ring);meshWithOutline(oasisFrame,1.02);addProp(oasisFrame);
+      for(let j=0;j<4;j++){const crystalX=x+Math.cos(j*TAU/4)*2.3,crystalZ=z+Math.sin(j*TAU/4)*2.3;makeCrystal(crystalX,crystalZ,.45,true);}
+      void oasis;
+    }
+    for(let i=0;i<8;i++){
+      const a=i*TAU/8,x=dunes.x+Math.cos(a)*(9+i%2),z=dunes.z+Math.sin(a)*(8+i%3),palm=new THREE.Group();palm.position.set(x,terrainHeight(x,z),z);
+      fantasyMesh(palm,new THREE.CylinderGeometry(.19,.32,3.2,7),storyMat(0x9d7145),0,1.6,0);
+      for(let k=0;k<5;k++){const leaf=fantasyMesh(palm,new THREE.ConeGeometry(.3,2.7,5),storyMat(k%2?0x7cae83:0x91bf87),Math.cos(k*TAU/5)*1,3.25,Math.sin(k*TAU/5)*1);leaf.rotation.z=Math.cos(k*TAU/5)*.85;leaf.rotation.x=Math.sin(k*TAU/5)*.85;}
+      meshWithOutline(palm,1.025);addProp(palm);
+    }
+    for(const [dx,dz] of [[-4,-4],[5,-5],[0,7]]){
+      const tent=new THREE.Group(),x=dunes.x+dx,z=dunes.z+dz;tent.position.set(x,terrainHeight(x,z),z);
+      storyPart(tent,'pillar',0xf5dbaa,0,.65,0,1.15,1.3,1.15);storyPart(tent,'cone',0xd58675,0,1.9,0,1.8,1.9,1.8);storyPart(tent,'ball',0x765e62,0,.55,1.08,.3,.55,.08);
+      storyPart(tent,'gem',0xffe3a1,0,3.1,0,.22,.47,.22);meshWithOutline(tent,1.02);addProp(tent);fantasyBuildings.push({group:tent,x,z,radius:1.25,height:3.4,kind:'tent'});
+    }
+    makeFantasySign('糖沙旷野',dunes.x-2,dunes.z-12,'#fff0d1');
+    landmarks.push({id:dunes.id,name:dunes.name,x:dunes.x,z:dunes.z,radius:dunes.r});
+    addStoryResident('sugarbeast',dunes.x+2,dunes.z-3,1.2);
+
+    makeGroundDisc(aurora.x,aurora.z,13,storyMat(0xb9d5d9));
+    for(let i=0;i<10;i++){
+      const a=i*TAU/10,x=aurora.x+Math.cos(a)*(8+i%3),z=aurora.z+Math.sin(a)*(8+i%3);
+      const pine=makeTree(x,z,true);pine.traverse(m=>{if(m.material===mats.pine)m.material=storyMat(i%2?0x8fc2cd:0xa8c9cf);if(m.material===mats.trunk)m.material=storyMat(0x8e806f)});
+      const snowGroup=new THREE.Group();snowGroup.position.set(x,terrainHeight(x,z),z);const snowCap=fantasyMesh(snowGroup,new THREE.ConeGeometry(.62,.52,6),storyMat(0xf5fbef),0,4.65,0);snowCap.rotation.z=.12;addProp(snowGroup);
+    }
+    const iceLake=makeGroundDisc(aurora.x+1,aurora.z+1,4.5,storyMat(0xa5d8e3));
+    for(const [dx,dz] of [[-6,-3],[5,-5],[5,6]]){
+      const dome=new THREE.Group(),x=aurora.x+dx,z=aurora.z+dz;dome.position.set(x,terrainHeight(x,z),z);
+      storyPart(dome,'ball',0xeaf4ef,0,.7,0,1.65,1.5,1.65);storyPart(dome,'ball',0x748ca6,0,.6,1.45,.36,.55,.16);storyPart(dome,'ring',0xd5b1d9,0,1.2,1.28,.36);storyPart(dome,'gem',0xffe3b1,0,2.35,0,.2,.45,.2);
+      meshWithOutline(dome,1.02);addProp(dome);fantasyBuildings.push({group:dome,x,z,radius:1.55,height:2.8,kind:'snowhouse'});
+    }
+    const starPost=new THREE.Group();starPost.position.set(aurora.x-3,terrainHeight(aurora.x-3,aurora.z-6),aurora.z-6);
+    storyPart(starPost,'pillar',0x708ca9,0,3.2,0,.95,6.4,.95);storyPart(starPost,'cone',0xc3b4dc,0,7.1,0,1.65,2.2,1.65);storyPart(starPost,'gem',0xffe1a4,0,8.7,0,.4,1,.4);
+    storyPart(starPost,'ring',0xb3ece8,0,6,0,2);storyPart(starPost,'gem',0xffe1a4,0,3,1,.5,.4,.08);meshWithOutline(starPost,1.02);addProp(starPost);fantasyBuildings.push({group:starPost,x:aurora.x-3,z:aurora.z-6,radius:1.1,height:10,kind:'starpost'});
+    for(let i=0;i<4;i++)makeCrystal(aurora.x+Math.cos(i*TAU/4)*6,aurora.z+Math.sin(i*TAU/4)*6,.68,i%2===0);
+    for(let i=0;i<2;i++){const group=new THREE.Group();group.position.set(aurora.x,terrainHeight(aurora.x,aurora.z)+8+i*1.7,aurora.z);const veil=fantasyMesh(group,new THREE.TorusGeometry(9-i*1.7,.085,6,52),storyMat(i?0xa7b9f1:0x8ce7ce));veil.rotation.set(.72+i*.18,.1+i*.7,.18);addProp(group,8+i*1.7);fantasyFloaters.push({kind:'aurora-veil',mesh:group,phase:i*2});}
+    makeFantasySign('极光雪境',aurora.x+2,aurora.z-12,'#edf8ff');makeRuneArch(dunes.x-7,dunes.z-11);
+    landmarks.push({id:aurora.id,name:aurora.name,x:aurora.x,z:aurora.z,radius:aurora.r});
+    addStoryResident('auroraling',aurora.x-3,aurora.z+3,1.16);
+  }
+  function seededRandom(s){let n=hashString(state.seed+':'+s);return ()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return n/4294967296}}
+  function roadDistance(x,z){let d=Infinity;for(const road of roads)for(let i=0;i<road.points.length;i+=4){const p=road.points[i];d=Math.min(d,Math.hypot(x-p.x,z-p.z))}return d;}
+  function makeWideNature(){
+    const random=seededRandom('wide-nature'),trees=[],rocks=[],flowers=[];
+    for(let i=0;i<1050;i++){
+      const a=random()*TAU,r=Math.sqrt(random())*127,x=Math.cos(a)*r,z=Math.sin(a)*r;
+      if(r<32||terrainHeight(x,z)<-.5||roadDistance(x,z)<3.1||REGIONS.some(v=>Math.hypot(x-v.x,z-v.z)<v.r*.83)||ACTIVITIES.some(v=>v.stops.some(s=>Math.hypot(s.x-x,s.z-z)<3.8)))continue;
+      const snow=x>55&&z<-42,desert=x<-50&&z>22;
+      const color=snow?0x91bdcd:desert?0xc5b77e:z>47?0xaec47c:x<-25?0x92a7b4:0x7ab68e;
+      if(i%3===0)rocks.push({x,z,s:.5+random()*.9,color:snow?0xc7e1e4:desert?0xe2bb7f:0x9eafa2});
+      else trees.push({x,z,s:.8+random()*1.15,color,pine:snow||z<-30});
+      if(i%4===0)flowers.push({x:x+1.8,z:z+1.2,s:.3+random()*.6,color:i%2?0xf6c78d:0xe5b3c3});
+    }
+    natureBatch={trees,rocks,flowers,meshes:[]};
+    const batch=(kind,list,geometry,material)=>{if(!list.length)return;const mesh=new THREE.InstancedMesh(geometry,material,list.length);mesh.castShadow=kind!=='flower';mesh.receiveShadow=true;mesh.userData.natureKind=kind;mesh.userData.specs=list;natureBatch.meshes.push(mesh);addProp(mesh);};
+    batch('trunk',trees,new THREE.CylinderGeometry(.18,.26,2.1,5),toon(0x9c7956));
+    batch('canopy',trees.filter(t=>!t.pine),new THREE.IcosahedronGeometry(1,0),toon(0xffffff));
+    batch('pine',trees.filter(t=>t.pine),new THREE.ConeGeometry(1.3,3.7,6),toon(0xffffff));
+    batch('rock',rocks,new THREE.DodecahedronGeometry(1,0),toon(0xffffff));
+    batch('flower',flowers,new THREE.IcosahedronGeometry(1,0),toon(0xffffff));
+    refreshWideNature();
+  }
+  function refreshWideNature(){if(!natureBatch)return;const dummy=new THREE.Object3D();for(const mesh of natureBatch.meshes){const kind=mesh.userData.natureKind;mesh.userData.specs.forEach((s,i)=>{const h=terrainHeight(s.x,s.z);dummy.position.set(s.x,h+s.s*(kind==='trunk'?1:kind==='canopy'?2.8:kind==='pine'?2.8:kind==='rock'?.35:.5),s.z);dummy.rotation.set(0,i*2.4,0);dummy.scale.set(s.s*(kind==='canopy'?1.8:1),s.s*(kind==='canopy'?1.3:kind==='rock'?.65:kind==='flower'?.25:1),s.s*(kind==='canopy'?1.5:1));dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);if(kind!=='trunk')mesh.setColorAt(i,new THREE.Color(s.color));});mesh.instanceMatrix.needsUpdate=true;if(mesh.instanceColor)mesh.instanceColor.needsUpdate=true;mesh.computeBoundingSphere();}}
+  function makeWaystations(){
+    for(const [name,x,z,variant] of [['风信驿站',32,25,0],['风车坡',49,76,1],['银砂营地',-44,69,2],['回声旧站',-56,8,1],['雪线中转站',54,-48,2],['旧观星台',-72,-62,1]]){
+      makeHouse(x-4,z+3,.5,variant);makeLantern(x+3,z+2,variant);makeFantasySign(name,x-2,z-2);landmarks.push({id:name,name,x,z,radius:6});
+      if(name==='风车坡'){const group=new THREE.Group();group.position.set(x-5,terrainHeight(x-5,z-1),z-1);storyPart(group,'pillar',0xf4e5bd,0,2,0,.8,4,.8);storyPart(group,'cone',0x859c9a,0,4.2,0,1.3,1.6,1.3);const blades=new THREE.Group();blades.position.set(0,3.4,1);group.add(blades);for(let i=0;i<4;i++){const b=fantasyMesh(blades,new THREE.BoxGeometry(.27,2.4,.12),storyMat(0xf1d18f),0,1,0);b.rotation.z=i*TAU/4;b.position.set(Math.sin(i*TAU/4),Math.cos(i*TAU/4),0);}meshWithOutline(group,1.02);addProp(group);fantasyFloaters.push({kind:'windmill',mesh:blades,phase:0});}
+      if(name==='旧观星台')makeRuneArch(x+1,z+1);
+    }
+    for(const [x,z] of [[-18,26],[87,50]])makeGroundDisc(x,z,3,storyMat(0x80c9cc));
+  }
+  function activityStep(a){return Math.min(a.stops.length,Math.max(0,Math.floor(state.activityProgress[a.id]||0)));}
+  function selectedActivity(){return ACTIVITIES.find(a=>a.id===state.activeActivity)||null;}
+  function nextActivityStop(){const a=selectedActivity();return a?a.stops[activityStep(a)]||null:null;}
+  function makeActivityWorld(){
+    for(const a of ACTIVITIES){const unique=new Map();a.stops.forEach((s,i)=>{const k=s.x+','+s.z;if(!unique.has(k))unique.set(k,{s,i});});for(const {s,i} of unique.values()){
+      const group=new THREE.Group();group.position.set(s.x,terrainHeight(s.x,s.z),s.z);
+      const color=a.type==='garden'?0x98c8a3:a.type==='treasure'?0xf5cc7c:a.type==='tune'?0xb9d7df:0xf5dfa1;
+      const ring=storyPart(group,'ring',color,0,.18,0,a.type==='race'?1.35:.72);ring.rotation.x=-Math.PI/2;
+      let token;
+      if(a.type==='garden'){storyPart(group,'pillar',0x907155,0,.18,0,.55,.2,.55);storyPart(group,'pillar',0x6c9a7a,0,.54,0,.06,.65,.06);token=storyPart(group,'ball',0xefadbd,0,.95,0,.42,.2,.42);}
+      else if(a.type==='delivery'){storyPart(group,'pillar',0x937650,0,.6,0,.09,1.2,.09);token=storyPart(group,'ball',0xe8a881,0,1.2,0,.45,.4,.35);storyPart(group,'gem',0xffebbd,0,1.2,.35,.26,.19,.035);}
+      else if(a.type==='race'){token=storyPart(group,'ring',0xf7d681,0,1.9,0,1.65);storyPart(group,'pillar',0x85978e,-1.65,1,0,.08,2,.08);storyPart(group,'pillar',0x85978e,1.65,1,0,.08,2,.08);}
+      else if(a.type==='fish'){storyPart(group,'ball',0x9ad4d0,0,.08,0,1.6,.07,1.6);token=storyPart(group,'gem',0xffe6a9,0,1.1,0,.23,.38,.2);}
+      else {storyPart(group,'pillar',0x85999d,0,.2,0,.4,.35,.4);token=storyPart(group,'gem',a.type==='treasure'?0xffd47c:0xa4e6e4,0,1.05,0,.32,.65,.32);}
+      meshWithOutline(group,1.02);addProp(group);activityMarkers.push({a,s,index:i,group,ring,token});
+    }}
+    activityTarget=new THREE.Group();storyPart(activityTarget,'gem',0xffdc87,0,0,0,.4,.65,.4);const halo=storyPart(activityTarget,'ring',0xfff3c3,0,0,0,.7);halo.rotation.x=Math.PI/2;meshWithOutline(activityTarget,1.025);scene.add(activityTarget);props.push(activityTarget);activityTarget.visible=false;
+    trailBeacon=new THREE.Group();trailBeacon.position.set(-2,terrainHeight(-2,2),2);storyPart(trailBeacon,'pillar',0x88b3ab,0,1.8,0,.16,3.6,.16);
+    for(let i=0;i<9;i++){const flag=storyPart(trailBeacon,'gem',0xffdc87,Math.cos(i*TAU/9)*.9,3.8,Math.sin(i*TAU/9)*.9,.14,.3,.14);flag.userData.beaconIndex=i;}
+    meshWithOutline(trailBeacon,1.02);addProp(trailBeacon);makeFantasySign('远行驿站',-2,4,'#e3edce');
+  }
+  function startActivity(id){
+    const a=ACTIVITIES.find(v=>v.id===id);if(!a)return;
+    const previous=selectedActivity();if(previous?.type==='race'&&previous.id!==id)state.activityProgress[previous.id]=0;
+    if(activityStep(a)>=a.stops.length||a.type==='race')state.activityProgress[id]=0;
+    state.activeActivity=id;activityRun=null;fishingRun=null;keys.clear();$('atlas').close();document.activeElement?.blur();updateActivityHUD();toast('已接取 · '+a.name+' / 循着金色菱星前进');
+  }
+  function finishActivity(a){
+    const first=!state.activityDone.includes(a.id);if(first){state.activityDone.push(a.id);state.wood+=2;state.stone+=2;state.seeds+=3;}
+    state.activeActivity='';activityRun=null;fishingRun=null;updateResourceUI();updateActivityHUD();
+    toast(first?'完成「'+a.name+'」· +2木 +2石 +3花种':'再次完成「'+a.name+'」· 谢谢你又走过这里');
+  }
+  function advanceActivity(){const a=selectedActivity();if(!a)return;state.activityProgress[a.id]=activityStep(a)+1;lastActivityAt=elapsed;fishingRun=null;if(activityStep(a)>=a.stops.length)finishActivity(a);else{updateActivityHUD();toast('已完成 '+activityStep(a)+' / '+a.stops.length+' · 下一站：'+nextActivityStop().label);}}
+  function performActivity(){
+    const a=selectedActivity(),s=nextActivityStop();if(!a||!s){openAtlas('activities');return;}
+    const d=Math.hypot(player.position.x-s.x,player.position.z-s.z);if(d>3.4){toast('下一站「'+s.label+'」在'+directionTo(s)+'方约 '+Math.round(d)+' 米 · M 查看地图');return;}
+    if(elapsed-lastActivityAt<.65)return;
+    if(a.type!=='race'&&state.riding){toast('先按 V 下车，再参与这里的活动');return;}
+    if(a.type==='fish'){
+      if(!fishingRun){fishingRun={id:a.id,age:0};lastActivityAt=elapsed;toast('已抛竿 · 等指针进入绿色区，按 T 或点收竿');return;}
+      const p=fishingPhase();if(fishingRun.age<.6||p<.32||p>.78){fishingRun=null;lastActivityAt=elapsed;toast('梦鱼轻轻游开了 · 再按 T 试一次');return;}
+      state.dreamFish++;advanceActivity();return;
+    }
+    if(a.type==='race'&&!activityRun)activityRun={id:a.id,elapsed:0};advanceActivity();
+  }
+  function fishingPhase(){if(!fishingRun)return 0;const p=(fishingRun.age*.5)%2;return p>1?2-p:p;}
+  function directionTo(s){const dx=s.x-player.position.x,dz=s.z-player.position.z;return (dz<-3?'北':dz>3?'南':'')+(dx>3?'东':dx<-3?'西':'')||'身旁';}
+  function updateActivityHUD(){
+    if(!player)return;const a=selectedActivity(),s=nextActivityStop(),near=s&&Math.hypot(player.position.x-s.x,player.position.z-s.z)<3.4;
+    $('routeStatus').textContent=a?a.name+' · '+activityStep(a)+' / '+a.stops.length+'\n'+s.label+' · '+directionTo(s)+' '+Math.round(Math.hypot(player.position.x-s.x,player.position.z-s.z))+'m':'探索 '+state.visited.length+' / '+REGIONS.length+' · 冒险 '+state.activityDone.length+' / '+ACTIVITIES.length+' · M 打开全域地图';
+    $('activityButton').textContent=a?(fishingRun?'绿色区收竿 · T':near?(a.type==='race'?(activityRun?'通过检查环':'开始巡游 · T'):'参与活动 · T'):'查看目标 · M'):'接取冒险 · T';
+    $('activityHint').textContent=a?(a.type==='race'&&activityRun?'巡游计时 '+activityRun.elapsed.toFixed(1)+' / '+a.limit+' 秒 · 下一个：'+s.label:near&&a.type==='fish'?'T 抛竿 / 收竿 · 绿色区最容易钓到梦鱼':s.label+' · '+(near?'靠近金色菱星按 T':directionTo(s)+'方 '+Math.round(Math.hypot(player.position.x-s.x,player.position.z-s.z))+' 米')):'九区都有两段冒险，首次完成可获得工坊材料与花种。';
+    $('fishingMeter').hidden=!fishingRun;$('fishingNeedle').style.left=(fishingPhase()*100)+'%';
+  }
+  function updateActivities(dt,t){
+    const a=selectedActivity(),s=nextActivityStop(),paused=$('atlas').open||document.hidden;
+    if(fishingRun&&(!s||Math.hypot(player.position.x-s.x,player.position.z-s.z)>4.5||state.riding))fishingRun=null;
+    if(fishingRun&&!paused)fishingRun.age+=dt;
+    if(activityRun&&a?.type==='race'&&!paused){activityRun.elapsed+=dt;if(activityRun.elapsed>a.limit){state.activityProgress[a.id]=0;activityRun=null;toast('巡游时间到了 · 回到起点再出发，沿途风景还在');}else if(s&&Math.hypot(player.position.x-s.x,player.position.z-s.z)<3&&elapsed-lastActivityAt>.6)advanceActivity();}
+    if(activityTarget){activityTarget.visible=!!s;if(s){activityTarget.position.set(s.x,terrainHeight(s.x,s.z)+3.1+Math.sin(t*2.5)*.3,s.z);activityTarget.rotation.y=t*.8;}}
+    for(const m of activityMarkers){
+      const done=state.activityDone.includes(m.a.id)||activityStep(m.a)>m.index;
+      const belongsToActive=m.a.id===a?.id;
+      const sameStop=belongsToActive&&s&&Math.hypot(s.x-m.s.x,s.z-m.s.z)<.01;
+      // Keep the scenery quiet: show only the next stop, or the remaining race rings.
+      // Completed gardens and repaired devices stay behind as small, persistent changes.
+      const changedLandmark=done&&(m.a.type==='garden'||m.a.type==='tune');
+      m.group.visible=changedLandmark||(belongsToActive&&(a.type==='race'?m.index>=activityStep(a):sameStop));
+      const active=sameStop;
+      m.group.position.y=terrainHeight(m.s.x,m.s.z);
+      m.ring.scale.setScalar((m.a.type==='race'?1.35:.72)*(active?1.15+Math.sin(t*3)*.1:1));
+      if(m.a.type==='garden'){m.token.scale.set(done?.65:.32,done?.5:.2,done?.65:.32);m.token.position.y=done?1.15:.8;}
+      else if(m.a.type==='treasure'){m.token.visible=!!active;m.token.rotation.y=t*.6;}
+      else if(m.a.type==='tune'){m.token.scale.y=done?.9:.45;m.token.rotation.y=t*(done?.8:.12);}
+    }
+    if(trailBeacon)for(const child of trailBeacon.children)if(child.userData.beaconIndex!==undefined)child.visible=child.userData.beaconIndex<Math.floor(state.activityDone.length/2);
+    if(fishingRun||activityRun)updateActivityHUD();
+  }
   function triggerWonder(){
     if(!player||$('atlas').open)return;const r=regionAt(player.position.x,player.position.z);
     if(!r){toast('循着道路走进一个区域，或从奇想手册踏入梦门');return;}
@@ -935,6 +1406,10 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
       if(r.id==='town'){for(const s of [-1,1]){const wing=storyPart(g,'cone',i%2?0xffe8bb:0xf3b5a4,s*.23,0,0,.42,.09,.5);wing.rotation.z=s*.2;}}
       else if(r.id==='crystal')storyPart(g,'gem',i%2?0xa1e7ed:0xd7b5ec,0,0,0,.23,.65,.23);
       else if(r.id==='nocturne')storyPart(g,'gem',0xffdf93,0,0,0,.14,.4,.14);
+      else if(r.id==='harbor'){storyPart(g,'ring',i%2?0xcaf3e6:0xffe1a4,0,0,0,.35+(i%3)*.12);storyPart(g,'ball',0xf3fff3,-.1,.12,0,.08);}
+      else if(r.id==='gear'){storyPart(g,'ring',0xffdc8c,0,0,0,.36);for(let j=0;j<4;j++)storyPart(g,'gem',0xf3b5a4,Math.cos(j*TAU/4)*.4,Math.sin(j*TAU/4)*.4,0,.1,.15,.1);}
+      else if(r.id==='aurora')storyPart(g,'gem',i%2?0xa1e7ed:0xd7b5ec,0,0,0,.15,.42,.15);
+      else if(r.id==='dunes')storyPart(g,'gem',i%2?0xffe1a4:0xf8a6b6,0,0,0,.16,.35,.16);
       else storyPart(g,'ball',r.id==='whale'?(i%2?0xf8a6b6:0xffe1a4):(i%2?0xcaf3e6:0xeec5ef),0,0,0,.16,.27,.16);
       scene.add(g);eventObjects.push(g);
     }
@@ -949,6 +1424,10 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
       if(r.id==='crystal'){const angle=a+t*.42;g.position.set(r.x+Math.cos(angle)*(2.7+i%3),base+4.8+Math.sin(a+t)*1.6,r.z+Math.sin(angle)*(2.7+i%3));g.rotation.set(t*.3,a,0);}
       if(r.id==='nocturne'){const angle=a+progress*2;g.position.set(r.x+Math.cos(angle)*Math.sin(i*2.6)*5,base+3+life*10,r.z+Math.sin(angle)*4);g.rotation.y=t;}
       if(r.id==='whale'){const radius=1+life*10;g.position.set(r.x+Math.cos(a)*radius,base+.5+Math.sin(life*Math.PI)*5,r.z+Math.sin(a)*radius);g.rotation.set(life*8,a+t,0);}
+      if(r.id==='harbor'){const angle=a+progress*2;g.position.set(r.x+Math.cos(angle)*(2+i%7),base+1+life*13,r.z+Math.sin(angle)*(2+i%6));g.quaternion.copy(camera.quaternion);}
+      if(r.id==='gear'){const angle=a+t*.3;g.position.set(r.x+Math.cos(angle)*(4+i%6),base+4+Math.sin(a+t*.7)*2.7,r.z+Math.sin(angle)*(4+i%6));g.rotation.set(t*.6,a,t*.45);}
+      if(r.id==='dunes'){const angle=a+progress*TAU*2;g.position.set(r.x+Math.cos(angle)*(3+life*10),base+.6+life*8,r.z+Math.sin(angle)*(3+life*10));g.rotation.set(t,a,t*.5);}
+      if(r.id==='aurora'){g.position.set(r.x-10+(i/36)*20,base+5+Math.sin(i*.4+t)*2+life*3,r.z+Math.sin(i*.3+t*.3)*5);g.rotation.set(t*.3,a,t*.4);}
       const pulse=r.id==='mushroom' ? .4+Math.sin(life*Math.PI)*1.2 : 1;
       g.scale.setScalar(pulse*(progress>.92?Math.max(0,(1-progress)/.08):1));
     }
@@ -966,7 +1445,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
   }
   function visitRegion(id){
     const r=REGIONS.find(r=>r.id===id);if(!r)return;if(state.riding)toggleRide();keys.clear();$('speech').hidden=true;$('atlas').close();
-    player.position.set(r.entry[0],terrainHeight(...r.entry)+.03,r.entry[1]);playerVelocity.set(0,0,0);onGround=true;state.camera='follow';$('camera').textContent='视角：跟随';setViewSpan(innerWidth<680?37:57);
+    player.position.set(r.entry[0],terrainHeight(...r.entry)+.03,r.entry[1]);playerVelocity.set(0,0,0);onGround=true;state.camera='follow';$('camera').textContent='视角：跟随';setViewSpan(innerWidth<680?(r.r>12?48:37):(r.r>12?78:57));
     camera.position.set(player.position.x+48,player.position.y+43,player.position.z+48);updateCamera(1);updateWorldHUD();toast('梦门已抵达 · '+r.name+'  /  Q 触发奇遇');
   }
   function setViewSpan(value){cameraSpan=value;$('zoom').value=value;const h=cameraSpan/(innerWidth/innerHeight);camera.left=-cameraSpan/2;camera.right=cameraSpan/2;camera.top=h/2;camera.bottom=-h/2;camera.updateProjectionMatrix();}
@@ -974,43 +1453,107 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     if(!player)return;const r=regionAt(player.position.x,player.position.z);const nearest=nearestStoryResident();
     if(r&&!state.visited.includes(r.id))state.visited.push(r.id);if((r?.id||'')!==currentRegion){currentRegion=r?.id||'';$('speech').hidden=true;}
     $('regionName').textContent=r?.name||'奇想之间';$('regionSubtitle').textContent=r?.en||'BETWEEN LITTLE WONDERS';$('regionRule').textContent=r?.rule||'循着道路，去听见下一个小心愿。';$('regionBanner').classList.toggle('night',nightAmount>.6);
-    $('wonderCount').textContent='印记 '+state.stamps.length+' / 5';
+    $('wonderCount').textContent='印记 '+state.stamps.length+' / '+REGIONS.length;updateActivityHUD();
     $('wonderButton').textContent=r?(activeWonder?.id===r.id?'奇遇进行中 · '+r.event:nearest?'E 和'+CAST.find(c=>c.id===nearest.id).name.split(' · ')[1]+'聊聊  /  Q '+r.wonder:r.wonder+' · Q'):'打开手册，寻找一扇梦门 ↗';
   }
   function regionArtwork(r){
     const common='<path d="M0 89 Q55 43 110 85 T280 76 V120 H0Z" fill="'+r.color+'" opacity=".4"/>';
     const art={town:'<path d="M72 88V58H112V88M167 89V47H208V89" fill="#fff3d4"/><path d="M63 58L92 31L122 58M158 47L188 18L217 47" fill="#5c9f9e"/><path d="M117 48L146 33L170 48L146 62Z" fill="#fff9e9"/><path d="M117 48L146 51L170 48" fill="none" stroke="#bd8561"/>',mushroom:'<path d="M78 93V50M174 94V40" stroke="#fff1ce" stroke-width="15"/><path d="M40 61C32 8 119 4 120 61Z" fill="#bd73ab"/><path d="M137 46C140 0 216 5 216 46Z" fill="#9c83bc"/><g fill="#f8eac6"><circle cx="70" cy="37" r="5"/><circle cx="95" cy="42" r="4"/><circle cx="172" cy="25" r="5"/></g>',crystal:'<path d="M40 90L71 22L95 88L119 46L137 92L176 12L206 92Z" fill="#80c8d4"/><path d="M71 22L77 89L95 88M176 12L181 92L206 92" fill="#c4aade"/><ellipse cx="140" cy="38" rx="35" ry="13" fill="none" stroke="#fff4ce" stroke-width="4" transform="rotate(-25 140 38)"/>',nocturne:'<path d="M42 95V60H75V95M92 95V39H130V95M161 95V52H205V95" fill="#465471"/><path d="M37 60L59 21L82 60M87 39L110 5L136 39M155 52L184 17L212 52" fill="#7c7598"/><circle cx="111" cy="52" r="11" fill="#f6ce8d"/><path d="M111 45V53L117 57" stroke="#465471" fill="none" stroke-width="2"/><g fill="#f6ce8d"><circle cx="60" cy="77" r="4"/><circle cx="180" cy="69" r="4"/></g>',whale:'<ellipse cx="132" cy="47" rx="61" ry="27" fill="#8fc6bf"/><ellipse cx="151" cy="55" rx="43" ry="14" fill="#fff1d9"/><path d="M76 48L51 33L52 61Z" fill="#8fc6bf"/><ellipse cx="120" cy="22" rx="25" ry="12" fill="#fff9e9"/><circle cx="172" cy="45" r="3" fill="#263b49"/><g fill="#ef9c9f"><circle cx="56" cy="93" r="8"/><circle cx="213" cy="87" r="10"/><circle cx="185" cy="98" r="6"/></g>'};
-    return '<svg viewBox="0 0 260 110" aria-hidden="true"><circle cx="220" cy="22" r="13" fill="#fff9e9" opacity=".8"/>'+common+art[r.id]+'</svg>';
+    const frontierArt={harbor:'<path d="M20 90Q90 70 155 90T260 85" fill="none" stroke="#65b7bd" stroke-width="10"/><path d="M75 78V48H126V78M143 85V45H186V85" fill="#fff2ce"/><path d="M68 48L100 23L135 48M136 45L166 15L194 45" fill="#679eac"/><g fill="#d4fbef" stroke="#72bbc6" stroke-width="2"><circle cx="45" cy="27" r="16"/><circle cx="206" cy="57" r="20"/><circle cx="232" cy="23" r="9"/></g>',gear:'<g fill="none" stroke="#9d7b5b" stroke-width="7"><circle cx="114" cy="50" r="36"/><circle cx="177" cy="70" r="22"/></g><path d="M114 14V86M78 50H150M89 25L139 75M139 25L89 75" stroke="#edc57e" stroke-width="7"/><path d="M35 94V72H77V94M168 94V83H222V94" fill="#729f94"/>',dunes:'<path d="M0 90Q35 39 90 83Q145 18 209 80L260 100" fill="#e8bd83"/><ellipse cx="104" cy="92" rx="31" ry="7" fill="#75bcb2"/><path d="M190 87V39M175 60V48M205 63V50M175 60Q190 74 205 63" fill="none" stroke="#90af80" stroke-width="9"/><path d="M42 57L49 44L56 57L49 70ZM140 40L145 29L151 40L145 50Z" fill="#fff0b9"/>',aurora:'<path d="M15 98L63 25L111 98L161 13L220 98" fill="#9cbecf"/><path d="M43 55L63 25L83 55L63 48ZM139 48L161 13L184 48L161 42Z" fill="#fff8df"/><path d="M20 31Q75 -5 125 28T238 14" fill="none" stroke="#90d9c6" stroke-width="9" opacity=".8"/><ellipse cx="147" cy="94" rx="40" ry="7" fill="#a3d7dd"/>'};
+    return '<svg viewBox="0 0 260 110" aria-hidden="true"><circle cx="220" cy="22" r="13" fill="#fff9e9" opacity=".8"/>'+common+(art[r.id]||frontierArt[r.id]||'')+'</svg>';
+  }
+  function mapContent(){
+    const selected=REGIONS.find(r=>r.id===mapSelected)||REGIONS[0],point=(x,z)=>({left:(x+145)/290*100,top:(z+135)/270*100});
+    const labels={town:[30,13],mushroom:[-32,30],crystal:[-41,-11],nocturne:[38,-30],whale:[-4,-46]};
+    const paths=ROAM_ROUTES.map(([,points,type])=>'<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+(type==='star'?'#6c9eab':type==='wood'?'#b49067':'#99887d')+'" stroke-width="2" stroke-linecap="round"/>').join('');
+    const terrain=REGIONS.map(r=>'<circle cx="'+r.x+'" cy="'+r.z+'" r="'+(r.r+2)+'" fill="'+r.ground+'" opacity=".9"/>').join('');
+    const markers=REGIONS.map(r=>{const p=point(...(labels[r.id]||[r.x,r.z]));return '<button class="map-node" style="left:'+p.left+'%;top:'+p.top+'%;--region-bg:'+r.bg+'" data-map-region="'+r.id+'" aria-pressed="'+(r.id===selected.id)+'">'+(state.visited.includes(r.id)?'✓ ':'')+r.name+'</button>';}).join('');
+    const pos=point(player.position.x,player.position.z),s=nextActivityStop(),target=s?point(s.x,s.z):null;
+    return '<p class="atlas-intro"><strong>路的尽头，还有新的奇妙。</strong><br>九片风土、七条远行干道、沿途驿站与十八段可玩的冒险。点选区域查看活动；梦门可直达，也可以循着路标慢慢走。</p><div class="map-layout"><div class="world-map"><svg viewBox="-145 -135 290 270" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="mapWaves" width="25" height="23" patternUnits="userSpaceOnUse"><path d="M1 12Q6 7 11 12T21 12" fill="none" stroke="#9bc6cb" stroke-width=".5"/></pattern></defs><rect x="-145" y="-135" width="290" height="270" fill="url(#mapWaves)"/><circle r="132" fill="#c7d4a8" stroke="#e9dbb8" stroke-width="5"/>'+terrain+'<path d="M-109 -33L-89 -76L-72 -51L-56 -87L-35 -53L-10 -91L11 -59" fill="none" stroke="#adc3b8" stroke-width="10" stroke-linecap="round"/>'+paths+'<path d="M-18 -10L0 0L9 5L-13 17M-18 -10L-1 -28L22 -16L9 5" fill="none" stroke="#a2a58d" stroke-width="1"/>'+REGIONS.map(r=>{const l=labels[r.id];return l?'<path d="M'+r.x+' '+r.z+'L'+l[0]+' '+l[1]+'" stroke="#7b9580" stroke-width=".6" stroke-dasharray="1 1"/>':'';}).join('')+'<text x="-125" y="-111" font-size="8" fill="#466c6b">N ↑</text><text x="-103" y="-89" font-size="5" fill="#738d79">回声松原 · 旧观星台</text><text x="-120" y="117" font-size="5" fill="#567b7a">奇想群岛 / 远行版</text></svg>'+markers+'<span class="map-player" aria-label="你的位置" style="left:'+pos.left+'%;top:'+pos.top+'%">●</span>'+(target?'<span class="map-objective" aria-label="下一个活动目标" style="left:'+target.left+'%;top:'+target.top+'%">◆</span>':'')+'<div class="map-key">● 你的位置　◆ 下一目标　✓ 已抵达</div></div><article class="map-sheet" style="--region-bg:'+selected.bg+'"><small>'+selected.en+'</small><h3>'+selected.symbol+' '+selected.name+'</h3><div class="region-art">'+regionArtwork(selected)+'</div><p><b>'+selected.rule+'</b><br>'+selected.desc+'</p><button data-travel="'+selected.id+'" class="teal">梦门直达 · '+selected.name+' ↗</button><button class="secondary" id="panorama">合上手册 · 远眺全境</button><div class="map-tasks">'+ACTIVITIES.filter(a=>a.region===selected.id).map(a=>'<button data-start="'+a.id+'">'+(state.activityDone.includes(a.id)?'✓ ':'')+a.name+'<br><small>'+ACTIVITY_TYPES[a.type]+' · '+a.stops.length+' 站 · 接取并导航 ↗</small></button>').join('')+'</div></article></div><p class="atlas-footnote">步行 Shift 奔跑；载具可在世界设置中召回。梦门保留天气与时间；活动目标需要亲自抵达。地图按世界实际坐标绘制，五片原有风土集中在中央故乡。</p>';
+  }
+  function activityContent(){
+    const local=regionAt(player.position.x,player.position.z)?.id;
+    const list=ACTIVITIES.filter(a=>activityFilter==='unfinished'?!state.activityDone.includes(a.id):activityFilter==='nearby'?a.region===local:true);
+    return '<p class="atlas-intro"><strong>想去哪里，就从一件小事开始。</strong><br>投递、钓梦鱼、花圃照料、修补、寻宝与限时巡游。每区两段冒险；首次完成奖励 2 木材、2 石头与 3 花种。普通步骤可存档，巡游支持重复挑战。</p><div class="activity-filters">'+[['all','全部 18 段'],['unfinished','还没完成'],['nearby','身处区域']].map(([v,label])=>'<button data-filter="'+v+'" aria-pressed="'+(activityFilter===v)+'">'+label+'</button>').join('')+'</div><div class="atlas-grid">'+list.map(a=>{const r=REGIONS.find(r=>r.id===a.region),n=activityStep(a),done=state.activityDone.includes(a.id);return '<article class="region-card activity-card '+(state.activeActivity===a.id?'active':'')+'" style="--region-bg:'+r.bg+'"><div class="card-copy"><small>'+r.name+' / '+ACTIVITY_TYPES[a.type]+'</small><h3>'+a.name+'</h3><p>'+a.desc+'</p><div class="activity-meta"><span>'+a.stops.length+' 站'+(a.limit?' · '+a.limit+' 秒':' · 无时间限制')+'</span><span>'+(done?'✓ 已完成':'进度 '+n+' / '+a.stops.length)+'</span></div><progress value="'+n+'" max="'+a.stops.length+'" aria-label="'+a.name+'进度"></progress><p>下一站：'+(a.stops[n]?.label||'可以再次体验')+'</p><button data-start="'+a.id+'">'+(state.activeActivity===a.id?'继续导航 ↗':done?'再走一遍 ↗':'接取并导航 ↗')+'</button></div></article>';}).join('')+'</div>'+(list.length?'':'<p>这里暂时没有符合条件的冒险。点“全部”选择下一段旅途。</p>')+'<p class="atlas-footnote">T 参与活动，金色菱星标出下一站。途中可切换委托并保留普通进度；巡游重新接取、切换或读档会从起点重新计时。已完成的冒险可重玩，材料奖励仅领取一次。</p>';
+  }
+  function characterCard(c){
+    const activeLook=castPreviews.get(c.id)||state.looks[c.id]||'core',basePortrait=portraitRenderer(c.id,activeLook);
+    const current=CHARACTER_LOOKS[c.id]?.[activeLook],lookName=current?.name||'本真形态',lookText=current?.description||'保留角色最初的轮廓、性格和随身标记。';
+    const displayName=c.name.split(' · ')[1],life=REGION_LIFE.find(l=>l.region===c.region);
+    const action=c.playable?`<button data-avatar="${c.id}" data-look="${activeLook}">${state.avatar===c.id&&(state.looks[c.id]||'core')===activeLook?'✓ 正在穿着':'穿上这套 · '+displayName}</button>`:'<p class="resident-label">世界伙伴 · 可预览全部造型</p>';
+    return `<article class="cast-card" data-character="${c.id}" style="--region-bg:${c.bg}">
+      <div class="cast-portrait"><span class="portrait-number">NO. ${String(CAST.indexOf(c)+1).padStart(2,'0')}</span><img data-portrait="${c.id}" src="${basePortrait}" alt="${c.name} · ${lookName}三维造型" /></div>
+      <div class="card-copy"><small>${c.role}</small><h3>${c.name}</h3><p class="card-rule">${c.trait}</p><p>${c.wish}<br>${c.flaw}</p>
+        <div class="look-switch" role="group" aria-label="${c.name}的造型系列">${LOOK_SERIES.map(item=>`<button type="button" data-preview-look="${c.id}" data-look="${item.id}" aria-pressed="${activeLook===item.id}" title="预览${item.title}">${item.label}</button>`).join('')}</div>
+        <div class="look-caption" aria-live="polite"><b data-look-name="${c.id}">${lookName}</b><span data-look-description="${c.id}">${lookText}</span></div>${action}
+        <details class="life-note"><summary>在${life.name}相遇 ↗</summary><p>${life.story}</p><button data-life="${life.region}">去看看这处生活角 ↗</button><button data-start="${life.activity}">参与这里的冒险 ↗</button></details>
+      </div></article>`;
+  }
+  function castContent(){
+    castSeries=LOOK_SERIES.find(s=>CAST.every(c=>(castPreviews.get(c.id)||state.looks[c.id]||'core')===s.id))?.id||'';
+    return `<div class="wardrobe-intro"><div><div class="eyebrow">A LITTLE LIFE, MANY POSSIBILITIES</div><h3>一位朋友，许多种可能。</h3><p>无论穿成什么模样，他们最在意的小事始终没变。<br>打开一套系列，看看十位朋友的另一种生活。</p></div><div class="wardrobe-seal">10 位朋友<br><b>40</b> 种模样</div></div>
+      <div class="series-shelf" role="group" aria-label="预览整套造型系列">${LOOK_SERIES.map((s,i)=>`<button data-series="${s.id}" aria-pressed="${castSeries===s.id}" style="--series-bg:${s.color}"><small>VOL. 0${i+1}</small><b>${s.title}</b><span>${s.subtitle}</span></button>`).join('')}</div>
+      <p class="wardrobe-help">选择卡片中的系列试穿预览。前五位可化身出发；展开「相遇」能找到他们的生活角与相关冒险。</p><div class="atlas-grid cast-grid">${CAST.map(characterCard).join('')}</div>`;
+  }
+  function regionCard(r,i){
+    const life=REGION_LIFE.find(l=>l.region===r.id);
+    return `<article class="region-card" style="--region-bg:${r.bg}"><div class="region-art">${regionArtwork(r)}</div><div class="card-copy"><small>0${i+1} / ${r.en}</small><h3>${r.name}</h3><p class="card-rule">${r.rule}</p><p>${r.desc}</p><span class="stamp">${state.stamps.includes(r.id)?'✓ 已收集 · '+r.event:'待发现 · '+r.event}</span><div class="region-life"><b>${life.name}</b><p>${life.story}</p><button data-life="${r.id}">去生活角坐坐 ↗</button></div><button data-travel="${r.id}">踏入梦门 · 去${r.name} ↗</button></div></article>`;
   }
   function renderAtlas(tab=atlasTab){
     atlasTab=tab;for(const button of document.querySelectorAll('[data-tab]')){const active=button.dataset.tab===tab;button.setAttribute('aria-selected',active);button.tabIndex=active?0:-1;}$('atlasContent').setAttribute('aria-labelledby','tab-'+tab);
     let content='';
-    if(tab==='regions')content='<p class="atlas-intro"><strong>被认真对待的小心愿，会长成真实的地方和生命。</strong><br>一次漫长的遗忘，让五种心愿漂散成了五片风土。你可以循路漫游，也可以踏入梦门，替这个世界找回一点奇妙。</p><div class="atlas-grid">'+REGIONS.map((r,i)=>'<article class="region-card" style="--region-bg:'+r.bg+'"><div class="region-art">'+regionArtwork(r)+'</div><div class="card-copy"><small>0'+(i+1)+' / '+r.en+'</small><h3>'+r.name+'</h3><p class="card-rule">'+r.rule+'</p><p>'+r.desc+'</p><span class="stamp">'+(state.stamps.includes(r.id)?'✓ 已收集 · '+r.event:'待发现 · '+r.event)+'</span><button data-travel="'+r.id+'">踏入梦门 · 去'+r.name+' ↗</button></div></article>').join('')+'</div><p class="atlas-footnote">每个区域都有独特景观、伙伴与可触发奇遇。梦门只改变位置和视野，天气与时间由你掌握。</p>';
-    if(tab==='cast')content='<p class="atlas-intro"><strong>小小的身体里，住着很大的心事。</strong><br>他们有自己的愿望，也有不太完美的地方。前五位可以成为你的今日化身；靠近世界中的伙伴，按 E 听听他们的故事。</p><div class="atlas-grid">'+CAST.map(c=>'<article class="cast-card" style="--region-bg:'+c.bg+'"><div class="cast-portrait"><img src="'+(portraitURLs.get(c.id)||'')+'" alt="'+c.name+'三维形象" /></div><div class="card-copy"><small>'+c.role+'</small><h3>'+c.name+'</h3><p class="card-rule">'+c.trait+'</p><p>'+c.wish+'<br>'+c.flaw+'</p><button data-avatar="'+c.id+'" '+(!c.playable?'disabled':'')+'>'+(c.playable?(state.avatar===c.id?'✓ 正在使用':'成为'+c.name.split(' · ')[1]):'天空旅伴 · 在花海相遇')+'</button></div></article>').join('')+'</div>';
-    if(tab==='journal')content='<div class="journal-sheet"><small>TRAVELER\'S NOTEBOOK / '+state.seed.replace(/[&<>"']/g,'')+'</small><h3>把奇妙，带回日常。</h3><p>这段旅途没有倒计时。遇见一个朋友，记住一件小事，给自己的岛添一点新东西，都是向前走。已探索 '+state.visited.length+' / 5 片风土，结识 '+state.met.length+' / 6 位伙伴。</p><ul class="stamp-list">'+REGIONS.map(r=>'<li class="'+(state.stamps.includes(r.id)?'earned':'')+'"><b>'+r.symbol+'</b>'+r.name+'<br>'+(state.stamps.includes(r.id)?'已记住':'等待奇遇')+'</li>').join('')+'</ul><p><b>'+ (state.stamps.length===5?'造梦者星环已点亮。五枚小星星会随你的化身一起旅行。':'收集五地的奇想印记，点亮属于旅人的「造梦者星环」。')+'</b></p><p>按 Q 或点击“身边的奇妙”触发当前区域事件；印记、化身、已访区域和结识伙伴会随手动存档保存。</p><button id="journalSave" class="teal">保存这段旅途</button></div>';
+    if(tab==='map')content=mapContent();
+    if(tab==='activities')content=activityContent();
+    if(tab==='regions')content='<p class="atlas-intro"><strong>被认真对待的小心愿，会长成真实的地方和生命。</strong><br>每片风土都有不同的生活方法。走进九处生活角，看看他们把兴趣变成了什么奇妙的小地方。</p><div class="atlas-grid">'+REGIONS.map(regionCard).join('')+'</div><p class="atlas-footnote">每个区域都有独特景观、伙伴与可触发奇遇。梦门只改变位置和视野，天气与时间由你掌握。</p>';
+    if(tab==='cast')content=castContent();
+    if(tab==='journal')content='<div class="journal-sheet"><small>TRAVELER\'S NOTEBOOK / '+state.seed.replace(/[&<>"\']/g,'')+'</small><h3>把奇妙，带回日常。</h3><div class="journal-summary"><span>已探索 '+state.visited.length+' / '+REGIONS.length+'</span><span>结识 '+state.met.length+' / '+CAST.length+'</span><span>冒险 '+state.activityDone.length+' / '+ACTIVITIES.length+'</span><span>梦鱼 '+state.dreamFish+' 条</span></div><p>普通冒险步骤、已完成记录、花园和晶石的变化都会保存在旅途中。首次完成冒险带回材料，远行驿站也会逐渐挂满星灯。</p><ul class="stamp-list">'+REGIONS.map(r=>'<li class="'+(state.stamps.includes(r.id)?'earned':'')+'"><b>'+r.symbol+'</b>'+r.name+'<br>'+(state.stamps.includes(r.id)?'已记住':'等待奇遇')+'</li>').join('')+'</ul><p><b>'+(state.stamps.length===REGIONS.length?'九枚印记齐聚，远行星环已点亮。':state.stamps.length>=5?'造梦者星环已点亮；继续收集九区印记，星环会更明亮。':'收集任意五枚奇想印记，点亮随身的造梦者星环。')+'</b></p><p>步行与驾驶里程 '+Math.round(state.roadDistance)+' 米 · 种花 '+state.planted+' 朵 · 制作 '+state.crafted+' 件。<br>Q 区域奇遇 · T 参与活动 · M 全域地图。巡游读档后从起点重新计时；没有自动保存。</p><button id="journalSave" class="teal">保存这段旅途</button></div>';
     $('atlasContent').innerHTML=content;
     for(const button of $('atlasContent').querySelectorAll('[data-travel]'))button.onclick=()=>visitRegion(button.dataset.travel);
-    for(const button of $('atlasContent').querySelectorAll('[data-avatar]'))button.onclick=()=>{changeAvatar(button.dataset.avatar);renderAtlas('cast')};
+    for(const button of $('atlasContent').querySelectorAll('[data-life]'))button.onclick=()=>visitLife(button.dataset.life);
+    for(const button of $('atlasContent').querySelectorAll('[data-series]'))button.onclick=()=>{
+      castSeries=button.dataset.series;for(const c of CAST)castPreviews.set(c.id,castSeries);renderAtlas('cast');
+      $('atlasContent').querySelector('[data-series="'+castSeries+'"]').focus({preventScroll:true});
+    };
+    for(const button of $('atlasContent').querySelectorAll('[data-map-region]'))button.onclick=()=>{mapSelected=button.dataset.mapRegion;renderAtlas('map')};
+    for(const button of $('atlasContent').querySelectorAll('[data-start]'))button.onclick=()=>startActivity(button.dataset.start);
+    for(const button of $('atlasContent').querySelectorAll('[data-filter]'))button.onclick=()=>{activityFilter=button.dataset.filter;renderAtlas('activities')};
+    for(const button of $('atlasContent').querySelectorAll('[data-preview-look]'))button.onclick=()=>{
+      const id=button.dataset.previewLook,look=button.dataset.look,card=button.closest('.cast-card'),character=CAST.find(item=>item.id===id),info=CHARACTER_LOOKS[id]?.[look];
+      castPreviews.set(id,look);castSeries=CAST.every(c=>(castPreviews.get(c.id)||state.looks[c.id]||'core')===look)?look:'';
+      for(const series of $('atlasContent').querySelectorAll('[data-series]'))series.setAttribute('aria-pressed',String(series.dataset.series===castSeries));
+      card.querySelector('[data-portrait]').src=portraitRenderer(id,look);card.querySelector('[data-portrait]').alt=character.name+' · '+(info?.name||'本真形态')+'三维造型';
+      card.querySelector('[data-look-name]').textContent=info?.name||'本真形态';card.querySelector('[data-look-description]').textContent=info?.description||'保留角色最初的轮廓、性格和随身标记。';
+      for(const option of card.querySelectorAll('[data-preview-look]'))option.setAttribute('aria-pressed',String(option===button));
+      const wear=card.querySelector('[data-avatar]');if(wear){wear.dataset.look=look;wear.textContent=state.avatar===id&&(state.looks[id]||'core')===look?'✓ 正在穿着':'穿上这套 · '+character.name.split(' · ')[1];}
+    };
+    for(const button of $('atlasContent').querySelectorAll('[data-avatar]'))button.onclick=()=>{changeAvatar(button.dataset.avatar,true,button.dataset.look);renderAtlas('cast');const active=$('atlasContent').querySelector('[data-avatar="'+state.avatar+'"]');active.focus({preventScroll:true});};
     if($('journalSave'))$('journalSave').onclick=save;
+    if($('panorama'))$('panorama').onclick=()=>{$('atlas').close();state.camera='orbit';$('camera').textContent='视角：全境环绕';setViewSpan(280);keys.clear();toast('远眺全境 · 在世界设置中切回跟随，或踏入任一梦门')};
   }
+  function openAtlas(tab='map'){keys.clear();$('speech').hidden=true;renderAtlas(tab);if(!$('atlas').open)$('atlas').showModal();}
   function buildPortraits(){
     const portraitScene=new THREE.Scene(),portraitCamera=new THREE.OrthographicCamera(-2,2,2,-2,.1,40);
     portraitScene.add(new THREE.HemisphereLight(0xfff5df,0x718d99,2.7));const light=new THREE.DirectionalLight(0xffffff,3);light.position.set(3,6,5);portraitScene.add(light);
-    const target=new THREE.WebGLRenderTarget(256,256);const previousTarget=renderer.getRenderTarget(),pixels=new Uint8Array(256*256*4),canvas=document.createElement('canvas');canvas.width=canvas.height=256;const ctx=canvas.getContext('2d');
-    for(const c of CAST){
-      const g=makeCharacter(c.id);portraitScene.add(g);const box=new THREE.Box3().setFromObject(g),center=box.getCenter(new THREE.Vector3());
-      portraitCamera.position.copy(center).add(new THREE.Vector3(4.8,2.4,7));portraitCamera.lookAt(center);portraitCamera.updateMatrixWorld();
-      let half=0;for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const p=new THREE.Vector3(x,y,z).applyMatrix4(portraitCamera.matrixWorldInverse);half=Math.max(half,Math.abs(p.x),Math.abs(p.y))}
-      half*=1.1;portraitCamera.left=-half;portraitCamera.right=half;portraitCamera.top=half;portraitCamera.bottom=-half;portraitCamera.updateProjectionMatrix();
-      portraitScene.background=new THREE.Color(c.bg);renderer.setRenderTarget(target);renderer.render(portraitScene,portraitCamera);renderer.readRenderTargetPixels(target,0,0,256,256,pixels);const img=ctx.createImageData(256,256);for(let y=0;y<256;y++)img.data.set(pixels.subarray(y*1024,(y+1)*1024),(255-y)*1024);ctx.putImageData(img,0,0);portraitURLs.set(c.id,canvas.toDataURL());disposeObjects([g]);
-    }
-    renderer.setRenderTarget(previousTarget);target.dispose();
+    const target=new THREE.WebGLRenderTarget(256,256),pixels=new Uint8Array(256*256*4),canvas=document.createElement('canvas');target.texture.colorSpace=THREE.SRGBColorSpace;canvas.width=canvas.height=256;const ctx=canvas.getContext('2d');
+    portraitRenderer=(id,look='core')=>{
+      const key=id+':'+look;if(portraitURLs.has(key))return portraitURLs.get(key);const c=CAST.find(item=>item.id===id);if(!c)return '';
+      const previousTarget=renderer.getRenderTarget(),g=makeCharacter(id,true,look);
+      try{
+        portraitScene.add(g);const box=new THREE.Box3().setFromObject(g),center=box.getCenter(new THREE.Vector3());portraitCamera.position.copy(center).add(new THREE.Vector3(4.8,2.4,7));portraitCamera.lookAt(center);portraitCamera.updateMatrixWorld();
+        let half=0;for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const p=new THREE.Vector3(x,y,z).applyMatrix4(portraitCamera.matrixWorldInverse);half=Math.max(half,Math.abs(p.x),Math.abs(p.y))}
+        half*=1.1;portraitCamera.left=-half;portraitCamera.right=half;portraitCamera.top=half;portraitCamera.bottom=-half;portraitCamera.updateProjectionMatrix();portraitScene.background=new THREE.Color(c.bg);renderer.setRenderTarget(target);renderer.render(portraitScene,portraitCamera);renderer.readRenderTargetPixels(target,0,0,256,256,pixels);
+        const img=ctx.createImageData(256,256);for(let y=0;y<256;y++)img.data.set(pixels.subarray(y*1024,(y+1)*1024),(255-y)*1024);ctx.putImageData(img,0,0);const url=canvas.toDataURL();portraitURLs.set(key,url);return url;
+      }finally{disposeObjects([g]);renderer.setRenderTarget(previousTarget)}
+    };
+    for(const c of CAST)portraitRenderer(c.id,'core');
   }
   function initStoryUI(){
     $('avatar').innerHTML=CAST.filter(c=>c.playable).map(c=>'<option value="'+c.id+'">'+c.name+'</option>').join('');$('avatar').value=state.avatar;$('avatar').onchange=e=>changeAvatar(e.target.value);
-    $('openAtlas').onclick=()=>{keys.clear();$('speech').hidden=true;renderAtlas();$('atlas').showModal()};$('atlasClose').onclick=()=>$('atlas').close();$('atlas').addEventListener('close',()=>{keys.clear();document.activeElement?.blur()});
-    for(const button of document.querySelectorAll('[data-tab]')){button.onclick=()=>renderAtlas(button.dataset.tab);button.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('[data-tab]')];const current=tabs.indexOf(button);const next=e.key==='Home'?0:e.key==='End'?2:(current+(e.key==='ArrowRight'?1:2))%3;renderAtlas(tabs[next].dataset.tab);tabs[next].focus()});}
+    $('openAtlas').onclick=()=>openAtlas('map');$('atlasClose').onclick=()=>$('atlas').close();$('atlas').addEventListener('close',()=>{document.activeElement?.blur()});
+    $('openWardrobe').onclick=()=>openAtlas('cast');
+    for(const button of document.querySelectorAll('[data-tab]')){button.onclick=()=>renderAtlas(button.dataset.tab);button.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('[data-tab]')];const current=tabs.indexOf(button);const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(current+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length;renderAtlas(tabs[next].dataset.tab);tabs[next].focus()});}
     $('wonderButton').onclick=()=>{if(regionAt(player.position.x,player.position.z))triggerWonder();else $('openAtlas').click()};$('speechClose').onclick=()=>{$('speech').hidden=true};$('speechNext').onclick=()=>talkToResident(speechResident);$('speechWonder').onclick=triggerWonder;
+    $('activityButton').onclick=()=>{const s=nextActivityStop();if(s&&Math.hypot(player.position.x-s.x,player.position.z-s.z)>3.4)openAtlas('map');else performActivity()};
     buildPortraits();
   }
 
@@ -1025,39 +1568,81 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.m
     const stardust=makeWeatherPoints(180,seeded+':stardust',8,42,50,new THREE.PointsMaterial({color:0xffffff,size:3.2,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:.82,depthWrite:false,blending:THREE.AdditiveBlending}));stardust.name='stardust';stardust.visible=false;weatherEffect.add(stardust);
     const auroraGeometry=new THREE.BufferGeometry();const auroraPoints=[];for(let i=0;i<50;i++){const u=i/49;auroraPoints.push(new THREE.Vector3(-55+u*110,30+Math.sin(u*TAU*1.5)*2.2,-38+Math.sin(u*TAU)*3))}auroraGeometry.setFromPoints(auroraPoints);const aurora=new THREE.Line(auroraGeometry,new THREE.LineBasicMaterial({color:0x71edc8,transparent:true,opacity:.58,depthTest:false,blending:THREE.AdditiveBlending}));aurora.name='aurora';aurora.visible=false;aurora.frustumCulled=false;weatherEffect.add(aurora);
     setWeather(state.weather,false);updateLighting(0)}
-  function clearWorld(){disposeEncounter();regionProps.length=0;whaleActor=null;currentRegion='';speechResident=null;$('speech').hidden=true;disposeObjects([world?.terrain,world?.water?.water,...(world?.water?.rings||[]),...props,...pickups,...plants,...dynamic]);disposeWeather();outlines.length=0;props.length=0;pickups.length=0;plants.length=0;dynamic.length=0;landmarks.length=0;roads.length=0;vehicles.length=0;lanterns.length=0;residents.length=0;fantasyBuildings.length=0;fantasyFloaters.length=0}
-  function buildWorld(reset=true){clearWorld();state.seed=$('seed').value.trim()||'LUMEN-07';if(reset){state.terrainOps=[];state.placed=[];state.collected=[];state.wood=0;state.stone=0;state.seeds=0;state.crafted=0;state.planted=0;state.terrainEdits=0;state.stamps=[];state.visited=[];state.met=[];state.riding='';attachCrown();if(player)player.visible=true}seedHash=hashString(state.seed);rng=rand;world={terrain:makeTerrain(),water:makeWater()};buildFantasyWorld();for(let i=0;i<38;i++){const a=rand()*TAU,r=18+rand()*17,x=Math.cos(a)*r,z=Math.sin(a)*r;if(terrainHeight(x,z)<-.65||REGIONS.some(region=>Math.hypot(x-region.x,z-region.z)<region.r*.85))continue;if(rand()<.68)makeTree(x,z,terrainHeight(x,z)>3.4);else makeRock(x,z)}let pickupId=0;for(const type of ['wood','stone','seed']){for(let n=0;n<8;n++){let x=0,z=0,tries=0;do{const a=rand()*TAU,r=14+rand()*24;x=Math.cos(a)*r;z=Math.sin(a)*r;tries++}while(terrainHeight(x,z)<-.5&&Math.hypot(x-9,z-5)<14&&tries<40);makePickup(type,x,z,pickupId++)}}for(let i=0;i<8;i++){const a=rand()*TAU,r=16+rand()*28;makeCloud(Math.cos(a)*r,20+rand()*8,Math.sin(a)*r,1.1+rand()*.65)}if(player){player.position.set(0,terrainHeight(0,0)+.03,0)}if(!reset){for(const p of state.placed){if(p.type==='flower')plant(p);else placeCraft(p.type,p)}for(const id of state.collected){const g=pickups.find(item=>item.userData.id===id&&item.parent);if(g){g.parent.remove(g);const i=pickups.indexOf(g);if(i>=0)pickups.splice(i,1)}}}if(player)player.traverse(m=>{if(m.userData.outline&&!outlines.includes(m.userData.outline))outlines.push(m.userData.outline)});rebuildWeather();updateResourceUI();toggleOutlines();updateRideUI();updateLocationStatus();if(reset)toast('新岛屿已生成：'+state.seed)}
+  function clearWorld(){
+    disposeEncounter();regionProps.length=0;whaleActor=null;currentRegion='';speechResident=null;fishingRun=null;activityRun=null;natureBatch=null;activityTarget=null;trailBeacon=null;activityMarkers.length=0;$('speech').hidden=true;
+    disposeObjects([world?.terrain,world?.water?.water,...(world?.water?.rings||[]),...props,...pickups,...plants,...dynamic]);disposeWeather();
+    for(const list of [outlines,props,pickups,plants,dynamic,landmarks,roads,vehicles,lanterns,residents,fantasyBuildings,fantasyFloaters])list.length=0;
+  }
+  function buildWorld(reset=true){
+    clearWorld();state.seed=$('seed').value.trim()||'LUMEN-07';
+    if(reset){Object.assign(state,{terrainOps:[],placed:[],collected:[],wood:0,stone:0,seeds:0,crafted:0,planted:0,terrainEdits:0,stamps:[],visited:[],met:[],riding:'',activityProgress:{},activityDone:[],activeActivity:'',dreamFish:0,roadDistance:0});attachCrown();if(player)player.visible=true;}
+    seedHash=hashString(state.seed);rng=rand;world={terrain:makeTerrain(),water:makeWater()};buildFantasyWorld();
+    for(let i=0;i<38;i++){const a=rand()*TAU,r=18+rand()*17,x=Math.cos(a)*r,z=Math.sin(a)*r;if(terrainHeight(x,z)<-.65||REGIONS.some(region=>Math.hypot(x-region.x,z-region.z)<region.r*.85)||roadDistance(x,z)<2)continue;if(rand()<.68)makeTree(x,z,terrainHeight(x,z)>3.4);else makeRock(x,z);}
+    const resourceRandom=seededRandom('resources');let pickupId=0;
+    // IDs 0..23 remain valid for earlier save files; more supplies follow the outer roads.
+    for(const type of ['wood','stone','seed'])for(let n=0;n<8;n++){let x,z;for(let tries=0;tries<80;tries++){const a=resourceRandom()*TAU,r=14+resourceRandom()*22;x=Math.cos(a)*r;z=Math.sin(a)*r;if(terrainHeight(x,z)>-.5&&!fantasyBuildings.some(b=>Math.hypot(x-b.x,z-b.z)<b.radius+1))break;}makePickup(type,x,z,pickupId++);}
+    for(const region of REGIONS.slice(5))for(const type of ['wood','stone','seed'])for(let n=0;n<5;n++){let x,z;for(let tries=0;tries<80;tries++){const a=resourceRandom()*TAU,r=5+resourceRandom()*12;x=region.x+Math.cos(a)*r;z=region.z+Math.sin(a)*r;if(Math.hypot(x,z)<MAP_EDGE-3&&terrainHeight(x,z)>-.5&&!fantasyBuildings.some(b=>Math.hypot(x-b.x,z-b.z)<b.radius+1.1))break;}makePickup(type,x,z,pickupId++);}
+    for(const [,anchors] of ROAM_ROUTES)for(const [x,z] of anchors.slice(1,-1))for(const [i,type] of ['wood','stone','seed'].entries())makePickup(type,x+2.6+i*.8,z+2.6,pickupId++);
+    for(let i=0;i<26;i++){const a=rand()*TAU,r=24+rand()*105;makeCloud(Math.cos(a)*r,24+rand()*8,Math.sin(a)*r,1.1+rand()*.9);}
+    if(player)player.position.set(0,terrainHeight(0,0)+.03,0);
+    if(!reset){for(const p of state.placed){if(p.type==='flower')plant(p);else placeCraft(p.type,p);}for(const id of state.collected){const g=pickups.find(item=>item.userData.id===id&&item.parent);if(g){g.removeFromParent();pickups.splice(pickups.indexOf(g),1);}}}
+    if(player)player.traverse(m=>{if(m.userData.outline&&!outlines.includes(m.userData.outline))outlines.push(m.userData.outline)});
+    rebuildWeather();updateResourceUI();toggleOutlines();updateRideUI();updateLocationStatus();if(reset)toast('九区远行世界已生成 · '+state.seed);
+  }
   function updateResourceUI(){$('wood').textContent=state.wood;$('stone').textContent=state.stone;$('seedCount').textContent=state.seeds;$('progress').textContent=state.crafted>=2&&state.planted>=3?'岛屿已拥有自己的小小生活。截图留住它吧。':state.crafted>=1?'篝火亮起来了，再种下三朵花完成你的第一处营地。':'找到木材、石头与发光种子，给岛屿添一处温暖的落脚点。'}
   function toast(s){toastEl.textContent=s;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),2200)}
   function timeText(t){const h=Math.floor(t)%24,m=Math.floor((t-Math.floor(t))*60);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
   function setTime(t){state.time=((t%24)+24)%24;$('time').value=state.time;$('timeLabel').textContent=timeText(state.time)}
   let nightAmount=1;
   function setWeather(value,announce=true){const valid=['clear','cloudy','rain','snow','stardust'];state.weather=valid.includes(value)?value:'clear';const select=$('weather');if(select&&select.value!==state.weather)select.value=state.weather;if(weatherEffect){for(const item of weatherEffect.children){if(item.name==='rain')item.visible=state.weather==='rain';if(item.name==='snow')item.visible=state.weather==='snow';if(item.name==='stardust'||item.name==='aurora')item.visible=state.weather==='stardust'}}if(announce)toast('天气：'+({clear:'晴朗',cloudy:'多云',rain:'细雨',snow:'落雪',stardust:'星辉'}[state.weather]));updateLocationStatus();return state.weather}
-  function updateLighting(dt){if(state.autoTime&&dt>0)setTime(state.time+dt*.16);const hour=state.time,angle=(hour/24)*TAU-Math.PI/2,sunY=Math.sin(angle);let daylight=THREE.MathUtils.clamp((sunY+.12)/.38,0,1);daylight=daylight*daylight*(3-2*daylight);nightAmount=1-daylight;const dawn=THREE.MathUtils.clamp(1-Math.abs(hour-6)/2.4,0,1),dusk=THREE.MathUtils.clamp(1-Math.abs(hour-18)/2.4,0,1),twilight=Math.max(dawn,dusk);sun.position.set(Math.cos(angle)*34,sunY*35+6,Math.sin(angle*.75)*26);sun.target.position.set(0,0,0);const sky=new THREE.Color(0x17264b).lerp(new THREE.Color(0xbfe9e0),daylight);sky.lerp(new THREE.Color(0xf0a178),twilight*.72);if(state.weather==='cloudy')sky.lerp(new THREE.Color(0x7b939c),.25);if(state.weather==='rain')sky.lerp(new THREE.Color(0x526f88),.46);if(state.weather==='snow')sky.lerp(new THREE.Color(0xb8d5df),.28);if(state.weather==='stardust')sky.lerp(new THREE.Color(0x233868),nightAmount*.43);scene.background.copy(sky);scene.fog.color.copy(sky);const fog={clear:[45,136],cloudy:[36,112],rain:[28,94],snow:[32,106],stardust:[40,122]}[state.weather]||[45,136];scene.fog.near=fog[0];scene.fog.far=fog[1];const dim={clear:1,cloudy:.78,rain:.62,snow:.88,stardust:.94}[state.weather]||1;sun.intensity=.02+daylight*2.55*dim+twilight*.18;sun.color.set(state.weather==='snow'?0xdde9ff:twilight>.3?0xffb17d:0xffedcb);hemi.intensity=.16+daylight*1.02*dim+nightAmount*.5;hemi.color.set(nightAmount>.6?0xaabfe2:0xfff3db);hemi.groundColor.set(nightAmount>.6?0x35506c:0x5d887e);ambient.intensity=.12+daylight*.2+nightAmount*.7;ambient.color.set(nightAmount>.5?0xb8c9e5:0xffefc4);for(const [color,intensity] of storyLights){const mat=storyMats.get(color);if(mat)mat.emissiveIntensity=intensity*(.25+nightAmount*.75)};mats.water.color.set(state.weather==='rain'?0x4e91a4:state.weather==='snow'?0x9bc1cb:0x75d7d0);mats.cloud.color.set(state.weather==='rain'?0x8999a7:state.weather==='cloudy'?0xb5c0be:state.weather==='snow'?0xd6e4e4:0xfdfdf8);if(weatherEffect){const center=player||{position:{x:0,z:0}},originX=center.position.x,originZ=center.position.z;weatherEffect.position.set(originX,0,originZ);const stars=weatherEffect.getObjectByName('stars'),moon=weatherEffect.getObjectByName('moon'),halo=weatherEffect.getObjectByName('moon-halo'),starFactor={clear:1,cloudy:.34,rain:.04,snow:.48,stardust:1}[state.weather]||1;if(stars)stars.material.opacity=nightAmount*starFactor*.9;if(moon){const moonAngle=angle+Math.PI;moon.position.set(Math.cos(moonAngle)*39,Math.sin(moonAngle)*31+16,Math.sin(moonAngle*.75)*34);moon.material.opacity=nightAmount*.96;moon.visible=nightAmount>.02}if(halo){halo.position.copy(moon.position);halo.material.opacity=nightAmount*.12;halo.visible=nightAmount>.02}}}
+  function updateLighting(dt){if(state.autoTime&&dt>0)setTime(state.time+dt*.16);const hour=state.time,angle=(hour/24)*TAU-Math.PI/2,sunY=Math.sin(angle);let daylight=THREE.MathUtils.clamp((sunY+.12)/.38,0,1);daylight=daylight*daylight*(3-2*daylight);nightAmount=1-daylight;const dawn=THREE.MathUtils.clamp(1-Math.abs(hour-6)/2.4,0,1),dusk=THREE.MathUtils.clamp(1-Math.abs(hour-18)/2.4,0,1),twilight=Math.max(dawn,dusk);const focus=state.camera==='follow'&&player?player.position:new THREE.Vector3();sun.position.set(focus.x+Math.cos(angle)*80,focus.y+sunY*85+32,focus.z+Math.sin(angle*.75)*70);sun.target.position.copy(focus);const shadowSpan=state.camera==='orbit'?160:58;if(sun.shadow.camera.right!==shadowSpan){sun.shadow.camera.left=-shadowSpan;sun.shadow.camera.right=shadowSpan;sun.shadow.camera.top=shadowSpan;sun.shadow.camera.bottom=-shadowSpan;sun.shadow.camera.updateProjectionMatrix();}const sky=new THREE.Color(0x17264b).lerp(new THREE.Color(0xbfe9e0),daylight);sky.lerp(new THREE.Color(0xf0a178),twilight*.72);if(state.weather==='cloudy')sky.lerp(new THREE.Color(0x7b939c),.25);if(state.weather==='rain')sky.lerp(new THREE.Color(0x526f88),.46);if(state.weather==='snow')sky.lerp(new THREE.Color(0xb8d5df),.28);if(state.weather==='stardust')sky.lerp(new THREE.Color(0x233868),nightAmount*.43);scene.background.copy(sky);scene.fog.color.copy(sky);const fog={clear:[45,136],cloudy:[36,112],rain:[28,94],snow:[32,106],stardust:[40,122]}[state.weather]||[45,136];const viewFog=Math.max(0,cameraSpan-70)*1.02;scene.fog.near=fog[0]+viewFog;scene.fog.far=fog[1]+viewFog+Math.max(0,cameraSpan-100)*.6;const dim={clear:1,cloudy:.78,rain:.62,snow:.88,stardust:.94}[state.weather]||1;sun.intensity=.02+daylight*2.55*dim+twilight*.18;sun.color.set(state.weather==='snow'?0xdde9ff:twilight>.3?0xffb17d:0xffedcb);hemi.intensity=.16+daylight*1.02*dim+nightAmount*.5;hemi.color.set(nightAmount>.6?0xaabfe2:0xfff3db);hemi.groundColor.set(nightAmount>.6?0x35506c:0x5d887e);ambient.intensity=.12+daylight*.2+nightAmount*.7;ambient.color.set(nightAmount>.5?0xb8c9e5:0xffefc4);for(const [color,intensity] of storyLights){const mat=storyMats.get(color);if(mat)mat.emissiveIntensity=intensity*(.25+nightAmount*.75)};mats.water.color.set(state.weather==='rain'?0x4e91a4:state.weather==='snow'?0x9bc1cb:0x75d7d0);mats.cloud.color.set(state.weather==='rain'?0x8999a7:state.weather==='cloudy'?0xb5c0be:state.weather==='snow'?0xd6e4e4:0xfdfdf8);if(weatherEffect){const center=player||{position:{x:0,z:0}},originX=center.position.x,originZ=center.position.z;weatherEffect.position.set(originX,Math.max(0,terrainHeight(originX,originZ)),originZ);const stars=weatherEffect.getObjectByName('stars'),moon=weatherEffect.getObjectByName('moon'),halo=weatherEffect.getObjectByName('moon-halo'),starFactor={clear:1,cloudy:.34,rain:.04,snow:.48,stardust:1}[state.weather]||1;if(stars)stars.material.opacity=nightAmount*starFactor*.9;if(moon){const moonAngle=angle+Math.PI;moon.position.set(Math.cos(moonAngle)*39,Math.sin(moonAngle)*31+16,Math.sin(moonAngle*.75)*34);moon.material.opacity=nightAmount*.96;moon.visible=nightAmount>.02}if(halo){halo.position.copy(moon.position);halo.material.opacity=nightAmount*.12;halo.visible=nightAmount>.02}}}
   function updateAtmosphere(dt,t){if(!weatherEffect)return;const rain=weatherEffect.getObjectByName('rain');if(rain?.visible){const positions=rain.geometry.attributes.position.array;for(let i=0;i<positions.length;i+=6){positions[i+1]-=dt*19;positions[i+4]-=dt*19;if(positions[i+1]<1){positions[i+1]=27+(i%17)*.13;positions[i+4]=positions[i+1]-.9}}rain.geometry.attributes.position.needsUpdate=true}const snow=weatherEffect.getObjectByName('snow');if(snow?.visible){const positions=snow.geometry.attributes.position.array;for(let i=0;i<positions.length;i+=3){positions[i+1]-=dt*(1.2+(i%7)*.12);positions[i]+=Math.sin(t*.6+i)*dt*.3;if(positions[i+1]<1)positions[i+1]=34+(i%13)*.18}snow.geometry.attributes.position.needsUpdate=true}const stars=weatherEffect.getObjectByName('stars');if(stars)stars.rotation.y=t*.003;const dust=weatherEffect.getObjectByName('stardust');if(dust?.visible){dust.rotation.y=t*.025;dust.rotation.x=Math.sin(t*.08)*.04}const aurora=weatherEffect.getObjectByName('aurora');if(aurora?.visible){const p=aurora.geometry.attributes.position;for(let i=0;i<p.count;i++){const u=i/(p.count-1);p.setY(i,30+Math.sin(u*TAU*1.5+t*.2)*2.2);p.setZ(i,-38+Math.sin(u*TAU+t*.14)*3)}p.needsUpdate=true}}
   function nearest(list,max=2.3){let best=null,bd=max;for(const g of list){if(!g.parent)continue;const d=player.position.distanceTo(g.position);if(d<bd){bd=d;best=g}}return best}
   function collect(){const resident=nearestStoryResident();if(resident){talkToResident(resident);return;}const g=nearest(pickups,2.4);if(!g){toast('靠近发光物件再按 E');return}state[g.userData.type==='seed'?'seeds':g.userData.type]++;state.collected.push(g.userData.id);g.parent.remove(g);const idx=pickups.indexOf(g);if(idx>=0)pickups.splice(idx,1);toast('收集 '+(g.userData.type==='wood'?'木材':g.userData.type==='stone'?'石头':'发光种子'));updateResourceUI()}
   function placeCraft(type,restore=null){const cost=type==='campfire'?{wood:3,stone:2}:{wood:4,stone:1};if(!restore&&(state.wood<cost.wood||state.stone<cost.stone)){toast('资源还不够：需要 '+cost.wood+'木 · '+cost.stone+'石');return}if(!restore){state.wood-=cost.wood;state.stone-=cost.stone;state.crafted++}const g=new THREE.Group();const x=restore?.x??player.position.x,z=restore?.z??player.position.z;g.position.set(x,terrainHeight(x,z),z);if(type==='campfire'){for(let i=0;i<6;i++){const log=new THREE.Mesh(new THREE.CylinderGeometry(.12,.14,.9,7),mats.wood);log.rotation.set(0, i*TAU/6,Math.PI/2);log.position.y=.18;g.add(log)}const fire=new THREE.Mesh(new THREE.SphereGeometry(.3,8,6),mats.fire);fire.scale.y=1.7;fire.position.y=.7;g.add(fire);g.userData.fire=fire;dynamic.push(g)}else{const seat=new THREE.Mesh(new THREE.CylinderGeometry(.24,.28,1.5,8),mats.bench);seat.rotation.z=Math.PI/2;seat.position.y=.55;g.add(seat);for(const x of [-.53,.53]){const leg=new THREE.Mesh(new THREE.CylinderGeometry(.1,.12,.6,7),mats.wood);leg.position.set(x,.22,0);g.add(leg)}}g.userData.placeType=type;meshWithOutline(g,1.07);scene.add(g);props.push(g);if(!restore)state.placed.push({type,x,z});if(!restore)toast(type==='campfire'?'篝火已点亮':'长凳已放下');updateResourceUI()}
-  function plant(restore=null){if(!restore&&state.seeds<1){toast('还没有发光种子');return}const x=restore?.x??player.position.x+(rand()-.5)*1.8,z=restore?.z??player.position.z+(rand()-.5)*1.8;if(Math.hypot(x,z)>37){toast('请在岛屿内部种植');return}if(!restore){state.seeds--;state.planted++;state.placed.push({type:'flower',x,z})}const flower=makeFlower(x,z,'plant');plants.push(flower);if(!restore)toast('一朵花在这里扎根');updateResourceUI()}
-  function sculpt(mode){if(activeFantasyVehicle()){toast('请先下车再塑形');return}const cx=player.position.x,cz=player.position.z;if(Math.hypot(cx,cz)>37){toast('海浪边缘无法塑形');return}const radius=5;if(mode==='smooth'){let total=0,count=0;for(let a=0;a<12;a++){const ang=a*TAU/12;total+=terrainHeight(cx+Math.cos(ang)*radius*.65,cz+Math.sin(ang)*radius*.65);count++}state.terrainOps.push({type:'smooth',x:cx,z:cz,radius,amount:.3,target:total/count})}else state.terrainOps.push({type:mode,x:cx,z:cz,radius,amount:mode==='raise'?.45:-.45});const pos=world.terrain.geometry.attributes.position;for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i);pos.setY(i,terrainHeight(x,z))}pos.needsUpdate=true;world.terrain.geometry.computeVertexNormals();const hull=world.terrain.userData.outline;if(hull){hull.geometry.dispose();hull.geometry=world.terrain.geometry.clone()}for(const g of [...props,...plants]){if(g.userData.fantasyGround===undefined)g.position.y=terrainHeight(g.position.x,g.position.z)}for(const g of pickups)g.userData.baseY=terrainHeight(g.position.x,g.position.z)+.5;refreshFantasyGround();state.terrainEdits++;toast(mode==='raise'?'地形向上长了一点':mode==='lower'?'地形向下沉了一点':'地形变得更柔和了');}
+  function plant(restore=null){if(!restore&&state.seeds<1){toast('还没有发光种子');return}const x=restore?.x??player.position.x+(rand()-.5)*1.8,z=restore?.z??player.position.z+(rand()-.5)*1.8;if(Math.hypot(x,z)>MAP_EDGE-3){toast('请在海岸线内种植');return}if(!restore){state.seeds--;state.planted++;state.placed.push({type:'flower',x,z})}const flower=makeFlower(x,z,'plant');plants.push(flower);if(!restore)toast('一朵花在这里扎根');updateResourceUI()}
+  function sculpt(mode){if(activeFantasyVehicle()){toast('请先下车再塑形');return}const cx=player.position.x,cz=player.position.z;if(Math.hypot(cx,cz)>MAP_EDGE-4){toast('海浪边缘无法塑形');return}const radius=5;if(mode==='smooth'){let total=0,count=0;for(let a=0;a<12;a++){const ang=a*TAU/12;total+=terrainHeight(cx+Math.cos(ang)*radius*.65,cz+Math.sin(ang)*radius*.65);count++}state.terrainOps.push({type:'smooth',x:cx,z:cz,radius,amount:.3,target:total/count})}else state.terrainOps.push({type:mode,x:cx,z:cz,radius,amount:mode==='raise'?.45:-.45});const pos=world.terrain.geometry.attributes.position;for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i);pos.setY(i,terrainHeight(x,z))}pos.needsUpdate=true;world.terrain.geometry.computeVertexNormals();const hull=world.terrain.userData.outline;if(hull){hull.geometry.dispose();hull.geometry=world.terrain.geometry.clone()}for(const g of [...props,...plants]){if(g.userData.fantasyGround===undefined)g.position.y=terrainHeight(g.position.x,g.position.z)}for(const g of pickups)g.userData.baseY=terrainHeight(g.position.x,g.position.z)+.5;refreshFantasyGround();state.terrainEdits++;toast(mode==='raise'?'地形向上长了一点':mode==='lower'?'地形向下沉了一点':'地形变得更柔和了');}
   function jump(){if(!activeFantasyVehicle()&&onGround){playerVelocity.y=8.2;onGround=false;state.jumped=true}}
-  function movePlayer(dt){if(moveFantasyVehicle(dt))return;let x=0,z=0;if(keys.has('KeyW')||keys.has('ArrowUp'))z-=1;if(keys.has('KeyS')||keys.has('ArrowDown'))z+=1;if(keys.has('KeyA')||keys.has('ArrowLeft'))x-=1;if(keys.has('KeyD')||keys.has('ArrowRight'))x+=1;const previous=player.position.clone();const len=Math.hypot(x,z)||1;const speed=8;player.position.x+=x/len*speed*dt;player.position.z+=z/len*speed*dt;resolveTownCollision(player.position,previous);const r=Math.hypot(player.position.x,player.position.z);if(r>40){player.position.x*=40/r;player.position.z*=40/r}playerVelocity.y-=21*dt;player.position.y+=playerVelocity.y*dt;const floor=terrainHeight(player.position.x,player.position.z)+.03;if(player.position.y<=floor){player.position.y=floor;playerVelocity.y=0;onGround=true}else onGround=false;if(x||z)player.rotation.y=Math.atan2(x,z);}
+  function movePlayer(dt){if(moveFantasyVehicle(dt))return;let x=0,z=0;if(keys.has('KeyW')||keys.has('ArrowUp'))z-=1;if(keys.has('KeyS')||keys.has('ArrowDown'))z+=1;if(keys.has('KeyA')||keys.has('ArrowLeft'))x-=1;if(keys.has('KeyD')||keys.has('ArrowRight'))x+=1;const previous=player.position.clone();const len=Math.hypot(x,z)||1;const speed=keys.has('ShiftLeft')||keys.has('ShiftRight')?13:8;player.position.x+=x/len*speed*dt;player.position.z+=z/len*speed*dt;resolveTownCollision(player.position,previous);const r=Math.hypot(player.position.x,player.position.z);if(r>MAP_EDGE-2){player.position.x*=(MAP_EDGE-2)/r;player.position.z*=(MAP_EDGE-2)/r}state.roadDistance+=Math.hypot(player.position.x-previous.x,player.position.z-previous.z);playerVelocity.y-=21*dt;player.position.y+=playerVelocity.y*dt;const floor=terrainHeight(player.position.x,player.position.z)+.03;if(player.position.y<=floor){player.position.y=floor;playerVelocity.y=0;onGround=true}else onGround=false;if(x||z)player.rotation.y=Math.atan2(x,z);}
   const cameraTarget=new THREE.Vector3(),cameraPosition=new THREE.Vector3();
-  function updateCamera(dt){if(state.camera==='follow'){cameraTarget.set(player.position.x,player.position.y+1,player.position.z);cameraPosition.set(player.position.x+48,player.position.y+43,player.position.z+48);camera.position.lerp(cameraPosition,1-Math.pow(.001,dt));camera.lookAt(cameraTarget)}else{const ang=elapsed*.085;cameraPosition.set(Math.cos(ang)*75,51,Math.sin(ang)*75);camera.position.lerp(cameraPosition,1-Math.pow(.001,dt));camera.lookAt(0,1,0)}}
+  function updateCamera(dt){
+    const extent=Math.max(48,cameraSpan*.68),height=Math.max(43,cameraSpan*.64);
+    if(state.camera==='follow'){cameraTarget.set(player.position.x,player.position.y+1,player.position.z);cameraPosition.set(player.position.x+extent,player.position.y+height,player.position.z+extent);}
+    else{const ang=elapsed*.055;cameraTarget.set(0,1,0);cameraPosition.set(Math.cos(ang)*Math.max(90,extent*1.4),height,Math.sin(ang)*Math.max(90,extent*1.4));}
+    camera.position.lerp(cameraPosition,1-Math.pow(.001,dt));camera.lookAt(cameraTarget);
+  }
   function updateDynamics(t){for(const g of dynamic){if(g===world?.water?.water){g.material.opacity=.46+Math.sin(t*1.4)*.05;g.scale.setScalar(1+Math.sin(t*.8)*.006)}else if(g.userData.baseX!==undefined){g.position.x=g.userData.baseX+Math.sin(t*g.userData.speed*.18)*3;g.position.y+=Math.sin(t*.3+g.position.z)*.0005}else if(g.userData.type){g.position.y=g.userData.baseY+Math.sin(t*2.8+g.position.x)*.16}else if(g.userData.fire){g.userData.fire.scale.y=1.55+Math.sin(t*8)*.22}}for(let i=0;i<world.water.rings.length;i++)world.water.rings[i].scale.setScalar(1+Math.sin(t*1.4+i)*.018)}
-  function snapshot(){return {...state,version:3,seed:state.seed,vehicles:captureVehicles(),player:{x:player.position.x,y:player.position.y,z:player.position.z},collected:[...state.collected]}}
+  function snapshot(){return {...state,version:5,viewSpan:cameraSpan,seed:state.seed,vehicles:captureVehicles(),player:{x:player.position.x,y:player.position.y,z:player.position.z},collected:[...state.collected]}}
   function save(){localStorage.setItem('floating-isle-save',JSON.stringify(snapshot()));toast('进度已保存到本机')}
-  function restoreData(data){if(!data||typeof data!=='object'||typeof data.seed!=='string')throw new Error('invalid save');Object.assign(state,data);state.avatar=CAST.some(c=>c.playable&&c.id===data.avatar)?data.avatar:'sprout';state.stamps=[...new Set(Array.isArray(data.stamps)?data.stamps.filter(id=>REGIONS.some(r=>r.id===id)):[])];state.visited=[...new Set(Array.isArray(data.visited)?data.visited.filter(id=>REGIONS.some(r=>r.id===id)):[])];state.met=[...new Set(Array.isArray(data.met)?data.met.filter(id=>CAST.some(c=>c.id===id)):[])];state.terrainOps=Array.isArray(data.terrainOps)?data.terrainOps:[];state.placed=Array.isArray(data.placed)?data.placed:[];state.collected=Array.isArray(data.collected)?data.collected:[];state.weather=['clear','cloudy','rain','snow','stardust'].includes(data.weather)?data.weather:'clear';state.riding=typeof data.riding==='string'?data.riding:'';state.time=Number.isFinite(data.time)?data.time:10.5;$('seed').value=state.seed;buildWorld(false);if(data.player&&Number.isFinite(data.player.x)&&Number.isFinite(data.player.z))player.position.set(THREE.MathUtils.clamp(data.player.x,-40,40),Number.isFinite(data.player.y)?data.player.y:2,THREE.MathUtils.clamp(data.player.z,-40,40));restoreVehicles(Array.isArray(data.vehicles)?data.vehicles:[]);changeAvatar(state.avatar,false);state.wood=Number(data.wood)||0;state.stone=Number(data.stone)||0;state.seeds=Number(data.seeds)||0;setTime(state.time);setWeather(state.weather,false);$('outline').checked=state.outline;$('autoTime').textContent='时间：'+(state.autoTime?'自动':'手动');$('camera').textContent='视角：'+(state.camera==='follow'?'跟随':'自转');playerVelocity.set(0,0,0);toggleOutlines();updateResourceUI();updateRideUI();updateLocationStatus()}
+  function restoreData(data){
+    if(!data||typeof data!=='object'||typeof data.seed!=='string'||!data.seed.trim()||data.seed.length>22||(data.version!==undefined&&![2,3,4,5].includes(data.version)))throw new Error('invalid save');
+    const validPoint=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.hypot(p.x,p.z)<=MAP_EDGE;
+    const ids=(values,defs)=>[...new Set(Array.isArray(values)?values.filter(id=>defs.some(d=>d.id===id)):[])];
+    const count=value=>Math.min(1000000,Math.max(0,Math.floor(Number(value)||0)));
+    const savedLooks=Object.fromEntries(CAST.map(c=>[c.id,LOOK_SERIES.some(item=>item.id===data.looks?.[c.id])?data.looks[c.id]:'core']));
+    castPreviews.clear();castSeries='';
+    Object.assign(state,{seed:data.seed.trim(),outline:data.outline!==false,camera:['follow','orbit'].includes(data.camera)?data.camera:'follow',autoTime:data.autoTime!==false,time:Number.isFinite(data.time)?data.time:10.5,avatar:CAST.some(c=>c.playable&&c.id===data.avatar)?data.avatar:'sprout',looks:savedLooks,stamps:ids(data.stamps,REGIONS),visited:ids(data.visited,REGIONS),met:ids(data.met,CAST),activityDone:ids(data.activityDone,ACTIVITIES),activityProgress:{},activeActivity:ACTIVITIES.some(a=>a.id===data.activeActivity)?data.activeActivity:'',weather:['clear','cloudy','rain','snow','stardust'].includes(data.weather)?data.weather:'clear',riding:['cart','bus','airship','ferry'].includes(data.riding)?data.riding:'',terrainOps:[],placed:[],collected:[]});
+    state.terrainOps=(Array.isArray(data.terrainOps)?data.terrainOps:[]).filter(op=>validPoint(op)&&['raise','lower','smooth'].includes(op.type)&&Number.isFinite(op.radius)&&op.radius>0&&op.radius<=12&&Number.isFinite(op.amount)&&Math.abs(op.amount)<=3&&(op.type!=='smooth'||Number.isFinite(op.target))).slice(0,800);
+    state.placed=(Array.isArray(data.placed)?data.placed:[]).filter(p=>validPoint(p)&&['flower','campfire','bench'].includes(p.type)).slice(0,1500);
+    state.collected=[...new Set((Array.isArray(data.collected)?data.collected:[]).filter(n=>Number.isInteger(n)&&n>=0&&n<1000))];
+    for(const key of ['wood','stone','seeds','crafted','planted','terrainEdits','dreamFish','roadDistance'])state[key]=count(data[key]);
+    for(const a of ACTIVITIES){const n=data.activityProgress?.[a.id];state.activityProgress[a.id]=Number.isFinite(n)?Math.min(a.stops.length,Math.max(0,Math.floor(n))):state.activityDone.includes(a.id)?a.stops.length:0;if(a.type==='race'&&(!state.activityDone.includes(a.id)||data.activeActivity===a.id))state.activityProgress[a.id]=0;}
+    const active=selectedActivity();if(active&&activityStep(active)>=active.stops.length)state.activeActivity='';
+    $('seed').value=state.seed;buildWorld(false);
+    if(data.player&&Number.isFinite(data.player.x)&&Number.isFinite(data.player.z)){const r=Math.hypot(data.player.x,data.player.z),scale=r>MAP_EDGE-2?(MAP_EDGE-2)/r:1;player.position.set(data.player.x*scale,0,data.player.z*scale);player.position.y=terrainHeight(player.position.x,player.position.z)+.03;resolveTownCollision(player.position,player.position.clone());}
+    restoreVehicles(Array.isArray(data.vehicles)?data.vehicles:[]);changeAvatar(state.avatar,false);setTime(state.time);setWeather(state.weather,false);setViewSpan(Number.isFinite(data.viewSpan)?THREE.MathUtils.clamp(data.viewSpan,28,280):86);
+    $('outline').checked=state.outline;$('autoTime').textContent='时间：'+(state.autoTime?'自动':'手动');$('camera').textContent='视角：'+(state.camera==='follow'?'跟随':'自转');playerVelocity.set(0,0,0);onGround=true;fishingRun=null;activityRun=null;toggleOutlines();updateResourceUI();updateRideUI();updateLocationStatus();updateCamera(1);
+  }
   function load(){const raw=localStorage.getItem('floating-isle-save');if(!raw){toast('还没有保存记录');return}try{restoreData(JSON.parse(raw));toast('已读取 '+state.seed)}catch(e){toast('保存文件不可用')}}
   function exportJSON(){const blob=new Blob([JSON.stringify({...state,seed:$('seed').value},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='floating-isle-save.json';a.click();URL.revokeObjectURL(a.href);toast('JSON 已导出')}
   function toggleOutlines(){state.outline=$('outline').checked;for(const h of outlines)h.visible=state.outline}
   $('regen').onclick=buildWorld;$('save').onclick=save;$('load').onclick=load;$('export').onclick=()=>{const blob=new Blob([JSON.stringify(snapshot(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='floating-isle-save.json';a.click();URL.revokeObjectURL(a.href);toast('JSON 已导出')};$('import').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{restoreData(JSON.parse(reader.result));toast('JSON 世界已导入')}catch(err){toast('JSON 格式不正确')}};reader.readAsText(file)};
   $('outline').onchange=toggleOutlines;$('camera').onclick=()=>{state.camera=state.camera==='follow'?'orbit':'follow';$('camera').textContent='视角：'+(state.camera==='follow'?'跟随':'自转');toast(state.camera==='follow'?'镜头跟随角色':'镜头开始自转')};$('autoTime').onclick=()=>{state.autoTime=!state.autoTime;$('autoTime').textContent='时间：'+(state.autoTime?'自动':'手动');toast(state.autoTime?'昼夜开始流转':'时间已锁定')};$('time').oninput=e=>{state.autoTime=false;$('autoTime').textContent='时间：手动';setTime(Number(e.target.value));updateLighting(0);updateLocationStatus()};$('weather').onchange=e=>setWeather(e.target.value);$('vehicle').onchange=updateRideUI;$('ride').onclick=toggleRide;$('summon').onclick=summonVehicle;$('zoom').oninput=e=>setViewSpan(Number(e.target.value));$('raise').onclick=()=>sculpt('raise');$('lower').onclick=()=>sculpt('lower');$('smooth').onclick=()=>sculpt('smooth');$('campfire').onclick=()=>placeCraft('campfire');$('bench').onclick=()=>placeCraft('bench');$('plant').onclick=()=>plant();$('shot').onclick=()=>{const a=document.createElement('a');a.download='floating-isle.png';a.href=renderer.domElement.toDataURL('image/png');a.click();toast('截图已保存')};
-  addEventListener('keydown',e=>{if($('atlas').open)return;if(e.code==='Escape'){$('speech').hidden=true;keys.clear();return;}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;keys.add(e.code);if(e.code==='Space'){e.preventDefault();if(activeFantasyVehicle()?.id==='airship')return;jump()}if(e.repeat&&['KeyE','KeyQ','KeyV','KeyP','KeyC','KeyB','KeyR','KeyF','KeyG'].includes(e.code))return;if(e.code==='KeyE')collect();if(e.code==='KeyQ')triggerWonder();if(e.code==='KeyV')toggleRide();if(e.code==='KeyP')plant();if(e.code==='KeyC')placeCraft('campfire');if(e.code==='KeyB')placeCraft('bench');if(e.code==='KeyR')sculpt('raise');if(e.code==='KeyF')sculpt('lower');if(e.code==='KeyG')sculpt('smooth')});addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>keys.clear());document.addEventListener('visibilitychange',()=>{if(document.hidden)keys.clear()});
+  addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if($('atlas').open)return;if(e.code==='Escape'){$('speech').hidden=true;keys.clear();return;}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;keys.add(e.code);if(e.code==='Space'){e.preventDefault();if(activeFantasyVehicle()?.id==='airship')return;jump()}if(e.repeat&&['KeyE','KeyQ','KeyT','KeyM','KeyV','KeyP','KeyC','KeyB','KeyR','KeyF','KeyG'].includes(e.code))return;if(e.code==='KeyE')collect();if(e.code==='KeyQ')triggerWonder();if(e.code==='KeyT')performActivity();if(e.code==='KeyM')openAtlas('map');if(e.code==='KeyV')toggleRide();if(e.code==='KeyP')plant();if(e.code==='KeyC')placeCraft('campfire');if(e.code==='KeyB')placeCraft('bench');if(e.code==='KeyR')sculpt('raise');if(e.code==='KeyF')sculpt('lower');if(e.code==='KeyG')sculpt('smooth')});addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>keys.clear());document.addEventListener('visibilitychange',()=>{if(document.hidden)keys.clear()});
   addEventListener('resize',()=>{const a=innerWidth/innerHeight;const h=cameraSpan/a;camera.left=-cameraSpan/2;camera.right=cameraSpan/2;camera.top=h/2;camera.bottom=-h/2;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
   for(const button of document.querySelectorAll('#touchControls [data-dir]')){const code={up:'KeyW',down:'KeyS',left:'KeyA',right:'KeyD'}[button.dataset.dir];button.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(code);button.setPointerCapture(e.pointerId)});for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>keys.delete(code))}for(const button of document.querySelectorAll('#touchControls [data-action]'))button.addEventListener('click',()=>({jump,collect,plant,ride:toggleRide}[button.dataset.action])());
   buildWorld(); player=makePlayer(); initStoryUI(); setTime(state.time); updateResourceUI();updateWorldHUD();
-  function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.04);elapsed+=dt;if(!$('atlas').open)movePlayer(dt);updateLighting(dt);updateAtmosphere(dt,elapsed);updateFantasyWorld(dt,elapsed,nightAmount);updateStoryWorld(dt,elapsed);updateCamera(dt);updateDynamics(elapsed);if(elapsed-statusClock>.2){statusClock=elapsed;updateLocationStatus()}renderer.render(scene,camera)} loop();
+  function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.04);elapsed+=dt;if(!$('atlas').open)movePlayer(dt);updateLighting(dt);updateAtmosphere(dt,elapsed);updateFantasyWorld(dt,elapsed,nightAmount);updateStoryWorld(dt,elapsed);updateActivities(dt,elapsed);updateCamera(dt);updateDynamics(elapsed);if(elapsed-statusClock>.2){statusClock=elapsed;updateLocationStatus()}renderer.render(scene,camera)} loop();
 })();
 </script>
 </body>
