@@ -1,0 +1,2 @@
+# Preserve the vendored upstream module byte-for-byte, including its whitespace.
+vendor/three-0.161.0/three.module.js -text -whitespace

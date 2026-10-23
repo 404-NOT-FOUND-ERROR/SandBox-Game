@@ -1,0 +1,55 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const root = path.resolve(__dirname, '..');
+(async () => {
+  const report = { checks: [], errors: [], consoleErrors: [], externalRequests: [] };
+  const browser = await chromium.launch({headless:true, ...(process.env.BROWSER_EXECUTABLE ? {executablePath:process.env.BROWSER_EXECUTABLE} : {})});
+  try {
+    const context = await browser.newContext({viewport:{width:1440,height:1000}});
+    await context.route('**/*', route => {
+      const url = route.request().url();
+      if (url.startsWith('http://127.0.0.1:8080/') || url.startsWith('data:') || url.startsWith('blob:')) return route.continue();
+      report.externalRequests.push(url); return route.abort();
+    });
+    const page = await context.newPage();
+    page.on('pageerror', e => report.errors.push(e.message));
+    page.on('console', m => {if(m.type()==='error') report.consoleErrors.push(m.text());});
+    const check = (name, ok) => {assert(ok, name);report.checks.push(name);};
+    const readSave = () => page.evaluate(() => JSON.parse(localStorage.getItem('floating-isle-save')));
+    await page.goto('http://127.0.0.1:8080/',{waitUntil:'networkidle'});
+    await page.waitForFunction(() => document.querySelector('#avatar').options.length === 5);
+    check('WebGL canvas initialized',await page.locator('#app canvas').count() === 1);
+    await page.click('#tools > summary');
+    await page.click('#save'); const before = await readSave();
+    await page.locator('#save').evaluate(el=>el.blur());
+    await page.keyboard.down('KeyS'); await page.waitForTimeout(600); await page.keyboard.up('KeyS');
+    await page.click('#save'); const moved = await readSave();
+    check('WASD movement changes saved position',Math.hypot(moved.player.x-before.player.x,moved.player.z-before.player.z)>.1);
+    await page.selectOption('#weather','snow'); await page.click('#save');
+    const saved = await readSave();check('v6 save includes snow weather and player',saved.version===6&&saved.weather==='snow'&&Number.isFinite(saved.player.x));
+    await page.selectOption('#weather','clear');await page.click('#load');
+    check('load restores saved weather',await page.inputValue('#weather')==='snow');
+    await page.click('#openAtlas');check('map has nine regions',await page.locator('[data-map-region]').count()===9);
+    await page.click('[data-map-region="harbor"]');await page.click('[data-travel="harbor"]');
+    check('map travel reaches harbor',await page.locator('#regionName').textContent()==='泡泡海港');
+    await page.click('#openAtlas');await page.click('#tab-activities');
+    check('adventure list has eighteen activities',await page.locator('.activity-card').count()===18);
+    await page.click('[data-start="harbor-post"]'); await page.click('#save');
+    check('accept adventure persists its id',(await readSave()).activeActivity==='harbor-post');
+    const downloadPromise=page.waitForEvent('download');await page.click('#export');
+    const download=await downloadPromise;const savePath=path.join(root,'.local','smoke-save.json');await download.saveAs(savePath);
+    const exported=JSON.parse(await fs.readFile(savePath,'utf8'));
+    check('JSON export includes version and current adventure',exported.version===6&&exported.activeActivity==='harbor-post');
+    await page.selectOption('#weather','rain');await page.setInputFiles('#importFile',savePath);
+    await page.waitForFunction(()=>document.querySelector('#weather').value==='snow');
+    check('JSON import restores exported weather',await page.inputValue('#weather')==='snow');
+    await page.selectOption('#weather','clear');
+    await page.screenshot({path:path.join(root,'.local','local-game.png')});
+    check('runs without external requests',report.externalRequests.length===0);
+    check('no browser errors',report.errors.length===0&&report.consoleErrors.length===0);
+    await fs.writeFile(path.join(root,'.local','smoke-test.json'),JSON.stringify(report,null,2));
+    console.log(JSON.stringify(report,null,2));
+  } finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

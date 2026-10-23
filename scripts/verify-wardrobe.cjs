@@ -21,8 +21,14 @@ const screenshots = process.argv.includes('--screenshots');
     openAtlas,setViewSpan,updateCamera,movePlayer,updateStoryWorld,updateActivities,
     startActivity,performActivity,toggleRide,summonVehicle,sculpt,disposeObjects};`;
   const html = source.replace(startup, startup + bridge);
+  const three = await fs.readFile(path.join(root, 'vendor/three-0.161.0/three.module.js'));
+  const tales = await fs.readFile(path.join(root, 'world-tales.js'));
+  const taleCSS = await fs.readFile(path.join(root, 'world-tales.css'));
   const server = http.createServer((req, res) => {
     if (req.url === '/') {res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});res.end(html);}
+    else if (req.url === '/vendor/three-0.161.0/three.module.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(three);}
+    else if (req.url === '/world-tales.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(tales);}
+    else if (req.url === '/world-tales.css') {res.writeHead(200, {'Content-Type':'text/css; charset=utf-8'});res.end(taleCSS);}
     else {res.writeHead(404);res.end();}
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -46,7 +52,8 @@ const screenshots = process.argv.includes('--screenshots');
     const defaultSnapshot = await page.evaluate(() => JSON.stringify(wardrobeQA.snapshot()));
     const ids = await page.evaluate(() => wardrobeQA.CAST.map(c=>c.id));
     const images = {};
-    for (const look of ['core','region','hobby','stardream']) {
+    const series = await page.evaluate(() => wardrobeQA.LOOK_SERIES.map(s=>s.id));
+    for (const look of series) {
       await page.click(`[data-series="${look}"]`);
       for (const id of ids) {
         const card=page.locator(`[data-character="${id}"]`);
@@ -57,11 +64,11 @@ const screenshots = process.argv.includes('--screenshots');
         images[id] ||= {};images[id][look]=url;
       }
     }
-    for(const id of ids)check(`${id} has four visually distinct renders`, new Set(Object.values(images[id])).size===4);
+    for(const id of ids)check(`${id} has six visually distinct renders`, new Set(Object.values(images[id])).size===6);
     check('previews leave gameplay state unchanged', defaultSnapshot===await page.evaluate(() => JSON.stringify(wardrobeQA.snapshot())));
-    check('all forty portraits cached on demand', await page.evaluate(() => wardrobeQA.portraitCount===40));
+    check('all sixty portraits cached on demand', await page.evaluate(() => wardrobeQA.portraitCount===60));
     const playable=ids.slice(0,5);
-    for(const id of playable)for(const look of ['core','region','hobby','stardream']){
+    for(const id of playable)for(const look of series){
       await page.locator(`[data-character="${id}"] [data-preview-look][data-look="${look}"]`).click();
       await page.locator(`[data-avatar="${id}"]`).click();
       const result=await page.evaluate(({id,look})=>{
@@ -82,9 +89,9 @@ const screenshots = process.argv.includes('--screenshots');
     });
     check('outfit changes preserve transform, resources and earned crown',metadata.position===0&&metadata.heading===1.3&&metadata.resources.join(',')==='17,13,9'&&metadata.crown);
     const saved=await page.evaluate(()=>JSON.parse(JSON.stringify(wardrobeQA.snapshot())));
-    check('v5 snapshot contains independent character looks',saved.version===5&&saved.looks.post==='hobby'&&saved.looks.ray==='stardream');
+    check('v6 snapshot contains independent character looks',saved.version===6&&saved.looks.post==='hobby'&&saved.looks.ray==='stardream');
     await page.evaluate(s=>{wardrobeQA.changeAvatar('sprout',false,'core');wardrobeQA.restoreData(s);},saved);
-    check('v5 restores live avatar and inventory',await page.evaluate(()=>wardrobeQA.player.userData.character==='ray'&&wardrobeQA.player.userData.look==='stardream'&&wardrobeQA.state.wood===17));
+    check('v6 restores live avatar and inventory',await page.evaluate(()=>wardrobeQA.player.userData.character==='ray'&&wardrobeQA.player.userData.look==='stardream'&&wardrobeQA.state.wood===17));
     // UI must render a saved look even if it has never been previewed in the new session.
     await page.reload({waitUntil:'networkidle'});
     await page.evaluate(s=>wardrobeQA.restoreData(s),saved);await page.click('#openWardrobe');
@@ -140,6 +147,7 @@ const screenshots = process.argv.includes('--screenshots');
       check('life corner remains in gear after animation resumes',await page.evaluate(()=>wardrobeQA.regionAt(wardrobeQA.player.position.x,wardrobeQA.player.position.z)?.id==='gear'&&document.querySelector('#regionName').textContent==='齿轮集市'));
       await page.screenshot({path:path.join(root,'docs/screenshots/life-corner.png')});
     }
+    if (await page.locator('#atlas').evaluate(dialog => dialog.open)) await page.click('#atlasClose');
     await page.setViewportSize({width:390,height:844});await page.click('#openWardrobe');await page.click('[data-series="region"]');
     const mobile=await page.evaluate(()=>{const d=document.querySelector('#atlas');return {overflow:d.scrollWidth-d.clientWidth,columns:getComputedStyle(document.querySelector('.cast-grid')).gridTemplateColumns.split(' ').length,images:[...d.querySelectorAll('img')].every(i=>i.complete&&i.naturalWidth>0)};});
     check('390px wardrobe fits and keeps all previews usable',mobile.overflow<=2&&mobile.columns===1&&mobile.images);
