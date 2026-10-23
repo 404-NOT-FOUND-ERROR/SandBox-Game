@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>浮屿工坊 · 万物奇想记</title>
 <link rel="stylesheet" href="./world-tales.css" />
+<link rel="stylesheet" href="./world-city.css" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%2383c7b2'/%3E%3Cpath d='M24 6 37 24 24 42 11 24Z' fill='%23ffdc87' stroke='%23263831' stroke-width='3'/%3E%3C/svg%3E" />
 <style>
   :root{--ink:#202820;--paper:#fff9e9;--lemon:#ffd84d;--leaf:#79c54f;--teal:#38b6a5;--coral:#ff715d;--snow:#fdfdf8;--shadow:6px 6px 0 var(--ink)}
@@ -89,13 +90,14 @@
 <script type="module">
 import * as THREE from "./vendor/three-0.161.0/three.module.js";
 import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from "./world-tales.js";
+import {createCityWorld} from "./world-city.js";
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
   const app = $('app'), toastEl = $('toast');
   const TAU = Math.PI * 2, MAP_EDGE = 136;
   const state = { seed:'LUMEN-07', outline:true, camera:'follow', autoTime:true, time:10.5, weather:'clear', riding:'', avatar:'sprout', looks:{}, stamps:[], met:[], visited:[], activityProgress:{}, activityDone:[], activeActivity:'', dreamFish:0, roadDistance:0, wood:0, stone:0, seeds:0, crafted:0, planted:0, terrainEdits:0, jumped:false, terrainOps:[], placed:[], collected:[] };
-  let taleWorld=null;
+  let taleWorld=null,cityWorld=null;
   const keys = new Set(); let seedHash = 1, rng, world = null, player, playerVelocity = new THREE.Vector3(), onGround = true, elapsed = 0, toastTimer = 0, weatherEffect = null, weatherClock = 0, skyClock = 0, statusClock = 0;
   const outlines = [], dynamic = [], pickups = [], props = [], plants = [], landmarks = [], roads = [], vehicles = [], lanterns = [], residents = [], activityMarkers = [];
   const clock = new THREE.Clock();
@@ -108,6 +110,8 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   const toon = (color, extra={}) => new THREE.MeshToonMaterial({color,gradientMap,...extra});
   const outlineMat = new THREE.ShaderMaterial({side:THREE.BackSide,transparent:true,fog:true,uniforms:THREE.UniformsUtils.merge([THREE.UniformsLib.fog,{lineColor:{value:new THREE.Color(0x202820)}}]),vertexShader:'varying float vHeight; varying float vFogDepth; void main(){vHeight=position.y; vec3 p=position+normal*0.055; vec4 mv=modelViewMatrix*vec4(p,1.0);vFogDepth=-mv.z;gl_Position=projectionMatrix*mv;}',fragmentShader:'uniform vec3 lineColor;uniform vec3 fogColor;uniform float fogNear;uniform float fogFar;varying float vHeight;varying float vFogDepth;void main(){if(vHeight < -2.0) discard;float fogFactor=smoothstep(fogNear,fogFar,vFogDepth);gl_FragColor=vec4(mix(lineColor,fogColor,fogFactor),1.0);}'});
   const mats={terrain:toon(0xffffff,{vertexColors:true}), water:toon(0x75d7d0,{transparent:true,opacity:.52,side:THREE.DoubleSide}), trunk:toon(0x91552d), leaf:toon(0x4ca85b), pine:toon(0x147b6f), rock:toon(0x858b82), flower:toon(0xffbd3f), cloud:toon(0xfdfdf8,{transparent:true,opacity:.7,depthWrite:false}), clay:toon(0xff8068), fire:toon(0xff6449), wood:toon(0xa86c3c), bench:toon(0xc7864d), seed:toon(0xffd75a), crystal:toon(0x54d8cb,{emissive:0x15594f,emissiveIntensity:.65}), mushroom:toon(0xd778a2), mushroomLight:toon(0xffd986,{emissive:0x795323,emissiveIntensity:.25}), roadEdge:toon(0xd1b982,{side:THREE.DoubleSide}), road:toon(0x8b6c64,{side:THREE.DoubleSide}), wall:toon(0xffe7ba), roof:toon(0x4fa89b), moon:toon(0xf9e5ab), lantern:new THREE.MeshBasicMaterial({color:0xffcb69}), stars:new THREE.PointsMaterial({color:0xfff1bd,size:1.7,transparent:true,opacity:0,depthWrite:false}), rain:new THREE.LineBasicMaterial({color:0x9dd6ec,transparent:true,opacity:.56}), snow:new THREE.PointsMaterial({color:0xf8fbff,size:4,transparent:true,opacity:.9,depthWrite:false}), stardust:new THREE.PointsMaterial({color:0xffe18b,size:3,transparent:true,opacity:.88,depthWrite:false})};
+  // Curved decks need a small shadow bias to avoid self-shadow striping.
+  sun.shadow.normalBias=.05;sun.shadow.bias=-.00005;
   function hashString(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
   function rand(){seedHash=(seedHash*1664525+1013904223)>>>0;return seedHash/4294967296}
   function hash2(x,y){let n=Math.sin(x*127.1+y*311.7+hashString(state.seed)*.001)*43758.5453;return n-Math.floor(n)}
@@ -545,7 +549,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   function buildFantasyWorld() {
     fantasyBuildings.length = 0; fantasyFloaters.length = 0;
     const town = makeTown();
-    makeRoads(town); makeScenery(); makeStoryWorld(); makeFrontierRoads(); makeFrontierDistricts(); makeLifeCorners();makeWaystations();makeWideNature();makeActivityWorld();taleWorld?.build();
+    makeRoads(town); makeScenery(); makeStoryWorld(); makeFrontierRoads(); makeFrontierDistricts(); makeLifeCorners();makeWaystations();makeActivityWorld();taleWorld?.build();cityWorld?.build();makeWideNature();
     makeFantasyVehicle('cart', 2.2, -1.4);
     makeFantasyVehicle('bus', 7.8, -5.1);
     makeFantasyVehicle('airship', 13, -5.2);
@@ -576,6 +580,10 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     return vehicles.find(vehicle => vehicle.id === state.riding || vehicle.name === state.riding);
   }
 
+  function movementFloor(x,z,referenceY=terrainHeight(x,z)) {
+    return cityWorld?.surfaceHeight(x,z,referenceY) ?? terrainHeight(x,z);
+  }
+
   function selectedFantasyVehicle() {
     return vehicles.find(vehicle => vehicle.id === $('vehicle')?.value) || vehicles[0];
   }
@@ -583,7 +591,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   function nearestVehicle() {
     if (!player) return null;
     const candidates = vehicles.filter(vehicle => vehicle.group.parent &&
-      Math.hypot(player.position.x - vehicle.group.position.x, player.position.z - vehicle.group.position.z) < (vehicle.id === 'airship' ? 4.6 : 3.6));
+      Math.hypot(player.position.x - vehicle.group.position.x, player.position.z - vehicle.group.position.z) < (vehicle.id === 'airship' ? 4.6 : 3.6) && Math.abs(player.position.y-vehicle.group.position.y)<(vehicle.id==='airship'?6:2.5));
     const selected = selectedFantasyVehicle();
     if (candidates.includes(selected)) return selected;
     candidates.sort((a, b) => player.position.distanceToSquared(a.group.position) - player.position.distanceToSquared(b.group.position));
@@ -617,10 +625,11 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
       if (keys.has('ShiftLeft') || keys.has('ShiftRight')) vehicle.altitude -= dt * 4;
       vehicle.altitude = THREE.MathUtils.clamp(vehicle.altitude, 3, 14);
     }
-    group.position.y = terrainHeight(group.position.x, group.position.z) +
+    if(vehicle.id!=='airship')cityWorld?.constrain(group.position,previous,vehicle.radius,vehicle.groundOffset);
+    group.position.y = (vehicle.id==='airship'?terrainHeight(group.position.x,group.position.z):movementFloor(group.position.x,group.position.z,previous.y-vehicle.groundOffset)) +
       (vehicle.id === 'airship' ? vehicle.altitude : vehicle.groundOffset);
     resolveTownCollision(group.position, previous, vehicle.radius);
-    group.position.y = terrainHeight(group.position.x, group.position.z) +
+    group.position.y = (vehicle.id==='airship'?terrainHeight(group.position.x,group.position.z):movementFloor(group.position.x,group.position.z,previous.y-vehicle.groundOffset)) +
       (vehicle.id === 'airship' ? vehicle.altitude : vehicle.groundOffset);
     vehicle.lastTravel = Math.hypot(group.position.x - previous.x, group.position.z - previous.z);
     vehicle.distance += vehicle.lastTravel;state.roadDistance+=vehicle.lastTravel;
@@ -634,7 +643,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
       const group = vehicle.group;
       if (!group?.parent) continue;
       const offset = vehicle.id === 'airship' ? vehicle.altitude : vehicle.groundOffset;
-      group.position.y = terrainHeight(group.position.x, group.position.z) + offset;
+      group.position.y = (vehicle.id==='airship'?terrainHeight(group.position.x,group.position.z):movementFloor(group.position.x,group.position.z,group.position.y-offset)) + offset;
       if (vehicle.id === 'airship') {
         if (!vehicle.mounted) group.position.y += Math.sin(t * 1.15) * .13;
         vehicle.propeller.rotation.z += dt * (vehicle.mounted ? 15 : 3);
@@ -644,18 +653,19 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     }
   }
 
-  function findFantasyParking(x, z, heading = 0, radius = .6) {
+  function findFantasyParking(x, z, heading = 0, radius = .6, referenceY = player?.position.y ?? terrainHeight(x,z)) {
     for (let i = 0; i < 10; i++) {
       const angle = heading + Math.PI / 2 + i * TAU / 10;
       const candidate = new THREE.Vector3(x + Math.sin(angle) * 2.7, 0, z + Math.cos(angle) * 2.7);
       if (Math.hypot(candidate.x, candidate.z) > MAP_EDGE-3) continue;
-      candidate.y = terrainHeight(candidate.x, candidate.z);
-      const collision = fantasyBuildings.some(building => Math.hypot(candidate.x - building.x, candidate.z - building.z) < building.radius + radius + .25);
+      candidate.y = movementFloor(candidate.x,candidate.z,referenceY);
+      if(referenceY-terrainHeight(x,z)>1.5&&candidate.y<referenceY-1.8)continue;
+      const collision = fantasyBuildings.some(building => candidate.y<building.group.position.y+building.height+.65&&Math.hypot(candidate.x - building.x, candidate.z - building.z) < building.radius + radius + .25);
       if (!collision) return candidate;
     }
-    const fallback = new THREE.Vector3(x, terrainHeight(x, z), z);
+    const fallback = new THREE.Vector3(x, movementFloor(x,z,referenceY), z);
     resolveTownCollision(fallback, fallback.clone(), radius);
-    fallback.y = terrainHeight(fallback.x, fallback.z);
+    fallback.y = movementFloor(fallback.x,fallback.z,referenceY);
     return fallback;
   }
 
@@ -664,11 +674,11 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     const mounted = activeFantasyVehicle();
     if (mounted) {
       const landing = findFantasyParking(mounted.group.position.x, mounted.group.position.z,
-        mounted.group.rotation.y, .55);
+        mounted.group.rotation.y, .55, mounted.id==='airship'?terrainHeight(mounted.group.position.x,mounted.group.position.z):mounted.group.position.y-mounted.groundOffset);
       mounted.mounted = false; state.riding = ''; player.visible = true; player.position.copy(landing);
       player.position.y += .03;
       keys.delete('Space'); keys.delete('ShiftLeft'); keys.delete('ShiftRight');
-      toast('已离开' + mounted.name + '，回到地面步行');
+      toast('已离开' + mounted.name + '，可以继续步行');
     } else {
       const vehicle = nearestVehicle();
       if (!vehicle) {
@@ -721,7 +731,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
 
   function captureVehicles() {
     return vehicles.map(vehicle => ({id: vehicle.id, x: vehicle.group.position.x,
-      z: vehicle.group.position.z, heading: vehicle.group.rotation.y, altitude: vehicle.altitude}));
+      z: vehicle.group.position.z, y:vehicle.id==='airship'?terrainHeight(vehicle.group.position.x,vehicle.group.position.z)+vehicle.altitude:vehicle.group.position.y, heading: vehicle.group.rotation.y, altitude: vehicle.altitude}));
   }
 
   function restoreVehicles(data) {
@@ -733,7 +743,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
       vehicle.group.rotation.y = Number.isFinite(saved.heading) ? saved.heading : 0;
       vehicle.altitude = vehicle.id === 'airship' && Number.isFinite(saved.altitude)
         ? THREE.MathUtils.clamp(saved.altitude, 3, 14) : vehicle.id === 'airship' ? 3 : 0;
-      vehicle.group.position.y = terrainHeight(vehicle.group.position.x, vehicle.group.position.z) +
+      vehicle.group.position.y = (vehicle.id==='airship'?terrainHeight(vehicle.group.position.x,vehicle.group.position.z):(cityWorld?.savedSurface(vehicle.group.position.x,vehicle.group.position.z,saved.y-vehicle.groundOffset)??terrainHeight(vehicle.group.position.x,vehicle.group.position.z))) +
         (vehicle.id === 'airship' ? vehicle.altitude : vehicle.groundOffset);
       resolveTownCollision(vehicle.group.position, vehicle.group.position.clone(), vehicle.radius);
     }
@@ -746,6 +756,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
 
   function refreshFantasyGround() {
     for (const prop of props) {
+      if(prop.userData.cityManaged)continue;
       if (prop.userData.fantasyGround === undefined) continue;
       if (prop.userData.fantasyRoad || prop.userData.groundDisc || prop.userData.natureKind) prop.position.set(0, 0, 0);
       else prop.position.y = terrainHeight(prop.position.x, prop.position.z) + prop.userData.fantasyGround;
@@ -757,13 +768,14 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
       }
     }
     for (const road of roads) {
+      if(road.city)continue;
       const replacements = [ribbonGeometry(road.points, road.width / 2 + .22, .048),
         ribbonGeometry(road.points, road.width / 2, .082), roadMarkGeometry(road.points, road.type, road.width)];
       [road.shoulder, road.mesh, road.markings].forEach((mesh, i) => {
         mesh.geometry.dispose(); mesh.geometry = replacements[i]; mesh.position.set(0, 0, 0);
       });
     }
-    refreshWideNature();updateVehicles(0);
+    cityWorld?.refresh();refreshWideNature();updateVehicles(0);
   }
 
   function updateFantasyWorld(dt, t = elapsed, nightAmount = 0) {
@@ -816,7 +828,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     const weatherNames = {clear: '晴朗', cloudy: '多云', rain: '细雨', snow: '落雪', stardust: '星辉', storm: '雷雨', mist: '薄雾'};
     const landmark = landmarks.find(place => Math.hypot(player.position.x - place.x, player.position.z - place.z) < place.radius);
     const height = terrainHeight(player.position.x, player.position.z);
-    const place = regionAt(player.position.x,player.position.z)?.name || landmark?.name || (height < -.5 ? '海滨浅滩' : height > 3.5 ? '松石山坡' : '苹果绿草甸');
+    const place = cityWorld?.location(player.position.x,player.position.z,player.position.y)?.name || regionAt(player.position.x,player.position.z)?.name || landmark?.name || (height < -.5 ? '海滨浅滩' : height > 3.5 ? '松石山坡' : '苹果绿草甸');
     const mounted = activeFantasyVehicle();
     const status = $('locationStatus');
     if (status) status.textContent = place + ' · ' + (weatherNames[state.weather] || '晴朗') + ' · ' + timeText(state.time) +
@@ -1329,7 +1341,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     const random=seededRandom('wide-nature'),trees=[],rocks=[],flowers=[];
     for(let i=0;i<1050;i++){
       const a=random()*TAU,r=Math.sqrt(random())*127,x=Math.cos(a)*r,z=Math.sin(a)*r;
-      if(TALE_PLACES.some(p=>Math.hypot(p.x-x,p.z-z)<10)||r<32||terrainHeight(x,z)<-.5||roadDistance(x,z)<3.1||REGIONS.some(v=>Math.hypot(x-v.x,z-v.z)<v.r*.83)||ACTIVITIES.some(v=>v.stops.some(s=>Math.hypot(s.x-x,s.z-z)<3.8)))continue;
+      if(cityWorld?.occupied(x,z,2.5)||TALE_PLACES.some(p=>Math.hypot(p.x-x,p.z-z)<10)||r<32||terrainHeight(x,z)<-.5||roadDistance(x,z)<3.1||REGIONS.some(v=>Math.hypot(x-v.x,z-v.z)<v.r*.83)||ACTIVITIES.some(v=>v.stops.some(s=>Math.hypot(s.x-x,s.z-z)<3.8)))continue;
       const snow=x>55&&z<-42,desert=x<-50&&z>22;
       const color=snow?0x91bdcd:desert?0xc5b77e:z>47?0xaec47c:x<-25?0x92a7b4:0x7ab68e;
       if(i%3===0)rocks.push({x,z,s:.5+random()*.9,color:snow?0xc7e1e4:desert?0xe2bb7f:0x9eafa2});
@@ -1490,7 +1502,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   function updateWorldHUD(){
     if(!player)return;const r=regionAt(player.position.x,player.position.z);const nearest=nearestStoryResident();
     if(r&&!state.visited.includes(r.id))state.visited.push(r.id);if((r?.id||'')!==currentRegion){currentRegion=r?.id||'';$('speech').hidden=true;}
-    const tale=taleWorld?.near?.def;$('regionName').textContent=tale?.name||r?.name||'奇想之间';$('regionSubtitle').textContent=tale?.en||r?.en||'BETWEEN LITTLE WONDERS';$('regionRule').textContent=tale?.rule||r?.rule||'循着道路，去听见下一个小心愿。';$('regionBanner').classList.toggle('night',nightAmount>.6);
+    const tale=taleWorld?.near?.def,city=cityWorld?.location(player.position.x,player.position.z,player.position.y);$('regionName').textContent=tale?.name||r?.name||city?.name||'奇想之间';$('regionSubtitle').textContent=tale?.en||r?.en||city?.en||'BETWEEN LITTLE WONDERS';$('regionRule').textContent=tale?.rule||r?.rule||city?.rule||'循着道路，去听见下一个小心愿。';$('regionBanner').classList.toggle('night',nightAmount>.6);
     $('wonderCount').textContent='印记 '+state.stamps.length+' / '+REGIONS.length;updateActivityHUD();
     $('wonderButton').textContent=r?(activeWonder?.id===r.id?'奇遇进行中 · '+r.event:nearest?'E 和'+CAST.find(c=>c.id===nearest.id).name.split(' · ')[1]+'聊聊  /  Q '+r.wonder:r.wonder+' · Q'):'打开手册，寻找一扇梦门 ↗';
   }
@@ -1503,11 +1515,11 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   function mapContent(){
     const selected=REGIONS.find(r=>r.id===mapSelected)||REGIONS[0],point=(x,z)=>({left:(x+145)/290*100,top:(z+135)/270*100});
     const labels={town:[30,13],mushroom:[-32,30],crystal:[-41,-11],nocturne:[38,-30],whale:[-4,-46]};
-    const paths=ROAM_ROUTES.map(([,points,type])=>'<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+(type==='star'?'#6c9eab':type==='wood'?'#b49067':'#99887d')+'" stroke-width="2" stroke-linecap="round"/>').join('');
+    const paths=roads.filter(r=>!r.city).map(r=>'<polyline points="'+r.points.filter((p,i)=>i%5===0).map(p=>p.x+','+p.z).join(' ')+'" fill="none" stroke="#9caa99" stroke-width=".9"/>').join('')+cityWorld.mapSVG();
     const terrain=REGIONS.map(r=>'<circle cx="'+r.x+'" cy="'+r.z+'" r="'+(r.r+2)+'" fill="'+r.ground+'" opacity=".9"/>').join('');
     const markers=REGIONS.map(r=>{const p=point(...(labels[r.id]||[r.x,r.z]));return '<button class="map-node" style="left:'+p.left+'%;top:'+p.top+'%;--region-bg:'+r.bg+'" data-map-region="'+r.id+'" aria-pressed="'+(r.id===selected.id)+'">'+(state.visited.includes(r.id)?'✓ ':'')+r.name+'</button>';}).join('');
     const pos=point(player.position.x,player.position.z),s=nextActivityStop(),target=s?point(s.x,s.z):null;
-    return '<p class="atlas-intro"><strong>路的尽头，还有新的奇妙。</strong><br>九片风土、七条远行干道、沿途驿站与十八段可玩的冒险。点选区域查看活动；梦门可直达，也可以循着路标慢慢走。</p><div class="map-layout"><div class="world-map"><svg viewBox="-145 -135 290 270" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="mapWaves" width="25" height="23" patternUnits="userSpaceOnUse"><path d="M1 12Q6 7 11 12T21 12" fill="none" stroke="#9bc6cb" stroke-width=".5"/></pattern></defs><rect x="-145" y="-135" width="290" height="270" fill="url(#mapWaves)"/><circle r="132" fill="#c7d4a8" stroke="#e9dbb8" stroke-width="5"/>'+terrain+'<path d="M-109 -33L-89 -76L-72 -51L-56 -87L-35 -53L-10 -91L11 -59" fill="none" stroke="#adc3b8" stroke-width="10" stroke-linecap="round"/>'+paths+'<path d="M-18 -10L0 0L9 5L-13 17M-18 -10L-1 -28L22 -16L9 5" fill="none" stroke="#a2a58d" stroke-width="1"/>'+REGIONS.map(r=>{const l=labels[r.id];return l?'<path d="M'+r.x+' '+r.z+'L'+l[0]+' '+l[1]+'" stroke="#7b9580" stroke-width=".6" stroke-dasharray="1 1"/>':'';}).join('')+'<text x="-125" y="-111" font-size="8" fill="#466c6b">N ↑</text><text x="-103" y="-89" font-size="5" fill="#738d79">回声松原 · 旧观星台</text><text x="-120" y="117" font-size="5" fill="#567b7a">奇想群岛 / 远行版</text></svg>'+markers+taleWorld.mapPins(point)+'<span class="map-player" aria-label="你的位置" style="left:'+pos.left+'%;top:'+pos.top+'%">●</span>'+(target?'<span class="map-objective" aria-label="下一个活动目标" style="left:'+target.left+'%;top:'+target.top+'%">◆</span>':'')+'<div class="map-key">● 你的位置　◆ 下一目标　✧ 奇想剧场</div></div><article class="map-sheet" style="--region-bg:'+selected.bg+'"><small>'+selected.en+'</small><h3>'+selected.symbol+' '+selected.name+'</h3><div class="region-art">'+regionArtwork(selected)+'</div><p><b>'+selected.rule+'</b><br>'+selected.desc+'</p><button data-travel="'+selected.id+'" class="teal">梦门直达 · '+selected.name+' ↗</button><button class="secondary" id="panorama">合上手册 · 远眺全境</button><div class="map-tasks">'+ACTIVITIES.filter(a=>a.region===selected.id).map(a=>'<button data-start="'+a.id+'">'+(state.activityDone.includes(a.id)?'✓ ':'')+a.name+'<br><small>'+ACTIVITY_TYPES[a.type]+' · '+a.stops.length+' 站 · 接取并导航 ↗</small></button>').join('')+'</div></article></div><p class="atlas-footnote">步行 Shift 奔跑；载具可在世界设置中召回。梦门保留天气与时间；活动目标需要亲自抵达。地图按世界实际坐标绘制，五片原有风土集中在中央故乡。</p>';
+    return '<p class="atlas-intro"><strong>路的尽头，还有新的奇妙。</strong><br>十片生活街区、四条可通行高架，把九片风土连接得更紧密。点选区域查看冒险，向下翻可直接前往新街区和高架坡道。</p><div class="map-layout"><div class="world-map"><svg viewBox="-145 -135 290 270" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="mapWaves" width="25" height="23" patternUnits="userSpaceOnUse"><path d="M1 12Q6 7 11 12T21 12" fill="none" stroke="#9bc6cb" stroke-width=".5"/></pattern></defs><rect x="-145" y="-135" width="290" height="270" fill="url(#mapWaves)"/><circle r="132" fill="#c7d4a8" stroke="#e9dbb8" stroke-width="5"/>'+terrain+'<path d="M-109 -33L-89 -76L-72 -51L-56 -87L-35 -53L-10 -91L11 -59" fill="none" stroke="#adc3b8" stroke-width="10" stroke-linecap="round"/>'+paths+'<path d="M-18 -10L0 0L9 5L-13 17M-18 -10L-1 -28L22 -16L9 5" fill="none" stroke="#a2a58d" stroke-width="1"/>'+REGIONS.map(r=>{const l=labels[r.id];return l?'<path d="M'+r.x+' '+r.z+'L'+l[0]+' '+l[1]+'" stroke="#7b9580" stroke-width=".6" stroke-dasharray="1 1"/>':'';}).join('')+'<text x="-125" y="-111" font-size="8" fill="#466c6b">N ↑</text><text x="-103" y="-89" font-size="5" fill="#738d79">回声松原 · 旧观星台</text><text x="-120" y="117" font-size="5" fill="#567b7a">奇想群岛 / 远行版</text></svg>'+markers+taleWorld.mapPins(point)+'<span class="map-player" aria-label="你的位置" style="left:'+pos.left+'%;top:'+pos.top+'%">●</span>'+(target?'<span class="map-objective" aria-label="下一个活动目标" style="left:'+target.left+'%;top:'+target.top+'%">◆</span>':'')+'<div class="map-key">● 你的位置　◆ 目标　✧ 剧场　═ 高架</div></div><article class="map-sheet" style="--region-bg:'+selected.bg+'"><small>'+selected.en+'</small><h3>'+selected.symbol+' '+selected.name+'</h3><div class="region-art">'+regionArtwork(selected)+'</div><p><b>'+selected.rule+'</b><br>'+selected.desc+'</p><button data-travel="'+selected.id+'" class="teal">梦门直达 · '+selected.name+' ↗</button><button class="secondary" id="panorama">合上手册 · 远眺全境</button><div class="map-tasks">'+ACTIVITIES.filter(a=>a.region===selected.id).map(a=>'<button data-start="'+a.id+'">'+(state.activityDone.includes(a.id)?'✓ ':'')+a.name+'<br><small>'+ACTIVITY_TYPES[a.type]+' · '+a.stops.length+' 站 · 接取并导航 ↗</small></button>').join('')+'</div></article></div>'+cityWorld.guide()+'<p class="atlas-footnote">步行 Shift 奔跑；载具可在世界设置中召回。梦门保留天气与时间；活动目标需要亲自抵达。地图按世界实际坐标绘制，五片原有风土集中在中央故乡。</p>';
   }
   function activityContent(){
     const local=regionAt(player.position.x,player.position.z)?.id;
@@ -1547,6 +1559,8 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     if(tab==='cast')content=castContent();
     if(tab==='journal')content='<div class="journal-sheet"><small>TRAVELER\'S NOTEBOOK / '+state.seed.replace(/[&<>"\']/g,'')+'</small><h3>把奇妙，带回日常。</h3><div class="journal-summary"><span>已探索 '+state.visited.length+' / '+REGIONS.length+'</span><span>结识 '+state.met.length+' / '+CAST.length+'</span><span>冒险 '+state.activityDone.length+' / '+ACTIVITIES.length+'</span><span>梦鱼 '+state.dreamFish+' 条</span></div><p>普通冒险步骤、已完成记录、花园和晶石的变化都会保存在旅途中。首次完成冒险带回材料，远行驿站也会逐渐挂满星灯。</p><ul class="stamp-list">'+REGIONS.map(r=>'<li class="'+(state.stamps.includes(r.id)?'earned':'')+'"><b>'+r.symbol+'</b>'+r.name+'<br>'+(state.stamps.includes(r.id)?'已记住':'等待奇遇')+'</li>').join('')+'</ul><p><b>'+(state.stamps.length===REGIONS.length?'九枚印记齐聚，远行星环已点亮。':state.stamps.length>=5?'造梦者星环已点亮；继续收集九区印记，星环会更明亮。':'收集任意五枚奇想印记，点亮随身的造梦者星环。')+'</b></p><p>步行与驾驶里程 '+Math.round(state.roadDistance)+' 米 · 种花 '+state.planted+' 朵 · 制作 '+state.crafted+' 件。<br>Q 区域奇遇 · T 参与活动 · M 全域地图。巡游读档后从起点重新计时；没有自动保存。</p><button id="journalSave" class="teal">保存这段旅途</button></div>';
     $('atlasContent').innerHTML=content;taleWorld.bind();
+    for(const button of $('atlasContent').querySelectorAll('[data-city]'))button.onclick=()=>cityWorld.visit(button.dataset.city);
+    for(const button of $('atlasContent').querySelectorAll('[data-skyway]'))button.onclick=()=>cityWorld.visit(button.dataset.skyway,true);
     for(const button of $('atlasContent').querySelectorAll('[data-travel]'))button.onclick=()=>visitRegion(button.dataset.travel);
     for(const button of $('atlasContent').querySelectorAll('[data-life]'))button.onclick=()=>visitLife(button.dataset.life);
     for(const button of $('atlasContent').querySelectorAll('[data-series]'))button.onclick=()=>{
@@ -1608,7 +1622,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     const auroraGeometry=new THREE.BufferGeometry();const auroraPoints=[];for(let i=0;i<50;i++){const u=i/49;auroraPoints.push(new THREE.Vector3(-55+u*110,30+Math.sin(u*TAU*1.5)*2.2,-38+Math.sin(u*TAU)*3))}auroraGeometry.setFromPoints(auroraPoints);const aurora=new THREE.Line(auroraGeometry,new THREE.LineBasicMaterial({color:0x71edc8,transparent:true,opacity:.58,depthTest:false,blending:THREE.AdditiveBlending}));aurora.name='aurora';aurora.visible=false;aurora.frustumCulled=false;weatherEffect.add(aurora);
     setWeather(state.weather,false);updateLighting(0)}
   function clearWorld(){
-    taleWorld?.clear();disposeEncounter();regionProps.length=0;whaleActor=null;currentRegion='';speechResident=null;fishingRun=null;activityRun=null;natureBatch=null;activityTarget=null;trailBeacon=null;activityMarkers.length=0;$('speech').hidden=true;
+    cityWorld?.clear();taleWorld?.clear();disposeEncounter();regionProps.length=0;whaleActor=null;currentRegion='';speechResident=null;fishingRun=null;activityRun=null;natureBatch=null;activityTarget=null;trailBeacon=null;activityMarkers.length=0;$('speech').hidden=true;
     disposeObjects([world?.terrain,world?.water?.water,...(world?.water?.rings||[]),...props,...pickups,...plants,...dynamic]);disposeWeather();
     for(const list of [outlines,props,pickups,plants,dynamic,landmarks,roads,vehicles,lanterns,residents,fantasyBuildings,fantasyFloaters])list.length=0;
   }
@@ -1616,7 +1630,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     clearWorld();state.seed=$('seed').value.trim()||'LUMEN-07';
     if(reset){Object.assign(state,{tales:normalizeTales(),terrainOps:[],placed:[],collected:[],wood:0,stone:0,seeds:0,crafted:0,planted:0,terrainEdits:0,stamps:[],visited:[],met:[],riding:'',activityProgress:{},activityDone:[],activeActivity:'',dreamFish:0,roadDistance:0});attachCrown();if(player)player.visible=true;}
     seedHash=hashString(state.seed);rng=rand;world={terrain:makeTerrain(),water:makeWater()};buildFantasyWorld();
-    for(let i=0;i<38;i++){const a=rand()*TAU,r=18+rand()*17,x=Math.cos(a)*r,z=Math.sin(a)*r;if(TALE_PLACES.some(p=>Math.hypot(p.x-x,p.z-z)<10)||terrainHeight(x,z)<-.65||REGIONS.some(region=>Math.hypot(x-region.x,z-region.z)<region.r*.85)||roadDistance(x,z)<2)continue;if(rand()<.68)makeTree(x,z,terrainHeight(x,z)>3.4);else makeRock(x,z);}
+    for(let i=0;i<38;i++){const a=rand()*TAU,r=18+rand()*17,x=Math.cos(a)*r,z=Math.sin(a)*r;if(cityWorld?.occupied(x,z,2.5)||TALE_PLACES.some(p=>Math.hypot(p.x-x,p.z-z)<10)||terrainHeight(x,z)<-.65||REGIONS.some(region=>Math.hypot(x-region.x,z-region.z)<region.r*.85)||roadDistance(x,z)<2)continue;if(rand()<.68)makeTree(x,z,terrainHeight(x,z)>3.4);else makeRock(x,z);}
     const resourceRandom=seededRandom('resources');let pickupId=0;
     // IDs 0..23 remain valid for earlier save files; more supplies follow the outer roads.
     for(const type of ['wood','stone','seed'])for(let n=0;n<8;n++){let x,z;for(let tries=0;tries<80;tries++){const a=resourceRandom()*TAU,r=14+resourceRandom()*22;x=Math.cos(a)*r;z=Math.sin(a)*r;if(terrainHeight(x,z)>-.5&&!fantasyBuildings.some(b=>Math.hypot(x-b.x,z-b.z)<b.radius+1))break;}makePickup(type,x,z,pickupId++);}
@@ -1642,7 +1656,21 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   function plant(restore=null){if(!restore&&state.seeds<1){toast('还没有发光种子');return}const x=restore?.x??player.position.x+(rand()-.5)*1.8,z=restore?.z??player.position.z+(rand()-.5)*1.8;if(Math.hypot(x,z)>MAP_EDGE-3){toast('请在海岸线内种植');return}if(!restore){state.seeds--;state.planted++;state.placed.push({type:'flower',x,z})}const flower=makeFlower(x,z,'plant');plants.push(flower);if(!restore)toast('一朵花在这里扎根');updateResourceUI()}
   function sculpt(mode){if(activeFantasyVehicle()){toast('请先下车再塑形');return}const cx=player.position.x,cz=player.position.z;if(Math.hypot(cx,cz)>MAP_EDGE-4){toast('海浪边缘无法塑形');return}const radius=5;if(mode==='smooth'){let total=0,count=0;for(let a=0;a<12;a++){const ang=a*TAU/12;total+=terrainHeight(cx+Math.cos(ang)*radius*.65,cz+Math.sin(ang)*radius*.65);count++}state.terrainOps.push({type:'smooth',x:cx,z:cz,radius,amount:.3,target:total/count})}else state.terrainOps.push({type:mode,x:cx,z:cz,radius,amount:mode==='raise'?.45:-.45});const pos=world.terrain.geometry.attributes.position;for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i);pos.setY(i,terrainHeight(x,z))}pos.needsUpdate=true;world.terrain.geometry.computeVertexNormals();const hull=world.terrain.userData.outline;if(hull){hull.geometry.dispose();hull.geometry=world.terrain.geometry.clone()}for(const g of [...props,...plants]){if(g.userData.fantasyGround===undefined)g.position.y=terrainHeight(g.position.x,g.position.z)}for(const g of pickups)g.userData.baseY=terrainHeight(g.position.x,g.position.z)+.5;refreshFantasyGround();state.terrainEdits++;toast(mode==='raise'?'地形向上长了一点':mode==='lower'?'地形向下沉了一点':'地形变得更柔和了');}
   function jump(){if(!activeFantasyVehicle()&&onGround){playerVelocity.y=8.2;onGround=false;state.jumped=true}}
-  function movePlayer(dt){if(moveFantasyVehicle(dt))return;let x=0,z=0;if(keys.has('KeyW')||keys.has('ArrowUp'))z-=1;if(keys.has('KeyS')||keys.has('ArrowDown'))z+=1;if(keys.has('KeyA')||keys.has('ArrowLeft'))x-=1;if(keys.has('KeyD')||keys.has('ArrowRight'))x+=1;const previous=player.position.clone();const len=Math.hypot(x,z)||1;const speed=keys.has('ShiftLeft')||keys.has('ShiftRight')?13:8;player.position.x+=x/len*speed*dt;player.position.z+=z/len*speed*dt;resolveTownCollision(player.position,previous);const r=Math.hypot(player.position.x,player.position.z);if(r>MAP_EDGE-2){player.position.x*=(MAP_EDGE-2)/r;player.position.z*=(MAP_EDGE-2)/r}state.roadDistance+=Math.hypot(player.position.x-previous.x,player.position.z-previous.z);playerVelocity.y-=21*dt;player.position.y+=playerVelocity.y*dt;const floor=terrainHeight(player.position.x,player.position.z)+.03;if(player.position.y<=floor){player.position.y=floor;playerVelocity.y=0;onGround=true}else onGround=false;if(x||z)player.rotation.y=Math.atan2(x,z);}
+  function movePlayer(dt){
+    if(moveFantasyVehicle(dt))return;
+    let x=0,z=0;
+    if(keys.has('KeyW')||keys.has('ArrowUp'))z-=1;if(keys.has('KeyS')||keys.has('ArrowDown'))z+=1;
+    if(keys.has('KeyA')||keys.has('ArrowLeft'))x-=1;if(keys.has('KeyD')||keys.has('ArrowRight'))x+=1;
+    const previous=player.position.clone(),len=Math.hypot(x,z)||1,speed=keys.has('ShiftLeft')||keys.has('ShiftRight')?13:8;
+    player.position.x+=x/len*speed*dt;player.position.z+=z/len*speed*dt;
+    cityWorld?.constrain(player.position,previous);resolveTownCollision(player.position,previous);
+    const r=Math.hypot(player.position.x,player.position.z);if(r>MAP_EDGE-2){player.position.x*=(MAP_EDGE-2)/r;player.position.z*=(MAP_EDGE-2)/r}
+    state.roadDistance+=Math.hypot(player.position.x-previous.x,player.position.z-previous.z);
+    const floor=movementFloor(player.position.x,player.position.z,previous.y-.03)+.03;
+    if(onGround&&Math.abs(previous.y-floor)<.8){player.position.y=floor;playerVelocity.y=0;}
+    else{playerVelocity.y-=21*dt;player.position.y+=playerVelocity.y*dt;if(player.position.y<=floor){player.position.y=floor;playerVelocity.y=0;onGround=true}else onGround=false;}
+    if(x||z)player.rotation.y=Math.atan2(x,z);
+  }
   const cameraTarget=new THREE.Vector3(),cameraPosition=new THREE.Vector3();
   function updateCamera(dt){
     const extent=Math.max(48,cameraSpan*.68),height=Math.max(43,cameraSpan*.64);
@@ -1669,7 +1697,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
     for(const a of ACTIVITIES){const n=data.activityProgress?.[a.id];state.activityProgress[a.id]=Number.isFinite(n)?Math.min(a.stops.length,Math.max(0,Math.floor(n))):state.activityDone.includes(a.id)?a.stops.length:0;if(a.type==='race'&&(!state.activityDone.includes(a.id)||data.activeActivity===a.id))state.activityProgress[a.id]=0;}
     const active=selectedActivity();if(active&&activityStep(active)>=active.stops.length)state.activeActivity='';
     $('seed').value=state.seed;buildWorld(false);
-    if(data.player&&Number.isFinite(data.player.x)&&Number.isFinite(data.player.z)){const r=Math.hypot(data.player.x,data.player.z),scale=r>MAP_EDGE-2?(MAP_EDGE-2)/r:1;player.position.set(data.player.x*scale,0,data.player.z*scale);player.position.y=terrainHeight(player.position.x,player.position.z)+.03;resolveTownCollision(player.position,player.position.clone());}
+    if(data.player&&Number.isFinite(data.player.x)&&Number.isFinite(data.player.z)){const r=Math.hypot(data.player.x,data.player.z),scale=r>MAP_EDGE-2?(MAP_EDGE-2)/r:1;player.position.set(data.player.x*scale,0,data.player.z*scale);player.position.y=(cityWorld?.savedSurface(player.position.x,player.position.z,data.player.y)??terrainHeight(player.position.x,player.position.z))+.03;resolveTownCollision(player.position,player.position.clone());}
     restoreVehicles(Array.isArray(data.vehicles)?data.vehicles:[]);changeAvatar(state.avatar,false);setTime(state.time);setWeather(state.weather,false);setViewSpan(Number.isFinite(data.viewSpan)?THREE.MathUtils.clamp(data.viewSpan,28,280):86);
     $('outline').checked=state.outline;$('autoTime').textContent='时间：'+(state.autoTime?'自动':'手动');$('camera').textContent='视角：'+(state.camera==='follow'?'跟随':'自转');playerVelocity.set(0,0,0);onGround=true;fishingRun=null;activityRun=null;toggleOutlines();updateResourceUI();updateRideUI();updateLocationStatus();updateCamera(1);
   }
@@ -1681,6 +1709,13 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
   addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if($('atlas').open)return;if(e.code==='Escape'){$('speech').hidden=true;keys.clear();return;}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;keys.add(e.code);if(e.code==='Space'){e.preventDefault();if(activeFantasyVehicle()?.id==='airship')return;jump()}if(e.repeat&&['KeyE','KeyQ','KeyH','KeyT','KeyM','KeyV','KeyP','KeyC','KeyB','KeyR','KeyF','KeyG'].includes(e.code))return;if(e.code==='KeyE')collect();if(e.code==='KeyQ')triggerWonder();if(e.code==='KeyH')taleWorld.interact();if(e.code==='KeyT')performActivity();if(e.code==='KeyM')openAtlas('map');if(e.code==='KeyV')toggleRide();if(e.code==='KeyP')plant();if(e.code==='KeyC')placeCraft('campfire');if(e.code==='KeyB')placeCraft('bench');if(e.code==='KeyR')sculpt('raise');if(e.code==='KeyF')sculpt('lower');if(e.code==='KeyG')sculpt('smooth')});addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>keys.clear());document.addEventListener('visibilitychange',()=>{if(document.hidden)keys.clear()});
   addEventListener('resize',()=>{const a=innerWidth/innerHeight;const h=cameraSpan/a;camera.left=-cameraSpan/2;camera.right=cameraSpan/2;camera.top=h/2;camera.bottom=-h/2;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
   for(const button of document.querySelectorAll('#touchControls [data-dir]')){const code={up:'KeyW',down:'KeyS',left:'KeyA',right:'KeyD'}[button.dataset.dir];button.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(code);button.setPointerCapture(e.pointerId)});for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>keys.delete(code))}for(const button of document.querySelectorAll('#touchControls [data-action]'))button.addEventListener('click',()=>({jump,collect,plant,ride:toggleRide}[button.dataset.action])());
+  cityWorld=createCityWorld(THREE,{
+    props,roads,buildings:fantasyBuildings,residents,tales:TALE_PLACES,activities:ACTIVITIES,life:REGION_LIFE,
+    addProp,makeRoad,terrainHeight,toon,sign:makeFantasySign,disposeObjects,
+    travel:(x,z)=>{if(state.riding)toggleRide();keys.clear();$('atlas').close();$('speech').hidden=true;
+      player.position.set(x,movementFloor(x,z)+.03,z);resolveTownCollision(player.position,player.position.clone());playerVelocity.set(0,0,0);onGround=true;
+      state.camera='follow';$('camera').textContent='视角：跟随';setViewSpan(innerWidth<680?40:70);updateCamera(1);updateLocationStatus();toast('沿着街道散步，或从坡道登上高架。');}
+  });
   taleWorld=createTaleWorld(THREE,{
     state,scene,buildings:fantasyBuildings,residents,makeCharacter,disposeObjects,groundDisc:makeGroundDisc,material:storyMat,part:storyPart,outline:meshWithOutline,addProp,terrainHeight,sign:makeFantasySign,toast,
     getPlayer:()=>player,cast:CAST,openAtlas,updateResources:updateResourceUI,refreshHUD:updateWorldHUD,
@@ -1690,7 +1725,7 @@ import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from 
       state.camera='follow';$('camera').textContent='视角：跟随';setViewSpan(innerWidth<680?28:45);updateCamera(1);updateWorldHUD();}
   });
   buildWorld(); player=makePlayer(); initStoryUI(); setTime(state.time); updateResourceUI();updateWorldHUD();
-  function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.04);elapsed+=dt;if(!$('atlas').open)movePlayer(dt);updateLighting(dt);updateAtmosphere(dt,elapsed);updateFantasyWorld(dt,elapsed,nightAmount);updateStoryWorld(dt,elapsed);updateActivities(dt,elapsed);taleWorld.update(dt,elapsed);updateCamera(dt);updateDynamics(elapsed);if(elapsed-statusClock>.2){statusClock=elapsed;updateLocationStatus()}renderer.render(scene,camera)} loop();
+  function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.04);elapsed+=dt;if(!$('atlas').open)movePlayer(dt);updateLighting(dt);updateAtmosphere(dt,elapsed);updateFantasyWorld(dt,elapsed,nightAmount);updateStoryWorld(dt,elapsed);updateActivities(dt,elapsed);taleWorld.update(dt,elapsed);cityWorld.update(dt,elapsed,nightAmount);updateCamera(dt);updateDynamics(elapsed);if(elapsed-statusClock>.2){statusClock=elapsed;updateLocationStatus()}renderer.render(scene,camera)} loop();
 })();
 </script>
 </body>

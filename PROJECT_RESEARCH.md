@@ -2,6 +2,8 @@
 
 本文为首次部署时的研究快照。第三章已在此基础上加入九处剧场、27 张故事卡、60 种造型与 v6 存档，最新说明见 [WORLD_TALES.md](docs/WORLD_TALES.md)。
 
+后续城市密度与立体道路扩展见 [CITY_AND_SKYWAYS.md](docs/CITY_AND_SKYWAYS.md)，包括十片街区、四条可通行高架和桥上存档。
+
 研究日期：2026-10-23。上游：https://github.com/404-NOT-FOUND-ERROR/SandBox-Game 。本地基线：`6987092`（Add original character look series and life corners）。
 
 ## 部署结果与使用
