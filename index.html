@@ -91,6 +91,7 @@
 import * as THREE from "./vendor/three-0.161.0/three.module.js";
 import {TALE_PLACES,TALE_SERIES,TALE_LOOKS,normalizeTales,createTaleWorld} from "./world-tales.js";
 import {createCityWorld} from "./world-city.js";
+import {HOUSE_COLORS,createHouseGeometry,houseParts} from "./house-style.js";
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
@@ -108,7 +109,19 @@ import {createCityWorld} from "./world-city.js";
   const sun = new THREE.DirectionalLight(0xfff2c3,2.6); sun.castShadow=true; sun.shadow.mapSize.set(1536,1536); sun.shadow.camera.left=-58;sun.shadow.camera.right=58;sun.shadow.camera.top=58;sun.shadow.camera.bottom=-58;sun.shadow.camera.near=1;sun.shadow.camera.far=500; scene.add(sun); scene.add(sun.target);
   const gradientCanvas=document.createElement('canvas'); gradientCanvas.width=3;gradientCanvas.height=1; const gc=gradientCanvas.getContext('2d'); gc.fillStyle='#4b4b4b';gc.fillRect(0,0,1,1);gc.fillStyle='#9a9a9a';gc.fillRect(1,0,1,1);gc.fillStyle='#f7f7f7';gc.fillRect(2,0,1,1); const gradientMap=new THREE.CanvasTexture(gradientCanvas); gradientMap.minFilter=THREE.NearestFilter;gradientMap.magFilter=THREE.NearestFilter;
   const toon = (color, extra={}) => new THREE.MeshToonMaterial({color,gradientMap,...extra});
-  const outlineMat = new THREE.ShaderMaterial({side:THREE.BackSide,transparent:true,fog:true,uniforms:THREE.UniformsUtils.merge([THREE.UniformsLib.fog,{lineColor:{value:new THREE.Color(0x202820)}}]),vertexShader:'varying float vHeight; varying float vFogDepth; void main(){vHeight=position.y; vec3 p=position+normal*0.055; vec4 mv=modelViewMatrix*vec4(p,1.0);vFogDepth=-mv.z;gl_Position=projectionMatrix*mv;}',fragmentShader:'uniform vec3 lineColor;uniform vec3 fogColor;uniform float fogNear;uniform float fogFar;varying float vHeight;varying float vFogDepth;void main(){if(vHeight < -2.0) discard;float fogFactor=smoothstep(fogNear,fogFar,vFogDepth);gl_FragColor=vec4(mix(lineColor,fogColor,fogFactor),1.0);}'});
+  const outlineMat = new THREE.ShaderMaterial({side:THREE.BackSide,transparent:true,fog:true,uniforms:THREE.UniformsUtils.merge([THREE.UniformsLib.fog,{lineColor:{value:new THREE.Color(0x202820)}}]),vertexShader:`
+    varying float vHeight; varying float vFogDepth;
+    void main(){
+      vHeight=position.y;
+      vec3 p=position+normal*0.055;
+      // Match the original cottage's child hull, including its local 1.022 scale.
+      #ifdef USE_INSTANCING
+        vec4 mv=modelViewMatrix*instanceMatrix*vec4(p*1.022,1.0);
+      #else
+        vec4 mv=modelViewMatrix*vec4(p,1.0);
+      #endif
+      vFogDepth=-mv.z;gl_Position=projectionMatrix*mv;
+    }`,fragmentShader:'uniform vec3 lineColor;uniform vec3 fogColor;uniform float fogNear;uniform float fogFar;varying float vHeight;varying float vFogDepth;void main(){if(vHeight < -2.0) discard;float fogFactor=smoothstep(fogNear,fogFar,vFogDepth);gl_FragColor=vec4(mix(lineColor,fogColor,fogFactor),1.0);}'});
   const mats={terrain:toon(0xffffff,{vertexColors:true}), water:toon(0x75d7d0,{transparent:true,opacity:.52,side:THREE.DoubleSide}), trunk:toon(0x91552d), leaf:toon(0x4ca85b), pine:toon(0x147b6f), rock:toon(0x858b82), flower:toon(0xffbd3f), cloud:toon(0xfdfdf8,{transparent:true,opacity:.7,depthWrite:false}), clay:toon(0xff8068), fire:toon(0xff6449), wood:toon(0xa86c3c), bench:toon(0xc7864d), seed:toon(0xffd75a), crystal:toon(0x54d8cb,{emissive:0x15594f,emissiveIntensity:.65}), mushroom:toon(0xd778a2), mushroomLight:toon(0xffd986,{emissive:0x795323,emissiveIntensity:.25}), roadEdge:toon(0xd1b982,{side:THREE.DoubleSide}), road:toon(0x8b6c64,{side:THREE.DoubleSide}), wall:toon(0xffe7ba), roof:toon(0x4fa89b), moon:toon(0xf9e5ab), lantern:new THREE.MeshBasicMaterial({color:0xffcb69}), stars:new THREE.PointsMaterial({color:0xfff1bd,size:1.7,transparent:true,opacity:0,depthWrite:false}), rain:new THREE.LineBasicMaterial({color:0x9dd6ec,transparent:true,opacity:.56}), snow:new THREE.PointsMaterial({color:0xf8fbff,size:4,transparent:true,opacity:.9,depthWrite:false}), stardust:new THREE.PointsMaterial({color:0xffe18b,size:3,transparent:true,opacity:.88,depthWrite:false})};
   // Curved decks need a small shadow bias to avoid self-shadow striping.
   sun.shadow.normalBias=.05;sun.shadow.bias=-.00005;
@@ -134,15 +147,15 @@ import {createCityWorld} from "./world-city.js";
   // Fantasy scenery is generated from the seed; only the three vehicles carry mutable state.
   const fantasyBuildings = [], fantasyFloaters = [];
   const fantasyPalette = {
-    stone: toon(0x9c8cae, {side: THREE.DoubleSide}),
-    paleStone: toon(0xdfc8aa, {side: THREE.DoubleSide}),
+    stone: toon(HOUSE_COLORS.stone, {side: THREE.DoubleSide}),
+    paleStone: toon(HOUSE_COLORS.paleStone, {side: THREE.DoubleSide}),
     starRoad: toon(0x699cb8, {emissive: 0x17455b, emissiveIntensity: .28, side: THREE.DoubleSide}),
     starEdge: toon(0xc3ded6, {side: THREE.DoubleSide}),
     timber: toon(0xaa7950, {side: THREE.DoubleSide}),
     timberEdge: toon(0x684c45, {side: THREE.DoubleSide}),
-    gold: toon(0xffd46e), ink: toon(0x304658),
-    walls: [toon(0xffe6bb), toon(0xffcaa7), toon(0xc1e8cf)],
-    roofs: [toon(0x519e9d), toon(0xcc7499), toon(0x678eb4)],
+    gold: toon(HOUSE_COLORS.gold), ink: toon(HOUSE_COLORS.ink),
+    walls: HOUSE_COLORS.walls.map(color=>toon(color)),
+    roofs: HOUSE_COLORS.roofs.map(color=>toon(color)),
     crystal: toon(0x80e4d9, {emissive: 0x216e76, emissiveIntensity: .38}),
     lilacCrystal: toon(0xc3adfa, {emissive: 0x4c326f, emissiveIntensity: .3}),
     mushroom: toon(0xe784ae), mushroomStem: toon(0xffe2b7),
@@ -308,29 +321,14 @@ import {createCityWorld} from "./world-city.js";
   function makeHouse(x, z, angle, variant) {
     const group = new THREE.Group();
     group.position.set(x, terrainHeight(x, z), z); group.rotation.y = angle;
-    const wall = fantasyPalette.walls[variant % 3], roof = fantasyPalette.roofs[variant % 3];
-    fantasyMesh(group, new THREE.CylinderGeometry(1.57, 1.68, 1.15, 10),
-      fantasyPalette.paleStone, 0, -.26, 0);
-    fantasyMesh(group, new THREE.CylinderGeometry(1.42, 1.56, 1.9, 12), wall, 0, .95, 0);
-    if (variant % 2) {
-      const dome = fantasyMesh(group, new THREE.SphereGeometry(1.8, 12, 8), roof, 0, 2.0, 0);
-      dome.scale.y = .56;
-      fantasyMesh(group, new THREE.ConeGeometry(.23, .65, 7), fantasyPalette.gold, 0, 3.13, 0);
-    } else {
-      fantasyMesh(group, new THREE.ConeGeometry(1.94, 1.58, 10), roof, 0, 2.56, 0);
-      fantasyMesh(group, new THREE.SphereGeometry(.13, 6, 5), fantasyPalette.gold, 0, 3.43, 0);
+    const materials={...fantasyPalette,wall:fantasyPalette.walls[variant%3],roof:fantasyPalette.roofs[variant%3]};
+    for(const part of houseParts(variant)){
+      const geometry=createHouseGeometry(THREE,part.shape);
+      const mesh=part.material==='window'
+        ?fantasyGlow(group,geometry,HOUSE_COLORS.window,...part.position,variant*.6)
+        :fantasyMesh(group,geometry,materials[part.material],...part.position);
+      mesh.scale.set(...part.scale);mesh.rotation.set(...part.rotation);
     }
-    const door = fantasyMesh(group, new THREE.CapsuleGeometry(.3, .52, 4, 8),
-      fantasyPalette.ink, 0, .56, 1.48);
-    door.scale.z = .12;
-    for (const side of [-1, 1]) {
-      const window = fantasyGlow(group, new THREE.SphereGeometry(.29, 8, 6),
-        0xffdb8f, side * .83, 1.17, 1.25, variant * .6);
-      window.scale.set(1, 1, .18); window.rotation.y = side * .55;
-    }
-    const chimney = fantasyMesh(group, new THREE.CylinderGeometry(.16, .2, .75, 7),
-      fantasyPalette.stone, -.85, 2.7, -.35);
-    chimney.rotation.z = -.06;
     meshWithOutline(group, 1.022);
     group.userData.townBuilding = true;
     fantasyBuildings.push({group, x, z, radius: 1.66, height: 3.55, kind: 'house'});
@@ -1711,7 +1709,7 @@ import {createCityWorld} from "./world-city.js";
   for(const button of document.querySelectorAll('#touchControls [data-dir]')){const code={up:'KeyW',down:'KeyS',left:'KeyA',right:'KeyD'}[button.dataset.dir];button.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(code);button.setPointerCapture(e.pointerId)});for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>keys.delete(code))}for(const button of document.querySelectorAll('#touchControls [data-action]'))button.addEventListener('click',()=>({jump,collect,plant,ride:toggleRide}[button.dataset.action])());
   cityWorld=createCityWorld(THREE,{
     props,roads,buildings:fantasyBuildings,residents,tales:TALE_PLACES,activities:ACTIVITIES,life:REGION_LIFE,
-    addProp,makeRoad,terrainHeight,toon,sign:makeFantasySign,disposeObjects,
+    addProp,makeRoad,terrainHeight,toon,sign:makeFantasySign,disposeObjects,outlines,outlineMat,state,
     travel:(x,z)=>{if(state.riding)toggleRide();keys.clear();$('atlas').close();$('speech').hidden=true;
       player.position.set(x,movementFloor(x,z)+.03,z);resolveTownCollision(player.position,player.position.clone());playerVelocity.set(0,0,0);onGround=true;
       state.camera='follow';$('camera').textContent='视角：跟随';setViewSpan(innerWidth<680?40:70);updateCamera(1);updateLocationStatus();toast('沿着街道散步，或从坡道登上高架。');}

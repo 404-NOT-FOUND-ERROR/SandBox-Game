@@ -8,11 +8,11 @@ const root=path.resolve(__dirname,'..');
 (async()=>{
   const source=await fs.readFile(path.join(root,'index.html'),'utf8'),startup='buildWorld(); player=makePlayer(); initStoryUI();';
   assert(source.includes(startup));
-  const html=source.replace(startup,startup+`globalThis.cityQA={cityWorld,state,roads,props,scene,renderer,vehicles,fantasyBuildings,keys,ACTIVITIES,TALE_PLACES,
+  const html=source.replace(startup,startup+`globalThis.cityQA={cityWorld,state,roads,props,scene,renderer,vehicles,fantasyBuildings,keys,ACTIVITIES,TALE_PLACES,outlines,
     terrainHeight,movementFloor,movePlayer,updateVehicles,toggleRide,summonVehicle,snapshot,restoreData,buildWorld,sculpt,setTime,setWeather,setViewSpan,updateCamera,openAtlas,updateLocationStatus,
     place:(x,y,z)=>{player.position.set(x,y,z);playerVelocity.set(0,0,0);onGround=true;keys.clear();},
     get player(){return player},get elapsed(){return elapsed}};`);
-  const allowed={'/world-city.js':'text/javascript','/world-city.css':'text/css','/world-tales.js':'text/javascript','/world-tales.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
+  const allowed={'/house-style.js':'text/javascript','/world-city.js':'text/javascript','/world-city.css':'text/css','/world-tales.js':'text/javascript','/world-tales.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
   const server=http.createServer(async(req,res)=>{try{
     if(req.url==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);}
     else if(allowed[req.url]){res.writeHead(200,{'Content-Type':allowed[req.url]});res.end(await fs.readFile(path.join(root,req.url)));}
@@ -29,11 +29,18 @@ const root=path.resolve(__dirname,'..');
     await page.evaluate(()=>{cityQA.state.autoTime=false;cityQA.setTime(10.5);});
     report.stats=await page.evaluate(()=>({houses:cityQA.cityWorld.houses.length,districts:cityQA.cityWorld.districts.map(d=>({name:d.def.name,houses:d.houses})),groundRoads:cityQA.roads.length,newRoads:cityQA.roads.filter(r=>r.city).length,skyways:cityQA.cityWorld.skyways.length,citizens:cityQA.cityWorld.pedestrians.length,traffic:cityQA.cityWorld.traffic.length,drawCalls:cityQA.renderer.info.render.calls,triangles:cityQA.renderer.info.render.triangles}));
     console.log(JSON.stringify(report.stats));
-    check('ten neighborhoods add at least 120 walk-around buildings',report.stats.districts.length===10&&report.stats.houses>=120&&report.stats.districts.every(d=>d.houses>0));
+    check('art pass preserves all 144 houses in ten neighborhoods',report.stats.districts.length===10&&report.stats.houses===144&&report.stats.districts.every(d=>d.houses>0));
     check('four skyways, 40 local walkers and eight sightseeing shuttles',report.stats.skyways===4&&report.stats.citizens===40&&report.stats.traffic===8);
-    check('new streets form a denser connected ground network',report.stats.newRoads>=70);
+    check('art pass preserves the 105-road ground network',report.stats.groundRoads===105&&report.stats.newRoads===78);
     check('new buildings preserve all activity and story destinations',await page.evaluate(()=>cityQA.cityWorld.houses.every(b=>cityQA.ACTIVITIES.every(a=>a.stops.every(p=>Math.hypot(b.x-p.x,b.z-p.z)>b.radius+.6))&&cityQA.TALE_PLACES.every(p=>Math.hypot(b.x-p.x,b.z-p.z)>9))));
     await page.screenshot({path:path.join(root,'.local','city-start.png')});
+    const outlineCount=await page.evaluate(()=>cityQA.outlines.filter(h=>h.isInstancedMesh).length);
+    await page.click('#tools > summary');
+    await page.locator('#outline').uncheck();
+    check('city contours follow the existing outline switch',outlineCount>0&&await page.evaluate(()=>cityQA.outlines.every(h=>!h.visible)));
+    await page.locator('#outline').check();
+    check('all original and city contours can be restored',await page.evaluate(()=>cityQA.outlines.every(h=>h.visible)));
+    await page.click('#tools > summary');
     await page.click('#openAtlas');
     check('map shows real streets, four skyways and ten district destinations',await page.locator('[data-skyway]').count()===4&&await page.locator('[data-city]').count()===10&&await page.locator('.city-map-skyways polyline').count()===12);
     await page.screenshot({path:path.join(root,'.local','city-map.png')});
@@ -86,11 +93,16 @@ const root=path.resolve(__dirname,'..');
     await page.evaluate(()=>{document.querySelector('#atlas').close();cityQA.cityWorld.visit('seabell',true);cityQA.setViewSpan(98);cityQA.updateCamera(1);});
     await page.waitForTimeout(800);await page.screenshot({path:path.join(root,'.local','city-skyway.png')});
     await page.evaluate(()=>{cityQA.cityWorld.visit('harbor');cityQA.setViewSpan(85);cityQA.updateCamera(1);});await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local','city-harbor.png')});
+    await page.evaluate(()=>{cityQA.place(80,cityQA.terrainHeight(80,55)+.03,55);cityQA.setViewSpan(43);cityQA.updateCamera(1);});await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local','city-cottages.png')});
+    for(const district of ['grove','snow','gear']){
+      await page.evaluate(id=>{cityQA.cityWorld.visit(id);cityQA.setViewSpan(48);cityQA.updateCamera(1);},district);
+      await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local',`city-style-${district}.png`)});
+    }
     await page.evaluate(()=>{cityQA.cityWorld.visit('gear');cityQA.setTime(22);cityQA.setViewSpan(78);cityQA.updateCamera(1);});await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local','city-night.png')});
     const maintenance=await page.evaluate(()=>{
       const q=cityQA,old=q.cityWorld.houses.length;q.cityWorld.visit('east');q.sculpt('raise');
       const edited=q.cityWorld.houses.length===old&&q.cityWorld.skyways.length===4&&q.cityWorld.skyways.every(s=>s.points.every(p=>Number.isFinite(p.y)));
-      q.buildWorld(false);const first=q.props.filter(p=>p.userData.cityManaged).length;q.buildWorld(false);return {edited,stable:q.props.filter(p=>p.userData.cityManaged).length===first,duplicates:q.roads.length===new Set(q.roads.map(r=>r.id)).size};
+      q.buildWorld(false);const first=q.props.filter(p=>p.userData.cityManaged).length,contours=q.outlines.length;q.buildWorld(false);return {edited,stable:q.props.filter(p=>p.userData.cityManaged).length===first,duplicates:q.roads.length===new Set(q.roads.map(r=>r.id)).size,contours:q.outlines.length===contours&&q.outlines.filter(h=>h.isInstancedMesh).every(h=>h.parent&&q.props.includes(h.parent))};
     });for(const [name,ok]of Object.entries(maintenance))check('terrain / regeneration / '+name,ok);
     await page.setViewportSize({width:390,height:844});await page.click('#openAtlas');await page.locator('.city-guide').scrollIntoViewIfNeeded();
     check('mobile map guide has no horizontal overflow',await page.locator('#atlas').evaluate(el=>el.scrollWidth-el.clientWidth<=2));

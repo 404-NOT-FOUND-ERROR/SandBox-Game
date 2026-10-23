@@ -26,6 +26,7 @@ const screenshots = process.argv.includes('--screenshots');
   const taleCSS = await fs.readFile(path.join(root, 'world-tales.css'));
   const city = await fs.readFile(path.join(root, 'world-city.js'));
   const cityCSS = await fs.readFile(path.join(root, 'world-city.css'));
+  const houseStyle = await fs.readFile(path.join(root, 'house-style.js'));
   const server = http.createServer((req, res) => {
     if (req.url === '/') {res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});res.end(html);}
     else if (req.url === '/vendor/three-0.161.0/three.module.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(three);}
@@ -33,6 +34,7 @@ const screenshots = process.argv.includes('--screenshots');
     else if (req.url === '/world-tales.css') {res.writeHead(200, {'Content-Type':'text/css; charset=utf-8'});res.end(taleCSS);}
     else if (req.url === '/world-city.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(city);}
     else if (req.url === '/world-city.css') {res.writeHead(200, {'Content-Type':'text/css; charset=utf-8'});res.end(cityCSS);}
+    else if (req.url === '/house-style.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(houseStyle);}
     else {res.writeHead(404);res.end();}
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));

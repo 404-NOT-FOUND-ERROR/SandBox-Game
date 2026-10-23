@@ -1,10 +1,12 @@
+import {HOUSE_COLORS,createHouseGeometry,houseParts} from './house-style.js';
+
 // Hand-authored neighborhoods and layered transport for the existing nine-region world.
 export const CITY_DISTRICTS = [
   {id:'cloudbell',name:'云铃环城街',en:'CLOUDBELL LANES',x:9,z:5,rings:[12.5,22],style:'post',colors:[0xf5dfb8,0xe8bfa1,0xb7d5c5],roof:0x579e96,link:[7,3.8],story:'邮戳屋顶挨着花店，晾衣绳上停满了等回信的纸鸟。'},
-  {id:'east',name:'铃东叠屋街',en:'EASTERN ROOFTOPS',x:48,z:2,rings:[8,16],style:'post',colors:[0xf3d6ad,0xe8bbb0,0xd4dfb7],roof:0x74a7b0,link:[27,4],story:'把小店叠成两三层，再给每扇窗留一片屋顶花园。'},
+  {id:'east',name:'铃东叠屋街',en:'EASTERN ROOFTOPS',x:48,z:2,rings:[8,16],style:'post',colors:[0xf3d6ad,0xe8bbb0,0xd4dfb7],roof:0x74a7b0,link:[27,4],story:'圆顶和尖顶沿坡错落，纸鸟在金色信箱与门前花盆之间传信。'},
   {id:'grove',name:'梦孢灯巷',en:'LANTERN GROVE',x:-46,z:18,rings:[8,16],style:'grove',colors:[0xe8cce0,0xd4d5e8,0xc1dbc9],roof:0xac83b4,link:[-20,16],story:'伞屋之间卖梦蕾和热茶，夜灯精沿着弯弯的街道散步。'},
   {id:'whale',name:'鲸眠花坊',en:'WHALEBLOOM QUARTER',x:-7,z:-65,rings:[8,15],style:'bloom',colors:[0xf2d6c3,0xf4dfb3,0xc7ded4],roof:0xdc9f9f,link:[-4,-32],story:'风筝挂满花坊的露台，赶路的人总能带走一朵花。'},
-  {id:'harbor',name:'海风阶街',en:'SEABREEZE TERRACES',x:80,z:47,rings:[15,24],style:'harbor',colors:[0xc9e8df,0xf1d7b7,0xd0deef],roof:0x65acb8,link:[73,40],story:'贝壳铺、船帆棚和蓝色阳台围着海港，一层又一层亮起灯。'},
+  {id:'harbor',name:'海风阶街',en:'SEABREEZE TERRACES',x:80,z:47,rings:[15,24],style:'harbor',colors:[0xc9e8df,0xf1d7b7,0xd0deef],roof:0x65acb8,link:[73,40],story:'圆鼓鼓的贝壳小屋围着海港，救生圈挂在门边，暖圆窗一盏盏亮起。'},
   {id:'gear',name:'发条南城',en:'CLOCKWORK SOUTH',x:10,z:100,rings:[15,24],style:'clock',colors:[0xe6c6a2,0xc6d4c1,0xf0dba7],roof:0x7e9992,link:[4,92],story:'修钟铺和面包摊共用一条街；观光班车在高架上慢慢经过。'},
   {id:'dunes',name:'薄荷驿城',en:'MINT CARAVANSERAI',x:-82,z:54,rings:[15,24],style:'dune',colors:[0xf0d6a2,0xe8b99e,0xdac8b4],roof:0xcd8d80,link:[-74,47],story:'连片的圆顶屋围住树荫，商队把风铃挂在每个拱门上。'},
   {id:'snow',name:'星邮坡城',en:'STARPOST HILLSIDE',x:77,z:-78,rings:[10,18],style:'snow',colors:[0xe6eeee,0xc8dce9,0xd8d1e7],roof:0x8aabc2,link:[86,-76],story:'陡屋顶接住落雪，观景桥把山坡上的星邮小屋连起来。'},
@@ -29,19 +31,25 @@ export function createCityWorld(THREE, env) {
 
   function prepareAssets(){
     shapes={box:new THREE.BoxGeometry(1,1,1),ball:new THREE.SphereGeometry(1,8,6),cone:new THREE.ConeGeometry(1,1,8),pillar:new THREE.CylinderGeometry(1,1,1,8),ring:new THREE.TorusGeometry(1,.12,6,16)};
-    solid=env.toon(0xffffff);glow=env.toon(0xffffff,{emissive:0xffd69a,emissiveIntensity:.22});
+    solid=env.toon(0xffffff);glow=env.toon(0xffffff,{emissive:HOUSE_COLORS.window,emissiveIntensity:.15});
   }
-  function add(shape,x,y,z,sx,sy,sz,color,angle=0,lit=false){
+  function add(shape,x,y,z,sx,sy,sz,color,angle=0,lit=false,tiltX=0,tiltZ=0){
     const key=shape+(lit?'-light':'');
     if(!batches.has(key))batches.set(key,[]);
-    batches.get(key).push({shape,x,y,z,sx,sy,sz,color,angle,lit});
+    batches.get(key).push({shape,x,y,z,sx,sy,sz,color,angle,lit,tiltX,tiltZ});
   }
   function flush(name){
     const root=new THREE.Group();root.name=name;
     for(const list of batches.values()){
       const first=list[0],mesh=new THREE.InstancedMesh(shapes[first.shape],first.lit?glow:solid,list.length);
-      list.forEach((p,i)=>{vec.position.set(p.x,p.y,p.z);vec.rotation.set(0,p.angle,0);vec.scale.set(p.sx,p.sy,p.sz);vec.updateMatrix();mesh.setMatrixAt(i,vec.matrix);mesh.setColorAt(i,tint.set(p.color));});
+      list.forEach((p,i)=>{vec.position.set(p.x,p.y,p.z);vec.rotation.set(p.tiltX,p.angle,p.tiltZ,'YXZ');vec.scale.set(p.sx,p.sy,p.sz);vec.updateMatrix();mesh.setMatrixAt(i,vec.matrix);mesh.setColorAt(i,tint.set(p.color));});
       mesh.castShadow=!first.lit;mesh.receiveShadow=true;mesh.computeBoundingSphere();root.add(mesh);
+      if(name.startsWith('city-district-')){
+        const hull=new THREE.InstancedMesh(mesh.geometry,env.outlineMat,list.length);
+        hull.instanceMatrix.copy(mesh.instanceMatrix);hull.computeBoundingSphere();
+        hull.name='inverted-hull';hull.userData.isOutline=true;hull.renderOrder=-1;hull.visible=env.state.outline;
+        root.add(hull);env.outlines.push(hull);
+      }
     }
     env.addProp(root);batches=new Map();return root;
   }
@@ -91,41 +99,53 @@ export function createCityWorld(THREE, env) {
       skyways.some(s=>nearestSegment(s.points,x,z).distance<s.def.width/2+r+1)||roadClearance(x,z)<r+.35;
   }
   function house(d,x,z,angle,index){
-    const wide=1.35+(index%3)*.12,depth=1.35+(index%2)*.1,floors=1+(index%4===0?2:index%3===0?1:0),height=1.7*floors;
+    // Keep the placement envelope unchanged so an art pass never moves the town.
+    const wide=1.35+(index%3)*.12,depth=1.35+(index%2)*.1;
     const c=Math.cos(angle),s=Math.sin(angle),g=ground(x,z),base=Math.max(g,ground(x-wide,z-depth),ground(x+wide,z+depth))+.12;
-    const part=(shape,px,py,pz,sx,sy,sz,color,lit=false)=>add(shape,x+px*c+pz*s,base+py,z-px*s+pz*c,sx,sy,sz,color,angle,lit);
-    part('box',0,(g-base)/2-.15,0,wide*2+.3,base-g+.3,depth*2+.3,ink);
-    part('box',0,height/2,0,wide*2,height,depth*2,d.colors[index%3]);
-    for(let f=0;f<floors;f++){
-      const y=f*1.7;part('box',0,y+1.65,0,wide*2+.22,.15,depth*2+.2,cream);
-      for(const face of [0,1,2,3])for(const side of [-1,1]){
-        const a=face*Math.PI/2,px=side*wide*.52*Math.cos(a)+Math.sin(a)*(depth+.035),pz=-side*wide*.52*Math.sin(a)+Math.cos(a)*(depth+.035);
-        add('box',x+px*c+pz*s,base+y+.9,z-px*s+pz*c,.52,.65,.09,ink,angle+a);
-        add('box',x+px*c+pz*s+Math.sin(angle+a)*.06,base+y+.9,z-px*s+pz*c+Math.cos(angle+a)*.06,.35,.47,.06,0xffdf9f,angle+a,true);
+    const scale=.97+(index%3)*.035,variant=index+CITY_DISTRICTS.indexOf(d);
+    const dome=['grove','dune','harbor'].includes(d.style)||d.style!=='snow'&&Boolean(index%2);
+    const colors={...HOUSE_COLORS,wall:HOUSE_COLORS.walls[variant%3],roof:HOUSE_COLORS.roofs[variant%3]};
+    const part=(shape,px,py,pz,sx,sy,sz,color,lit=false,rotation=[0,0,0])=>add(shape,x+(px*c+pz*s)*scale,base+py*scale,z+(-px*s+pz*c)*scale,sx*scale,sy*scale,sz*scale,color,angle+rotation[1],lit,rotation[0],rotation[2]);
+    for(const p of houseParts(variant,dome)){
+      const shape='house-'+p.shape;
+      if(!shapes[shape])shapes[shape]=createHouseGeometry(THREE,p.shape);
+      // Extend the same tapered stone footing only where the hillside needs it.
+      if(p.shape==='foundation'){
+        const low=Math.min(g,ground(x-wide,z-depth),ground(x+wide,z+depth));
+        const height=Math.max(1.15,(base-low+.35)/scale);
+        p.position[1]=.315-height/2;p.scale[1]=height/1.15;
       }
-      if(f>0){part('box',0,y-.02,depth+.38,wide*1.55,.16,.85,ink);part('box',0,y+.38,depth+.72,wide*1.55,.12,.08,cream);}
+      part(shape,...p.position,...p.scale,colors[p.material],p.material==='window',p.rotation);
     }
-    if(d.style==='grove'||d.style==='dune'||d.style==='harbor'){
-      part('ball',0,height+.25,0,wide*1.3,d.style==='grove'?.8:1.05,depth*1.3,d.roof);
-      part('pillar',0,height+.18,0,wide*1.28,.15,depth*1.28,cream);
-      if(d.style==='grove')for(const side of [-1,1])part('ball',side*.65,height+.83,.35,.22,.08,.22,cream);
-    }else if(index%3===1){
-      part('box',0,height+.15,0,wide*2+.3,.24,depth*2+.3,d.roof);
-      for(const side of [-1,1]){part('box',side*wide*.65,height+.42,0,.55,.4,1.35,0xc99572);part('ball',side*wide*.65,height+.76,0,.52,.48,.72,0x91b58a);}
-    }else{
-      part('cone',0,height+.85,0,wide*1.45,1.8,depth*1.45,d.roof);
-      part('ball',0,height+1.82,0,.16,.2,.16,0xf1cc7b,true);
+    // Local stories are small accessories on a shared cottage silhouette.
+    if(d.style==='grove')for(const [px,pz]of [[-.68,.63],[.62,.82],[.48,-.68]]){
+      const py=2+.56*Math.sqrt(1.8**2-px**2-pz**2);
+      part('ball',px,py+.025,pz,.21,.06,.21,HOUSE_COLORS.walls[0]);
     }
-    part('box',0,.55,depth+.07,.65,1.1,.12,ink);
-    if(index%2===0){
-      for(let i=0;i<5;i++)part('box',(i-2)*wide*.39,1.35,depth+.55,wide*.4,.14,1.1,i%2?cream:d.roof);
-      part('box',0,.35,depth+.45,wide*1.8,.6,.5,d.colors[(index+1)%3]);
-      for(const side of [-1,1])part('ball',side*.55,.76,depth+.43,.18,.18,.18,index%4?0xe8a38e:0x92b795);
+    if(d.style==='harbor')part('ring',1.26,.9,.93,.3,.3,.3,HOUSE_COLORS.gold,false,[0,.85,0]);
+    if(d.style==='clock'){
+      part('pillar',0,1.4,1.58,.2,.28,.2,HOUSE_COLORS.gold,false,[Math.PI/2,0,0]);
+      part('ball',0,1.4,1.72,.24,.24,.065,HOUSE_COLORS.paleStone);
+      part('ring',0,1.4,1.77,.25,.25,.2,HOUSE_COLORS.gold);
+      part('box',0,1.46,1.8,.025,.15,.025,HOUSE_COLORS.ink);
+      part('box',.06,1.4,1.8,.13,.025,.025,HOUSE_COLORS.ink);
     }
-    if(d.style==='clock'){part('pillar',-.6,height+.55,-.45,.26,1.3,.26,ink);part('ring',0,height+.16,depth+.16,.65,.65,.25,0xe8c489);}
-    if(d.style==='snow')part('cone',0,height+1.15,0,wide*.9,1.25,depth*.9,0xf7f4e5);
+    if(d.style==='snow')part('house-roof',0,2.9,0,.64,.6,.64,0xf7f4e5);
+    if(d.style==='dune'){
+      part('pillar',1.35,1.72,.68,.025,.48,.025,HOUSE_COLORS.gold);
+      part('ball',1.35,1.45,.68,.13,.14,.13,HOUSE_COLORS.gold);
+    }
+    if(d.style==='post'){
+      part('ball',1.2,.76,1.03,.22,.25,.13,HOUSE_COLORS.gold,false,[0,.65,0]);
+      part('box',1.23,.82,1.13,.24,.035,.025,HOUSE_COLORS.ink,false,[0,.65,0]);
+    }
+    if(d.style==='bloom'||index%3===0)for(const side of [-1,1]){
+      part('pillar',side*1.2,.2,1.35,.21,.35,.21,HOUSE_COLORS.paleStone);
+      part('ball',side*1.2,.47,1.35,.27,.28,.27,0x91b58a);
+      part('ball',side*1.2,.69,1.35,.13,.11,.13,HOUSE_COLORS.roofs[(variant+1)%3]);
+    }
     const collider=new THREE.Group();collider.position.set(x,base,z);
-    const record={group:collider,x,z,radius:Math.hypot(wide,depth)+.1,height:height+2,kind:'city-house',city:true,district:d.id};
+    const record={group:collider,x,z,radius:Math.hypot(wide,depth)+.1,height:3.55*scale,kind:'city-house',city:true,district:d.id};
     env.buildings.push(record);houses.push(record);return record;
   }
   function furnishing(x,z,index,d){
@@ -267,7 +287,7 @@ export function createCityWorld(THREE, env) {
     return {x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,z:a.z+(b.z-a.z)*f,angle:Math.atan2(b.x-a.x,b.z-a.z)};
   }
   function update(dt,t,night){
-    if(!glow)return;glow.emissiveIntensity=.15+night*1.3;
+    if(!glow)return;glow.emissiveIntensity=.1+night*1.7;
     for(const item of traffic){
       const cycle=(t*.022+item.phase)%1,forward=cycle<.5,u=forward?cycle*2:2-cycle*2,p=sample(item.route.points,u),side=forward?.65:-.65;
       item.group.position.set(p.x+Math.cos(p.angle)*side,p.y+.08,p.z-Math.sin(p.angle)*side);item.group.rotation.y=p.angle+(forward?0:Math.PI);

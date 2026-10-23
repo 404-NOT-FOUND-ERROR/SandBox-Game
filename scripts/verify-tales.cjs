@@ -11,7 +11,7 @@ const root=path.resolve(__dirname,'..');
   const html=source.replace(startup,startup+`globalThis.taleQA={taleWorld,state,TALE_PLACES,TALE_SERIES,LOOK_SERIES,CAST,scene,residents,outlines,renderer,fantasyBuildings,
     snapshot,restoreData,setTime,setWeather,terrainHeight,openAtlas,buildWorld,movePlayer,changeAvatar,
     get player(){return player},get elapsed(){return elapsed}};`);
-  const allowed={'/world-tales.js':'text/javascript','/world-tales.css':'text/css','/world-city.js':'text/javascript','/world-city.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
+  const allowed={'/house-style.js':'text/javascript','/world-tales.js':'text/javascript','/world-tales.css':'text/css','/world-city.js':'text/javascript','/world-city.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
   const server=http.createServer(async(req,res)=>{
     try{if(req.url==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);}
     else if(allowed[req.url]){const data=await fs.readFile(path.join(root,req.url));res.writeHead(200,{'Content-Type':allowed[req.url]});res.end(data);}
