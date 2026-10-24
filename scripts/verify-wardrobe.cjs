@@ -26,6 +26,8 @@ const screenshots = process.argv.includes('--screenshots');
   const taleCSS = await fs.readFile(path.join(root, 'world-tales.css'));
   const city = await fs.readFile(path.join(root, 'world-city.js'));
   const cityCSS = await fs.readFile(path.join(root, 'world-city.css'));
+  const worldStyle = await fs.readFile(path.join(root, 'world-style.js'));
+  const architecture = await fs.readFile(path.join(root, 'world-architecture.js'));
   const houseStyle = await fs.readFile(path.join(root, 'house-style.js'));
   const server = http.createServer((req, res) => {
     if (req.url === '/') {res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});res.end(html);}
@@ -34,6 +36,8 @@ const screenshots = process.argv.includes('--screenshots');
     else if (req.url === '/world-tales.css') {res.writeHead(200, {'Content-Type':'text/css; charset=utf-8'});res.end(taleCSS);}
     else if (req.url === '/world-city.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(city);}
     else if (req.url === '/world-city.css') {res.writeHead(200, {'Content-Type':'text/css; charset=utf-8'});res.end(cityCSS);}
+    else if (req.url === '/world-style.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(worldStyle);}
+    else if (req.url === '/world-architecture.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(architecture);}
     else if (req.url === '/house-style.js') {res.writeHead(200, {'Content-Type':'text/javascript; charset=utf-8'});res.end(houseStyle);}
     else {res.writeHead(404);res.end();}
   });

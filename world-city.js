@@ -1,4 +1,5 @@
-import {HOUSE_COLORS,createHouseGeometry,houseParts} from './house-style.js';
+import {ARCHITECTURE,architectureGeometry,buildingRecipe} from './world-architecture.js';
+import {SURFACES} from './world-style.js';
 
 // Hand-authored neighborhoods and layered transport for the existing nine-region world.
 export const CITY_DISTRICTS = [
@@ -22,34 +23,45 @@ export const CITY_SKYWAYS = [
 ];
 
 export function createCityWorld(THREE, env) {
-  const TAU=Math.PI*2, roots=[], districts=[], skyways=[], houses=[], pedestrians=[], traffic=[];
-  let batches, shapes, solid, glow, crowdMeshes=[];
+  const TAU=Math.PI*2, roots=[], districts=[], skyways=[], houses=[], pedestrians=[], traffic=[], motionInstances=[], movingBatches=new Set();
+  let batches, shapes, solid, glow, surfaces, crowdMeshes=[];
   const ink=0x596967, cream=0xf6e7c5, ground=env.terrainHeight;
   const vec=new THREE.Object3D(), tint=new THREE.Color();
+  const motionPose=new THREE.Object3D(),motionMatrix=new THREE.Matrix4();
   const clamp=THREE.MathUtils.clamp;
   const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 
   function prepareAssets(){
     shapes={box:new THREE.BoxGeometry(1,1,1),ball:new THREE.SphereGeometry(1,8,6),cone:new THREE.ConeGeometry(1,1,8),pillar:new THREE.CylinderGeometry(1,1,1,8),ring:new THREE.TorusGeometry(1,.12,6,16)};
-    solid=env.toon(0xffffff);glow=env.toon(0xffffff,{emissive:HOUSE_COLORS.window,emissiveIntensity:.15});
+    surfaces=Object.fromEntries(Object.keys(SURFACES).map(profile=>[profile,env.material(0xffffff,{},profile)]));
+    solid=surfaces.plaster;glow=surfaces.light;
   }
   function add(shape,x,y,z,sx,sy,sz,color,angle=0,lit=false,tiltX=0,tiltZ=0){
-    const key=shape+(lit?'-light':'');
+    const profile=lit?'light':'plaster',key=shape+'-'+profile;
     if(!batches.has(key))batches.set(key,[]);
-    batches.get(key).push({shape,x,y,z,sx,sy,sz,color,angle,lit,tiltX,tiltZ});
+    batches.get(key).push({shape,x,y,z,sx,sy,sz,color,angle,lit,tiltX,tiltZ,profile});
   }
   function flush(name){
     const root=new THREE.Group();root.name=name;
     for(const list of batches.values()){
-      const first=list[0],mesh=new THREE.InstancedMesh(shapes[first.shape],first.lit?glow:solid,list.length);
-      list.forEach((p,i)=>{vec.position.set(p.x,p.y,p.z);vec.rotation.set(p.tiltX,p.angle,p.tiltZ,'YXZ');vec.scale.set(p.sx,p.sy,p.sz);vec.updateMatrix();mesh.setMatrixAt(i,vec.matrix);mesh.setColorAt(i,tint.set(p.color));});
-      mesh.castShadow=!first.lit;mesh.receiveShadow=true;mesh.computeBoundingSphere();root.add(mesh);
-      if(name.startsWith('city-district-')){
-        const hull=new THREE.InstancedMesh(mesh.geometry,env.outlineMat,list.length);
+      const first=list[0],mesh=new THREE.InstancedMesh(shapes[first.shape],surfaces[first.profile],list.length);
+      list.forEach((p,i)=>{
+        if(p.matrix)mesh.setMatrixAt(i,p.matrix);
+        else{vec.position.set(p.x,p.y,p.z);vec.rotation.set(p.tiltX,p.angle,p.tiltZ,'YXZ');vec.scale.set(p.sx,p.sy,p.sz);vec.updateMatrix();mesh.setMatrixAt(i,vec.matrix);}
+        mesh.setColorAt(i,tint.set(p.color));
+      });
+      mesh.castShadow=!['glass','light','aether'].includes(first.profile);mesh.receiveShadow=true;mesh.computeBoundingSphere();root.add(mesh);
+      let hull=null;
+      // Glass is framed by structural ribs; an opaque back hull would hide its interior.
+      if(name.startsWith('city-district-')&&first.profile!=='glass'){
+        hull=new THREE.InstancedMesh(mesh.geometry,env.outlineMat,list.length);
         hull.instanceMatrix.copy(mesh.instanceMatrix);hull.computeBoundingSphere();
         hull.name='inverted-hull';hull.userData.isOutline=true;hull.renderOrder=-1;hull.visible=env.state.outline;
         root.add(hull);env.outlines.push(hull);
       }
+      list.forEach((p,i)=>{if(p.motion){motionInstances.push({...p.motion,mesh,hull,index:i});movingBatches.add(mesh);if(hull)movingBatches.add(hull);}});
+      // Animated parts stay inside this padded bound; distant districts can still be culled.
+      if(list.some(p=>p.motion)){mesh.boundingSphere.radius+=3.5;if(hull)hull.boundingSphere.radius+=3.5;}
     }
     env.addProp(root);batches=new Map();return root;
   }
@@ -99,53 +111,23 @@ export function createCityWorld(THREE, env) {
       skyways.some(s=>nearestSegment(s.points,x,z).distance<s.def.width/2+r+1)||roadClearance(x,z)<r+.35;
   }
   function house(d,x,z,angle,index){
-    // Keep the placement envelope unchanged so an art pass never moves the town.
     const wide=1.35+(index%3)*.12,depth=1.35+(index%2)*.1;
-    const c=Math.cos(angle),s=Math.sin(angle),g=ground(x,z),base=Math.max(g,ground(x-wide,z-depth),ground(x+wide,z+depth))+.12;
-    const scale=.97+(index%3)*.035,variant=index+CITY_DISTRICTS.indexOf(d);
-    const dome=['grove','dune','harbor'].includes(d.style)||d.style!=='snow'&&Boolean(index%2);
-    const colors={...HOUSE_COLORS,wall:HOUSE_COLORS.walls[variant%3],roof:HOUSE_COLORS.roofs[variant%3]};
-    const part=(shape,px,py,pz,sx,sy,sz,color,lit=false,rotation=[0,0,0])=>add(shape,x+(px*c+pz*s)*scale,base+py*scale,z+(-px*s+pz*c)*scale,sx*scale,sy*scale,sz*scale,color,angle+rotation[1],lit,rotation[0],rotation[2]);
-    for(const p of houseParts(variant,dome)){
-      const shape='house-'+p.shape;
-      if(!shapes[shape])shapes[shape]=createHouseGeometry(THREE,p.shape);
-      // Extend the same tapered stone footing only where the hillside needs it.
-      if(p.shape==='foundation'){
-        const low=Math.min(g,ground(x-wide,z-depth),ground(x+wide,z+depth));
-        const height=Math.max(1.15,(base-low+.35)/scale);
-        p.position[1]=.315-height/2;p.scale[1]=height/1.15;
-      }
-      part(shape,...p.position,...p.scale,colors[p.material],p.material==='window',p.rotation);
-    }
-    // Local stories are small accessories on a shared cottage silhouette.
-    if(d.style==='grove')for(const [px,pz]of [[-.68,.63],[.62,.82],[.48,-.68]]){
-      const py=2+.56*Math.sqrt(1.8**2-px**2-pz**2);
-      part('ball',px,py+.025,pz,.21,.06,.21,HOUSE_COLORS.walls[0]);
-    }
-    if(d.style==='harbor')part('ring',1.26,.9,.93,.3,.3,.3,HOUSE_COLORS.gold,false,[0,.85,0]);
-    if(d.style==='clock'){
-      part('pillar',0,1.4,1.58,.2,.28,.2,HOUSE_COLORS.gold,false,[Math.PI/2,0,0]);
-      part('ball',0,1.4,1.72,.24,.24,.065,HOUSE_COLORS.paleStone);
-      part('ring',0,1.4,1.77,.25,.25,.2,HOUSE_COLORS.gold);
-      part('box',0,1.46,1.8,.025,.15,.025,HOUSE_COLORS.ink);
-      part('box',.06,1.4,1.8,.13,.025,.025,HOUSE_COLORS.ink);
-    }
-    if(d.style==='snow')part('house-roof',0,2.9,0,.64,.6,.64,0xf7f4e5);
-    if(d.style==='dune'){
-      part('pillar',1.35,1.72,.68,.025,.48,.025,HOUSE_COLORS.gold);
-      part('ball',1.35,1.45,.68,.13,.14,.13,HOUSE_COLORS.gold);
-    }
-    if(d.style==='post'){
-      part('ball',1.2,.76,1.03,.22,.25,.13,HOUSE_COLORS.gold,false,[0,.65,0]);
-      part('box',1.23,.82,1.13,.24,.035,.025,HOUSE_COLORS.ink,false,[0,.65,0]);
-    }
-    if(d.style==='bloom'||index%3===0)for(const side of [-1,1]){
-      part('pillar',side*1.2,.2,1.35,.21,.35,.21,HOUSE_COLORS.paleStone);
-      part('ball',side*1.2,.47,1.35,.27,.28,.27,0x91b58a);
-      part('ball',side*1.2,.69,1.35,.13,.11,.13,HOUSE_COLORS.roofs[(variant+1)%3]);
+    const samples=[ground(x,z),ground(x-wide,z-depth),ground(x+wide,z+depth)];
+    const base=Math.max(...samples)+.12,recipe=buildingRecipe(THREE,d,index);
+    const parent=new THREE.Matrix4().compose(new THREE.Vector3(x,base,z),new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),angle),new THREE.Vector3(1,1,1));
+    for(const part of recipe.parts){
+      const shape='architecture-'+part.shape,profile=part.surface,key=shape+'-'+profile;
+      if(!shapes[shape])shapes[shape]=architectureGeometry(THREE,part.shape);
+      if(part.foundation){const h=Math.max(.7,base-Math.min(...samples)+.35);part.scale[1]=h;part.position[1]=.17-h/2;}
+      vec.position.set(...part.position);vec.scale.set(...part.scale);
+      if(part.quaternion)vec.quaternion.fromArray(part.quaternion);else vec.rotation.set(...part.rotation,part.rotationOrder);
+      vec.updateMatrix();const local=vec.matrix.clone(),matrix=parent.clone().multiply(local);
+      const motion=part.motion?{definition:part.motion,local,parent,x,z,family:recipe.family,inversePivot:new THREE.Matrix4().makeTranslation(...part.motion.pivot.map(v=>-v))}:null;
+      if(!batches.has(key))batches.set(key,[]);
+      batches.get(key).push({shape,profile,color:part.color,matrix,motion});
     }
     const collider=new THREE.Group();collider.position.set(x,base,z);
-    const record={group:collider,x,z,radius:Math.hypot(wide,depth)+.1,height:3.55*scale,kind:'city-house',city:true,district:d.id};
+    const record={group:collider,x,z,radius:Math.hypot(wide,depth)+.1,height:recipe.height,kind:'city-house',city:true,district:d.id,family:recipe.family,type:recipe.type};
     env.buildings.push(record);houses.push(record);return record;
   }
   function furnishing(x,z,index,d){
@@ -250,7 +232,7 @@ export function createCityWorld(THREE, env) {
     for(let i=env.props.length-1;i>=0;i--)if(env.props[i].userData.cityManaged)env.props.splice(i,1);
     for(let i=env.roads.length-1;i>=0;i--)if(env.roads[i].city)env.roads.splice(i,1);
     for(let i=env.buildings.length-1;i>=0;i--)if(env.buildings[i].city)env.buildings.splice(i,1);
-    roots.length=0;districts.length=0;skyways.length=0;houses.length=0;pedestrians.length=0;traffic.length=0;crowdMeshes=[];
+    roots.length=0;districts.length=0;skyways.length=0;houses.length=0;pedestrians.length=0;traffic.length=0;crowdMeshes=[];motionInstances.length=0;movingBatches.clear();
   }
   function build(){
     clear();prepareAssets();batches=new Map();const start=env.props.length;
@@ -287,7 +269,19 @@ export function createCityWorld(THREE, env) {
     return {x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,z:a.z+(b.z-a.z)*f,angle:Math.atan2(b.x-a.x,b.z-a.z)};
   }
   function update(dt,t,night){
-    if(!glow)return;glow.emissiveIntensity=.1+night*1.7;
+    if(!glow)return;glow.emissiveIntensity=.1+night*1.7;surfaces.aether.emissiveIntensity=.2+night*1.4;
+    const player=env.getPlayer?.();
+    for(const item of motionInstances){
+      const m=item.definition,near=player?Math.max(0,1-Math.hypot(player.position.x-item.x,player.position.z-item.z)/9):0;
+      const wave=Math.sin(t*m.speed+m.phase)*m.amount*(1+near*.45);
+      motionPose.position.set(...m.pivot);motionPose.rotation.set(0,0,0,'XYZ');motionPose.scale.set(1,1,1);
+      if(m.kind==='float')motionPose.position.y+=wave;
+      else if(m.kind==='breathe')motionPose.scale.set(1+wave,1+wave*1.7,1+wave);
+      else motionPose.rotation[m.axis]=m.kind==='spin'?t*m.speed+m.phase:wave;
+      motionPose.updateMatrix();motionMatrix.copy(item.parent).multiply(motionPose.matrix).multiply(item.inversePivot).multiply(item.local);
+      item.mesh.setMatrixAt(item.index,motionMatrix);item.hull?.setMatrixAt(item.index,motionMatrix);
+    }
+    movingBatches.forEach(mesh=>mesh.instanceMatrix.needsUpdate=true);
     for(const item of traffic){
       const cycle=(t*.022+item.phase)%1,forward=cycle<.5,u=forward?cycle*2:2-cycle*2,p=sample(item.route.points,u),side=forward?.65:-.65;
       item.group.position.set(p.x+Math.cos(p.angle)*side,p.y+.08,p.z-Math.sin(p.angle)*side);item.group.rotation.y=p.angle+(forward?0:Math.PI);
@@ -301,19 +295,19 @@ export function createCityWorld(THREE, env) {
   function location(x,z,y){
     const deck=surfaceInfo(x,z,y,.2);if(deck&&Math.abs(y-deck.y)<2)return {name:deck.route.def.name,en:'SKYWAY · ABOVE THE LITTLE CITY',rule:deck.route.def.note};
     const d=districts.find(d=>Math.hypot(x-d.def.x,z-d.def.z)<d.def.rings[1]+4)?.def;
-    return d?{name:d.name,en:d.en,rule:d.story}:null;
+    return d?{name:d.name,en:d.en,rule:ARCHITECTURE[d.id].life}:null;
   }
   function mapSVG(){
     const poly=(points,color,width,dash='')=>`<polyline points="${points.filter((p,i)=>i%3===0||i===points.length-1).map(p=>p.x+','+p.z).join(' ')}" fill="none" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="'+dash+'"':''} stroke-linejoin="round"/>`;
     return '<g class="city-map-streets">'+env.roads.filter(r=>r.city).map(r=>poly(r.points,'#a99b85',.65)).join('')+houses.map(b=>`<rect x="${b.x-1.2}" y="${b.z-1.2}" width="2.4" height="2.4" rx=".35" fill="#c28e72" opacity=".85"/>`).join('')+'</g><g class="city-map-skyways">'+skyways.map(s=>poly(s.points,'#f6e9c3',3.4)+poly(s.points,'#b47d52',1.8)+poly(s.points,'#ffedb2',.55,'1.3 1.3')).join('')+'</g>';
   }
   function guide(){
-    return `<section class="city-guide"><div class="city-guide-heading"><div><small>STREETS & SKYWAYS</small><h3>沿着街巷，走到屋顶上方</h3></div><p>${houses.length} 幢新增建筑 · ${districts.length} 片街区 · ${skyways.length} 条可通行高架</p></div><div class="skyway-cards">${CITY_SKYWAYS.map((s,i)=>`<article><small>0${i+1} / SKYWAY</small><h4>${s.name}</h4><p>${s.from} ↔ ${s.to}</p><span>${s.note}</span><button data-skyway="${s.id}">去坡道入口 ↑</button></article>`).join('')}</div><div class="city-destinations">${districts.map(d=>`<button data-city="${d.def.id}">${d.def.name}<small>${d.houses} 幢小屋与店铺 ↗</small></button>`).join('')}</div><p class="atlas-footnote">步行或驾驶邮车、小巴沿坡道上桥。桥下仍可通行；观光班车与街上小居民会沿固定路线来回。棕金色双线是高架，细线是地面街道。</p></section>`;
+    return `<section class="city-guide"><div class="city-guide-heading"><div><small>STREETS & SKYWAYS</small><h3>沿着街巷，走到屋顶上方</h3></div><p>${houses.length} 幢新增建筑 · ${districts.length} 片街区 · ${skyways.length} 条可通行高架</p></div><div class="skyway-cards">${CITY_SKYWAYS.map((s,i)=>`<article><small>0${i+1} / SKYWAY</small><h4>${s.name}</h4><p>${s.from} ↔ ${s.to}</p><span>${s.note}</span><button data-skyway="${s.id}">去坡道入口 ↑</button></article>`).join('')}</div><div class="city-destinations">${districts.map(d=>`<button data-city="${d.def.id}">${d.def.name}<small>${ARCHITECTURE[d.def.id].types.join(' · ')}<br>${d.houses} 幢建筑 ↗</small></button>`).join('')}</div><p class="atlas-footnote">步行或驾驶邮车、小巴沿坡道上桥。桥下仍可通行；观光班车与街上小居民会沿固定路线来回。棕金色双线是高架，细线是地面街道。</p></section>`;
   }
   function visit(id,sky=false){
     const target=sky?skyways.find(s=>s.def.id===id)?.points[0]:districts.find(d=>d.def.id===id)?.entry;
     if(target)env.travel(target.x,target.z);
   }
   function occupied(x,z,r=2){return houses.some(b=>Math.hypot(x-b.x,z-b.z)<b.radius+r)||skyways.some(s=>nearestSegment(s.points,x,z).distance<s.def.width/2+r);}
-  return {build,clear,refresh:build,update,constrain,surfaceHeight,surfaceInfo,savedSurface,location,mapSVG,guide,visit,occupied,districts,skyways,houses,pedestrians,traffic};
+  return {build,clear,refresh:build,update,constrain,surfaceHeight,surfaceInfo,savedSurface,location,mapSVG,guide,visit,occupied,districts,skyways,houses,pedestrians,traffic,motionInstances};
 }

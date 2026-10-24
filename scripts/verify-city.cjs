@@ -12,7 +12,7 @@ const root=path.resolve(__dirname,'..');
     terrainHeight,movementFloor,movePlayer,updateVehicles,toggleRide,summonVehicle,snapshot,restoreData,buildWorld,sculpt,setTime,setWeather,setViewSpan,updateCamera,openAtlas,updateLocationStatus,
     place:(x,y,z)=>{player.position.set(x,y,z);playerVelocity.set(0,0,0);onGround=true;keys.clear();},
     get player(){return player},get elapsed(){return elapsed}};`);
-  const allowed={'/house-style.js':'text/javascript','/world-city.js':'text/javascript','/world-city.css':'text/css','/world-tales.js':'text/javascript','/world-tales.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
+  const allowed={'/world-architecture.js':'text/javascript','/world-style.js':'text/javascript','/house-style.js':'text/javascript','/world-city.js':'text/javascript','/world-city.css':'text/css','/world-tales.js':'text/javascript','/world-tales.css':'text/css','/vendor/three-0.161.0/three.module.js':'text/javascript'};
   const server=http.createServer(async(req,res)=>{try{
     if(req.url==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);}
     else if(allowed[req.url]){res.writeHead(200,{'Content-Type':allowed[req.url]});res.end(await fs.readFile(path.join(root,req.url)));}
@@ -33,6 +33,18 @@ const root=path.resolve(__dirname,'..');
     check('four skyways, 40 local walkers and eight sightseeing shuttles',report.stats.skyways===4&&report.stats.citizens===40&&report.stats.traffic===8);
     check('art pass preserves the 105-road ground network',report.stats.groundRoads===105&&report.stats.newRoads===78);
     check('new buildings preserve all activity and story destinations',await page.evaluate(()=>cityQA.cityWorld.houses.every(b=>cityQA.ACTIVITIES.every(a=>a.stops.every(p=>Math.hypot(b.x-p.x,b.z-p.z)>b.radius+.6))&&cityQA.TALE_PLACES.every(p=>Math.hypot(b.x-p.x,b.z-p.z)>9))));
+    const architecture=await page.evaluate(()=>{
+      const q=cityQA,materials=new Map();q.props.filter(r=>r.userData.district).forEach(r=>r.traverse(m=>{if(m.material?.isMeshStandardMaterial)materials.set(m.material.userData.surface,{roughness:m.material.roughness,metalness:m.material.metalness});}));
+      const regions=q.cityWorld.districts.map(d=>({id:d.def.id,types:[...new Set(q.cityWorld.houses.filter(h=>h.district===d.def.id).map(h=>h.type))]}));
+      const moving=q.cityWorld.motionInstances,before=moving.map(i=>Array.from(i.mesh.instanceMatrix.array.slice(i.index*16,i.index*16+16)));
+      q.cityWorld.update(.1,7,0);
+      const changed=moving.filter((i,n)=>before[n].some((v,k)=>Math.abs(v-i.mesh.instanceMatrix.array[i.index*16+k])>.001)).length;
+      const paired=moving.every(i=>!i.hull||Array.from(i.mesh.instanceMatrix.array.slice(i.index*16,i.index*16+16)).every((v,k)=>v===i.hull.instanceMatrix.array[i.index*16+k]));
+      return {regions,families:new Set(q.cityWorld.houses.map(h=>h.family)).size,materials:Object.fromEntries(materials),changed,paired,motions:moving.length,environment:!!q.scene.environment};
+    });report.architecture=architecture;
+    check('ten districts each contain three distinct building types',architecture.families===10&&architecture.regions.every(r=>r.types.length===3));
+    check('PBR surfaces distinguish metal, glass, timber and stone',architecture.environment&&architecture.materials.metal.metalness>.6&&architecture.materials.glass.roughness<.25&&architecture.materials.wood.roughness>.6&&architecture.materials.stone.roughness>.8);
+    check('regional mechanisms animate with their outlines attached',architecture.changed>100&&architecture.paired);
     await page.screenshot({path:path.join(root,'.local','city-start.png')});
     const outlineCount=await page.evaluate(()=>cityQA.outlines.filter(h=>h.isInstancedMesh).length);
     await page.click('#tools > summary');
@@ -94,7 +106,7 @@ const root=path.resolve(__dirname,'..');
     await page.waitForTimeout(800);await page.screenshot({path:path.join(root,'.local','city-skyway.png')});
     await page.evaluate(()=>{cityQA.cityWorld.visit('harbor');cityQA.setViewSpan(85);cityQA.updateCamera(1);});await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local','city-harbor.png')});
     await page.evaluate(()=>{cityQA.place(80,cityQA.terrainHeight(80,55)+.03,55);cityQA.setViewSpan(43);cityQA.updateCamera(1);});await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local','city-cottages.png')});
-    for(const district of ['grove','snow','gear']){
+    for(const district of ['cloudbell','east','grove','whale','harbor','gear','dunes','snow','garden','kite']){
       await page.evaluate(id=>{cityQA.cityWorld.visit(id);cityQA.setViewSpan(48);cityQA.updateCamera(1);},district);
       await page.waitForTimeout(500);await page.screenshot({path:path.join(root,'.local',`city-style-${district}.png`)});
     }

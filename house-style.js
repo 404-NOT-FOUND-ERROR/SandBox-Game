@@ -1,5 +1,4 @@
-// The original cottages are the visual reference for every residential district.
-// Both individual landmarks and instanced city houses use this same recipe.
+// Heritage cottages remain in the old town. New districts have their own architecture.
 export const HOUSE_COLORS = {
   stone:0x9c8cae, paleStone:0xdfc8aa, gold:0xffd46e, ink:0x304658,
   walls:[0xffe6bb,0xffcaa7,0xc1e8cf], roofs:[0x519e9d,0xcc7499,0x678eb4],
